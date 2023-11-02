@@ -1,4 +1,24 @@
 .container-fluid {
+  .logo-name {
+    vertical-align: middle;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0px 10px;
+    color: black;
+  }
   padding-right: 0;
   padding-left: 0;
+  height: 100vh; /* Set the container height to 100% of the viewport height */
+  overflow: hidden; /* Hide content that exceeds the viewport */
+}
+
+.row.no-gutters {
+  height: 100%; /* Make the row fill the container's height */
+}
+
+body {
+  margin: 0; /* Remove default body margin to avoid any extra spacing */
+}
+.form-style {
+  padding-top: 10em;
 }

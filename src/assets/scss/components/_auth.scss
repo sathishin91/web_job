@@ -5,6 +5,24 @@
     height: 37px;
   }
 }
+
+.form-style-register {
+  padding-top: 4em;
+}
+.login-form {
+  overflow: hidden;
+  .login-body {
+    background: #fff;
+    padding: 8em 3em 3em 3em;
+  }
+  .login-image {
+    object-fit: cover;
+    width: 100%;
+  }
+}
+.mt-2em {
+  margin-top: 2em;
+}
 .auth-card {
   left: 50%;
   top: 50%;
@@ -133,7 +151,7 @@
     object-fit: cover;
   }
   .register-body {
-    padding: 60px;
+    padding: 10em;
 
     @media (max-width: 422px) {
       padding: 35px 24px;
@@ -244,4 +262,33 @@
 }
 .register-container {
   max-width: 1140px;
+}
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.container-fluid {
+  .logo-name {
+    vertical-align: middle;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0px 10px;
+    color: black;
+  }
+  padding-right: 0;
+  padding-left: 0;
+  height: 100vh; /* Set the container height to 100% of the viewport height */
+  overflow: hidden; /* Hide content that exceeds the viewport */
+}
+
+.row.no-gutters {
+  height: 100%; /* Make the row fill the container's height */
+}
+
+body {
+  margin: 0; /* Remove default body margin to avoid any extra spacing */
+}
+.form-style {
+  padding-top: 10em;
 }

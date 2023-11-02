@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -13,7 +15,11 @@ export class SignupComponent implements OnInit {
   registerForm!: UntypedFormGroup;
   submitted = false;
   error = '';
-  constructor(private formBuilder: UntypedFormBuilder) {}
+  constructor(
+    private formBuilder: UntypedFormBuilder,
+    private router: Router
+  ) {}
+
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       fname: ['', Validators.required],
@@ -39,5 +45,26 @@ export class SignupComponent implements OnInit {
     } else {
       // register user call here..
     }
+  }
+
+  customWithFunction() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirm',
+    }).then((result) => {
+      if (result.value) {
+        // Swal.fire(
+        //   'Account created!',
+        //   'Your account has been created.',
+        //   'success'
+        // );
+        this.router.navigate(['/dashboard/main']);
+      }
+    });
   }
 }
