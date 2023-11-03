@@ -12,7 +12,6 @@
         <div class="text-center">
           <div class="brand-wrapper">
             <img src="assets/images/logo.png" alt="logo" class="logo" />
-            <span class="logo-name">Seekk</span>
           </div>
         </div>
         <form class="validate-form" [formGroup]="registerForm">
@@ -70,6 +69,18 @@
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group position-relative">
+                <label>Website</label>
+                <i-feather name="user" class="login-icons"></i-feather>
+                <input
+                  type="number"
+                  class="form-control psl-5"
+                  formControlName="website"
+                  placeholder="website"
+                />
               </div>
             </div>
             <div class="col-lg-12">

@@ -1,4 +1,4 @@
-$color-primary: #3dc9b3;
+$color-primary: rgb(1, 158, 255);
 $color-primary-shadow: #8ddcd7;
 $color-primary-light: #4bded5;
 
@@ -277,7 +277,7 @@ $color-primary-light: #4bded5;
     }
   }
 
-  .accordion .accordion-header[aria-expanded='true'] {
+  .accordion .accordion-header[aria-expanded="true"] {
     background-color: $color-primary;
     color: #fff;
   }

@@ -16,6 +16,10 @@ const routes: Routes = [
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
+        path: 'jobs',
+        loadChildren: () => import('./job/job.module').then((m) => m.JobModule),
+      },
+      {
         path: 'advance-table',
         loadChildren: () =>
           import('./advance-table/advance-table.module').then(

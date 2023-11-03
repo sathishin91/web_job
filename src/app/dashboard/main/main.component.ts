@@ -75,7 +75,7 @@ export class MainComponent implements OnInit {
           show: false,
         },
       },
-      colors: ['#6777EF', '#8B8697'],
+      colors: ['#6777ef', '#8B8697'],
       stroke: {
         curve: 'smooth',
       },

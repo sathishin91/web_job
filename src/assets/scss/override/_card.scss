@@ -172,7 +172,7 @@
 
     &:not(.remove-spinner) {
       &:after {
-        background-image: url('../../images/spinner.svg');
+        background-image: url("../../images/spinner.svg");
         background-size: 80px;
         background-repeat: no-repeat;
         background-position: center;

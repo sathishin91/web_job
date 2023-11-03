@@ -33,7 +33,7 @@ textarea.form-control {
 .custom-file-label,
 .custom-select,
 .custom-file-label:after,
-.form-control[type='color'],
+.form-control[type="color"],
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 6px);
   background-position: right calc(0.375em + 0.9rem) center;
@@ -46,31 +46,31 @@ select.form-control:not([size]):not([multiple]) {
   padding-right: 60px;
 
   &.visa {
-    background-image: url('../../images/cards/visa.png');
+    background-image: url("../../images/cards/visa.png");
   }
 
   &.americanexpress {
-    background-image: url('../../images/cards/americanexpress.png');
+    background-image: url("../../images/cards/americanexpress.png");
   }
 
   &.dinersclub {
-    background-image: url('../../images/cards/dinersclub.png');
+    background-image: url("../../images/cards/dinersclub.png");
   }
 
   &.discover {
-    background-image: url('../../images/cards/discover.png');
+    background-image: url("../../images/cards/discover.png");
   }
 
   &.jcb {
-    background-image: url('../../images/cards/jcb.png');
+    background-image: url("../../images/cards/jcb.png");
   }
 
   &.mastercard {
-    background-image: url('../../images/cards/mastercard.png');
+    background-image: url("../../images/cards/mastercard.png");
   }
 
   &.visa {
-    background-image: url('../../images/cards/visa.png');
+    background-image: url("../../images/cards/visa.png");
   }
 }
 
@@ -127,7 +127,7 @@ select.form-control:not([size]):not([multiple]) {
   }
 }
 
-.input-group-append [class*='btn-outline-'] {
+.input-group-append [class*="btn-outline-"] {
   background-color: color_lighten(primary, 32.4%);
 }
 
@@ -317,7 +317,7 @@ select.form-control:not([size]):not([multiple]) {
   transition: 0.3s border-color, 0.3s background-color;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     height: calc(1.25rem - 4px);
     width: calc(1.25rem - 4px);
@@ -384,7 +384,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .imagecheck-figure:before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0.25rem;
   display: block;
@@ -479,7 +479,7 @@ select.form-control:not([size]):not([multiple]) {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 
   &:before {
-    content: '';
+    content: "";
     opacity: 0;
     position: absolute;
     top: 0.25rem;

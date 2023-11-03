@@ -1,4 +1,4 @@
-﻿@use 'sass:math';
+﻿@use "sass:math";
 $font-colors: (
   red: #f44336,
   pink: #fa62bb,
@@ -155,7 +155,7 @@ $linear-colors: (
 }
 
 @each $key, $val in $font-colors {
-  .bg-#{'' + $key} {
+  .bg-#{"" + $key} {
     background-color: $val !important;
     color: #fff;
 
@@ -169,7 +169,7 @@ $linear-colors: (
 }
 
 @each $key, $val in $linear-colors {
-  .l-bg-#{'' + $key} {
+  .l-bg-#{"" + $key} {
     background: $val !important;
     color: #fff;
 
@@ -183,7 +183,7 @@ $linear-colors: (
 }
 
 @each $key, $val in $font-colors {
-  .col-#{'' + $key} {
+  .col-#{"" + $key} {
     color: $val !important;
   }
 }

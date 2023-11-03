@@ -24,7 +24,7 @@ body.sidebar-gone {
 
   .main-sidebar {
     &:after {
-      content: ' ';
+      content: " ";
       position: fixed;
       width: 65px;
       height: 100%;
@@ -176,11 +176,11 @@ body.sidebar-gone {
 
       .menu-toggle {
         &:before {
-          content: '';
+          content: "";
         }
 
         &:after {
-          content: '';
+          content: "";
         }
       }
     }
@@ -354,7 +354,7 @@ body.layout-3 {
           }
 
           &:before {
-            content: ' ';
+            content: " ";
             position: absolute;
             left: initial;
             right: initial;
@@ -543,8 +543,8 @@ body.layout-3 {
 
       .menu-toggle {
         &:before {
-          content: '\f067';
-          font-family: 'Font Awesome\ 5 Free';
+          content: "\f067";
+          font-family: "Font Awesome\ 5 Free";
           position: absolute;
           font-size: 10px;
           right: 17px;
@@ -553,8 +553,8 @@ body.layout-3 {
         }
 
         &:after {
-          content: '\f068';
-          font-family: 'Font Awesome\ 5 Free';
+          content: "\f068";
+          font-family: "Font Awesome\ 5 Free";
           position: absolute;
           font-size: 10px;
           right: 17px;
@@ -669,8 +669,8 @@ body.layout-3 {
             }
 
             &:before {
-              content: '\f105';
-              font-family: 'Font Awesome 5 Free';
+              content: "\f105";
+              font-family: "Font Awesome 5 Free";
               font-weight: 900;
               font-size: 12px;
               position: absolute;
@@ -952,7 +952,7 @@ body:not(.sidebar-mini) .sidebar-style-2 {
 
     &.search-show:before,
     &.sidebar-show:before {
-      content: '';
+      content: "";
       position: fixed;
       left: 0;
       right: 0;

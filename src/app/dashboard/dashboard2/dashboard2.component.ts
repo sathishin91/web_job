@@ -110,7 +110,7 @@ export class Dashboard2Component implements OnInit {
       markers: {
         size: 0,
       },
-      colors: ['#999999', '#6777EF'],
+      colors: ['#999999', '#6777ef'],
       dataLabels: {
         enabled: true,
         enabledOnSeries: [1, 2],
@@ -219,7 +219,7 @@ export class Dashboard2Component implements OnInit {
                 label: 'Total',
                 fontSize: '22px',
                 fontWeight: 600,
-                color: '#6777EF',
+                color: '#6777ef',
               },
             },
           },
@@ -251,7 +251,7 @@ export class Dashboard2Component implements OnInit {
             name: {
               fontSize: '22px',
               fontWeight: 600,
-              color: '#6777EF',
+              color: '#6777ef',
               offsetY: 120,
             },
             value: {
