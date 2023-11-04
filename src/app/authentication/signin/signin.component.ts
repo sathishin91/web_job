@@ -24,9 +24,8 @@ export class SigninComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['admin@email.com', Validators.required],
-      password: ['admin@123', Validators.required],
-      remember: [''],
+      mobile_number: [8098778216, Validators.required],
+      otp: [1234, Validators.required],
     });
   }
   get f() {
@@ -37,18 +36,18 @@ export class SigninComponent implements OnInit {
     this.error = '';
 
     if (this.loginForm.invalid) {
-      this.error = 'Username and Password not valid !';
+      this.error = 'mobile_number and otp not valid !';
       return;
     } else {
       this.authService
-        .login(this.f['username'].value, this.f['password'].value)
+        .login(this.f['mobile_number'].value, this.f['otp'].value)
         .subscribe({
           next: (res) => {
             if (res) {
               if (res) {
                 const token = this.authService.currentUserValue.token;
                 if (token) {
-                  this.router.navigate(['/dashboard/main']);
+                  this.router.navigate(['/jobs']);
                 }
               } else {
                 this.error = 'Invalid Login';

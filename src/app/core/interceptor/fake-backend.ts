@@ -14,8 +14,8 @@ import { User } from '../models/user';
 const users: User[] = [
   {
     id: 1,
-    username: 'admin@email.com',
-    password: 'admin@123',
+    mobile_number: 8098778216,
+    otp: 1234,
     firstName: 'Sarah',
     lastName: 'Smith',
     token: 'admin-token',
@@ -45,16 +45,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     // route functions
 
     function authenticate() {
-      const { username, password } = body;
+      const { mobile_number, otp } = body;
       const user = users.find(
-        (x) => x.username === username && x.password === password
+        (x) => x.mobile_number === mobile_number && x.otp === otp
       );
       if (!user) {
-        return error('Username or password is incorrect');
+        return error('mobile number or otp is incorrect');
       }
       return ok({
         id: user.id,
-        username: user.username,
+        mobile_number: user.mobile_number,
+        otp: user.otp,
         firstName: user.firstName,
         lastName: user.lastName,
         token: user.token,
@@ -65,7 +66,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     function ok(body?: {
       id: number;
-      username: string;
+      mobile_number: number;
+      otp: number;
+
       firstName: string;
       lastName: string;
       token: string;

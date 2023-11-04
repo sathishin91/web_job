@@ -3,6 +3,7 @@ import { MainLayoutComponent } from './layout/app-layout/main-layout/main-layout
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guard/auth.guard';
+import { ManageCoinsModule } from './manage-coins/manage-coins.module';
 const routes: Routes = [
   {
     path: '',
@@ -18,6 +19,18 @@ const routes: Routes = [
       {
         path: 'jobs',
         loadChildren: () => import('./job/job.module').then((m) => m.JobModule),
+      },
+      {
+        path: 'manage-coins',
+        loadChildren: () =>
+          import('./manage-coins/manage-coins.module').then(
+            (m) => m.ManageCoinsModule
+          ),
+      },
+      {
+        path: 'reports',
+        loadChildren: () =>
+          import('./reports/reports.module').then((m) => m.ReportsModule),
       },
       {
         path: 'advance-table',
