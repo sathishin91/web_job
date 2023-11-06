@@ -12,6 +12,11 @@ import {
   styleUrls: ['./signin.component.scss'],
 })
 export class SigninComponent implements OnInit {
+  public counter!: number;
+  public timer!: any;
+  displayTimer = false;
+  getOtp = true;
+
   loginForm!: UntypedFormGroup;
   submitted = false;
   returnUrl!: string;
@@ -62,5 +67,26 @@ export class SigninComponent implements OnInit {
           },
         });
     }
+  }
+
+  startTimer() {
+    this.getOtp = false;
+    this.displayTimer = true;
+    this.counter = 30;
+    window.clearInterval(this.timer);
+    this.timer = setInterval(() => {
+      this.counter--;
+      if (this.counter === 0) {
+        window.clearInterval(this.timer);
+
+        /*After counter value is 0 means 10000 is completed */
+        this.startFilling();
+      }
+    }, 1000);
+  }
+
+  startFilling() {
+    console.log(true);
+    this.onSubmit();
   }
 }
