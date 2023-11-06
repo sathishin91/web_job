@@ -14,7 +14,7 @@ import { User } from '../models/user';
 const users: User[] = [
   {
     id: 1,
-    mobile_number: 8098778216,
+    mobile_number: 9876543210,
     otp: 1234,
     firstName: 'Sarah',
     lastName: 'Smith',

@@ -7,7 +7,7 @@
     (mouseleave)="mouseOut()"
   >
     <div class="sidebar-brand">
-      <a routerLink="/dashboard/main">
+      <a routerLink="/jobs">
         <img alt="image" src="assets/images/fav.png" class="header-logo" /><span
           class="logo-name"
           >Seekk</span
@@ -145,6 +145,11 @@
                 </ul>
               </li>
             </ul>
+          </li>
+          <li class="coinBalance">
+            <i class="fas fa-coins"></i>
+
+            <span class="hide-menu pl-2">Coin Balance </span> {{ coinBalances }}
           </li>
         </ul>
       </ng-scrollbar>

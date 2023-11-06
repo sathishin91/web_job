@@ -2,3 +2,19 @@
   text-align: right;
   margin-bottom: 1.5em;
 }
+
+.planSection {
+  border-radius: 10px;
+
+  background: #fef4e4;
+  p {
+    margin-top: 1em;
+    color: #d29c40;
+  }
+}
+
+.all_jobs .card-body p {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: unset;
+}

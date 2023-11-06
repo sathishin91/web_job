@@ -1139,3 +1139,20 @@
 .hiddenradio [type="radio"]:checked + img {
   outline: 2px solid #6777ef;
 }
+
+.coinBalance {
+  font-weight: 600;
+  color: #000000;
+  position: relative;
+  font-size: 14px;
+  display: block;
+  overflow: hidden;
+  line-height: 2rem;
+  padding: 9px 9px 9px 18px;
+}
+.coinBalanceIcon {
+  margin-right: 0.5em;
+}
+.pl-2 {
+  padding-left: 0.75em;
+}

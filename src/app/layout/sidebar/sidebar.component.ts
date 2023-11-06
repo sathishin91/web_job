@@ -28,6 +28,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   userType?: string;
   headerHeight = 60;
   currentRoute?: string;
+  coinBalances?: number;
   routerObj;
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -72,6 +73,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
   }
   ngOnInit() {
+    this.coinBalances = 10;
     if (this.authService.currentUserValue) {
       this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
     }

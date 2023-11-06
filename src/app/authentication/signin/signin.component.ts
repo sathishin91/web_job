@@ -24,7 +24,7 @@ export class SigninComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      mobile_number: [8098778216, Validators.required],
+      mobile_number: [9876543210, Validators.required],
       otp: [1234, Validators.required],
     });
   }
