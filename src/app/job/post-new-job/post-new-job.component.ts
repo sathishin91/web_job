@@ -1,76 +1,70 @@
 import { Component, OnInit } from '@angular/core';
-import { of } from 'rxjs';
+import Stepper from 'bs-stepper';
 import {
-  NgWizardConfig,
-  NgWizardService,
-  StepChangedArgs,
-  StepValidationArgs,
-  STEP_STATE,
-  THEME,
-} from 'ng-wizard';
-
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 @Component({
   selector: 'app-post-new-job',
   templateUrl: './post-new-job.component.html',
   styleUrls: ['./post-new-job.component.scss'],
 })
 export class PostNewJobComponent implements OnInit {
-  stepStates = {
-    normal: STEP_STATE.normal,
-    disabled: STEP_STATE.disabled,
-    error: STEP_STATE.error,
-    hidden: STEP_STATE.hidden,
-  };
+  constructor(private fb: UntypedFormBuilder) {}
+  // Form 1
+  postNewJobs!: UntypedFormGroup;
+  name = 'Angular';
+  private stepper!: Stepper; // Initialize stepper as null
 
-  config: NgWizardConfig = {
-    selected: 0,
-    theme: THEME.arrows,
-    toolbarSettings: {
-      toolbarExtraButtons: [
-        {
-          text: 'Finish',
-          class: 'btn btn-info',
-          event: () => {
-            alert('Finished!!!');
-          },
-        },
+  next(event: Event) {
+    event.preventDefault();
+    if (this.stepper) {
+      this.stepper.next();
+    }
+  }
+
+  onSubmit() {
+    console.log('Form Value', this.postNewJobs.value);
+  }
+
+  initForm() {
+    this.postNewJobs = this.fb.group({
+      company_name: [
+        '',
+        [Validators.required, Validators.pattern('[a-zA-Z]+')],
       ],
-    },
-  };
-
-  constructor(private ngWizardService: NgWizardService) {}
+      last: [''],
+      department: ['', Validators.required],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(15),
+        ],
+      ],
+      email: [
+        '',
+        [Validators.required, Validators.email, Validators.minLength(5)],
+      ],
+      address: [''],
+      city: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      country: ['', [Validators.required]],
+      termcondition: [false, [Validators.requiredTrue]],
+    });
+  }
 
   ngOnInit() {
-    console.log('init');
-  }
+    this.initForm();
+    const stepperElement = document.querySelector('#stepper1');
 
-  showPreviousStep(event?: Event) {
-    this.ngWizardService.previous();
-  }
-
-  showNextStep(event?: Event) {
-    this.ngWizardService.next();
-  }
-
-  resetWizard(event?: Event) {
-    this.ngWizardService.reset();
-  }
-
-  setTheme(theme: THEME) {
-    this.ngWizardService.theme(theme);
-  }
-
-  stepChanged(args: StepChangedArgs) {
-    console.log(args.step);
-  }
-
-  isValidTypeBoolean: boolean = true;
-
-  isValidFunctionReturnsBoolean(args: StepValidationArgs) {
-    return true;
-  }
-
-  isValidFunctionReturnsObservable(args: StepValidationArgs) {
-    return of(true);
+    if (stepperElement) {
+      this.stepper = new Stepper(stepperElement, {
+        linear: false,
+        animation: true,
+      });
+    }
   }
 }

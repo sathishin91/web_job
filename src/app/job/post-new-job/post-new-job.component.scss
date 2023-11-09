@@ -1,0 +1,15 @@
+.bs-stepper .step-trigger {
+  padding: 0px;
+}
+.bs-stepper-content {
+  padding: 1em;
+}
+.dropdown-divider {
+  border: 1px solid #f9f9f9 !important;
+}
+.dropdown-divider {
+  height: 0;
+  margin: var(--bs-dropdown-divider-margin-y) 0;
+  overflow: hidden;
+  opacity: 1;
+}

@@ -12,57 +12,356 @@
     </li> -->
   </ul>
   <div class="section-body">
-    <p>New jobs</p>
-    <ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
-      <ng-wizard-step
-        [title]="'Step 1'"
-        [description]="'Step 1 description'"
-        [canEnter]="isValidTypeBoolean"
-        [canExit]="isValidFunctionReturnsBoolean.bind(this)"
-      >
-        <span>Step 1 content</span>
-      </ng-wizard-step>
+    <div class="col-12 col-md-12 col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="container">
+            <div id="stepper1" class="bs-stepper">
+              <div class="bs-stepper-header">
+                <div class="step" data-target="#test-l-1">
+                  <button class="step-trigger">
+                    <span class="bs-stepper-circle">1</span>
+                    <span class="bs-stepper-label">Job Details</span>
+                  </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#test-l-2">
+                  <button class="step-trigger">
+                    <span class="bs-stepper-circle">2</span>
+                    <span class="bs-stepper-label"
+                      >Candidate Requirements
+                    </span>
+                  </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#test-l-3">
+                  <button class="step-trigger">
+                    <span class="bs-stepper-circle">3</span>
+                    <span class="bs-stepper-label"
+                      >Interviewer Information
+                    </span>
+                  </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#test-l-4">
+                  <button class="step-trigger">
+                    <span class="bs-stepper-circle">4</span>
+                    <span class="bs-stepper-label">Job Preview </span>
+                  </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#test-l-5">
+                  <button class="step-trigger">
+                    <span class="bs-stepper-circle">5</span>
+                    <span class="bs-stepper-label">Select Plan </span>
+                  </button>
+                </div>
+              </div>
+              <div class="bs-stepper-content">
+                <form (ngSubmit)="onSubmit()" [formGroup]="postNewJobs">
+                  <div id="test-l-1" class="content">
+                    <div class="row mt-3">
+                      <div class="col-lg-12">
+                        <h6>Job details</h6>
+                        <p>
+                          Job details We use this information to find the best
+                          candidates for the job.
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="form-group col-md-6">
+                        <label
+                          >Company you're hiring for
+                          <span class="text-danger">*</span></label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Company name"
+                          formControlName="company_name"
+                          required
+                        />
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            !postNewJobs.get('company_name')?.valid &&
+                            postNewJobs.get('company_name')?.touched
+                          "
+                          >Please enter a company name!</small
+                        >
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label
+                          >Job title / Designation
+                          <span class="text-danger">*</span>
+                        </label>
 
-      <ng-wizard-step
-        [title]="'Step 2'"
-        [description]="'Step 2 description'"
-        [state]="stepStates.disabled"
-      >
-        <span>Step 2 content</span>
-      </ng-wizard-step>
+                        <select class="form-select form-control">
+                          <option>Option 1</option>
+                          <option>Option 2</option>
+                          <option>Option 3</option>
+                        </select>
+                      </div>
 
-      <ng-wizard-step
-        [title]="'Step 3'"
-        [description]="'Step 3 description'"
-        [canEnter]="isValidFunctionReturnsObservable.bind(this)"
-        [canExit]="isValidFunctionReturnsBoolean.bind(this)"
-      >
-        <span>Step 3 content</span>
-      </ng-wizard-step>
+                      <div class="form-group col-md-6">
+                        <label
+                          >Department / Function
+                          <span class="text-danger">*</span></label
+                        >
+                        <select class="form-select form-control">
+                          <option>Option 1</option>
+                          <option>Option 2</option>
+                          <option>Option 3</option>
+                        </select>
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            !postNewJobs.get('department')?.valid &&
+                            postNewJobs.get('department')?.touched
+                          "
+                          >Please enter a Department !</small
+                        >
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label>Role<span class="text-danger">*</span></label>
+                        <select class="form-select form-control">
+                          <option>Option 1</option>
+                          <option>Option 2</option>
+                          <option>Option 3</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label
+                          >Type of Job <span class="text-danger">*</span></label
+                        >
+                        <div class="input-group">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="rbbuttons1"
+                              id="rb3"
+                              checked
+                            />
+                            <label class="form-check-label" for="rb3">
+                              Full Time
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="rbbuttons1"
+                              id="rb4"
+                            />
+                            <label class="form-check-label" for="rb4">
+                              Part Time
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="rbbuttons1"
+                              id="rb4"
+                            />
+                            <label class="form-check-label" for="rb4">
+                              Both (Full Time & Part Time)
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 form-group mt-4">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="cb6"
+                            formControlName="nightShift"
+                          />
+                          <label class="form-check-label" for="cb6">
+                            This is a night shift job
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="row mt-3">
+                      <div class="col-lg-12">
+                        <h6>Location</h6>
+                        <p>
+                          Let candidates know where they will be working from.
+                        </p>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label
+                          >Work location type
+                          <span class="text-danger">*</span></label
+                        >
+                        <div class="input-group">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="rbbuttons1"
+                              id="rb3"
+                              checked
+                            />
+                            <label class="form-check-label" for="rb3">
+                              Work From Office
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="rbbuttons1"
+                              id="rb4"
+                            />
+                            <label class="form-check-label" for="rb4">
+                              Work From Home
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="rbbuttons1"
+                              id="rb4"
+                            />
+                            <label class="form-check-label" for="rb4">
+                              Field Job
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-      <ng-wizard-step [title]="'Step 4'" [description]="'Step 4 description'">
-        <span>Step 4 content</span>
-      </ng-wizard-step>
+                    <div class="row">
+                      <div class="form-group col-md-12">
+                        <label>Address<span class="text-danger"></span></label>
+                        <textarea
+                          type="textitem"
+                          class="form-control"
+                          placeholder="Address"
+                          formControlName="address"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                        <label>City<span class="text-danger">*</span></label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="City"
+                          formControlName="city"
+                          required
+                        />
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            !postNewJobs.get('city')?.valid &&
+                            postNewJobs.get('city')?.touched
+                          "
+                          >Please enter a city name!</small
+                        >
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label>State<span class="text-danger">*</span></label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="State"
+                          formControlName="state"
+                          required
+                        />
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            !postNewJobs.get('state')?.valid &&
+                            postNewJobs.get('state')?.touched
+                          "
+                          >Please enter a state name!</small
+                        >
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-md-12">
+                        <label>Country<span class="text-danger">*</span></label>
+                        <select
+                          class="form-select form-control"
+                          formControlName="country"
+                          required
+                        >
+                          <option>India</option>
+                          <option>Algeria</option>
+                          <option>Brazil</option>
+                          <option>Poland</option>
+                          <option>Sri Lanka</option>
+                          <option>Thailand</option>
+                        </select>
+                      </div>
+                    </div>
 
-      <ng-wizard-step
-        [title]="'Step 5'"
-        [description]="'Step 5 description'"
-        [state]="stepStates.hidden"
-      >
-        <span>Step 5 content</span>
-      </ng-wizard-step>
-
-      <ng-wizard-step
-        [title]="'Step 6'"
-        [description]="'Step 6 description'"
-        [state]="stepStates.error"
-      >
-        <span>Step 6 content</span>
-      </ng-wizard-step>
-
-      <ng-wizard-step [title]="'Step 7'" [description]="'Step 7 description'">
-        <span>Step 7 content</span>
-      </ng-wizard-step>
-    </ng-wizard>
+                    <button (click)="next($event)" class="btn btn-primary">
+                      Next
+                    </button>
+                  </div>
+                  <div id="test-l-2" class="content">
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="exampleInputPassword1"
+                        placeholder="Password"
+                      />
+                    </div>
+                    <button (click)="next($event)" class="btn btn-primary">
+                      Next
+                    </button>
+                  </div>
+                  <div id="test-l-3" class="content text-center">
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="exampleInputPassword1"
+                        placeholder="Password"
+                      />
+                    </div>
+                    <button (click)="next($event)" class="btn btn-primary">
+                      Next
+                    </button>
+                  </div>
+                  <div id="test-l-4" class="content text-center">
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="exampleInputPassword1"
+                        placeholder="Password"
+                      />
+                    </div>
+                    <button (click)="next($event)" class="btn btn-primary">
+                      Next
+                    </button>
+                  </div>
+                  <div id="test-l-5" class="content text-center">
+                    <button type="submit" class="btn btn-primary mt-5">
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
