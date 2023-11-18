@@ -3,7 +3,8 @@ import { MainLayoutComponent } from './layout/app-layout/main-layout/main-layout
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guard/auth.guard';
-import { ManageCoinsModule } from './manage-coins/manage-coins.module';
+
+import { ProfileComponent } from './profile/profile.component';
 const routes: Routes = [
   {
     path: '',
@@ -52,6 +53,10 @@ const routes: Routes = [
           import('./multilevel/multilevel.module').then(
             (m) => m.MultilevelModule
           ),
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
       },
     ],
   },

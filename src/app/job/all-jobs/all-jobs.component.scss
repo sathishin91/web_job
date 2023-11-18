@@ -4,6 +4,10 @@
 }
 
 .planSection {
+  .btn-plan {
+    color: white;
+    background: #be8c38;
+  }
   border-radius: 10px;
 
   background: #fef4e4;
@@ -17,4 +21,14 @@
   margin-bottom: 10px;
   font-size: 14px;
   font-weight: unset;
+}
+
+.renewPlanSection {
+  border-radius: 10px;
+
+  background: rgb(235, 243, 254);
+  p {
+    margin-top: 1em;
+    color: rgb(23, 43, 77);
+  }
 }
