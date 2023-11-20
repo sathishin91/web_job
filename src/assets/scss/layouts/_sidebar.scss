@@ -1141,9 +1141,11 @@
 }
 
 .coinBalance {
+  position: absolute;
+  bottom: 20px;
   font-weight: 600;
   color: #000000;
-  position: relative;
+  // position: relative;
   font-size: 14px;
   display: block;
   overflow: hidden;

@@ -6,9 +6,13 @@
   }
 }
 
-.form-style-register {
-  padding-top: 4em;
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
+
 .login-form {
   overflow: hidden;
   .login-body {
@@ -288,7 +292,4 @@
 
 body {
   margin: 0; /* Remove default body margin to avoid any extra spacing */
-}
-.form-style {
-  padding-top: 10em;
 }

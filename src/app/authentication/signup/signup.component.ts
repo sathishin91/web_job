@@ -63,7 +63,7 @@ export class SignupComponent implements OnInit {
         //   'Your account has been created.',
         //   'success'
         // );
-        this.router.navigate(['/dashboard/main']);
+        this.router.navigate(['/jobs']);
       }
     });
   }
