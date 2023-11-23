@@ -1,0 +1,73 @@
+<!-- Navigation -->
+<nav
+  class="navbar navbar-expand-lg fixed-top navbar-dark"
+  [ngClass]="isNavbarFixed ? 'top-nav-collapse' : ''"
+  (scroll)="onScroll()"
+>
+  <div class="container">
+    <!-- Text Logo - Use this if you don't have a graphic logo -->
+    <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Revo</a> -->
+
+    <!-- Image Logo -->
+    <a class="navbar-brand logo-image" href=""
+      ><img src="../../../assets/images/logo.png" alt="alternative" width="100"
+    /></a>
+
+    <button
+      class="navbar-toggler hidden-sm-up"
+      type="button"
+      (click)="isNavbarCollapsed = !isNavbarCollapsed"
+      data-target="#navbarsDefault"
+      aria-controls="navbarsDefault"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- <button
+      class="navbar-toggler p-0 border-0"
+      type="button"
+      data-toggle="offcanvas"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+
+    <div
+      class="navbar-collapse offcanvas-collapse"
+      id="navbarsDefault"
+      #navigationLinks
+    >
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link page-scroll"
+            >HOME <span class="sr-only">(current)</span></a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link page-scroll">TRIAL</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link page-scroll">FEATURES</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link page-scroll" href="#details">DETAILS</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link page-scroll" href="#purchase">PURCHASE</a>
+        </li>
+
+        <li>
+          <button routerLink="/authentication/signin" class="btn btn-primary">
+            Signin
+          </button>
+        </li>
+      </ul>
+    </div>
+    <!-- end of navbar-collapse -->
+  </div>
+  <!-- end of container -->
+</nav>
+<!-- end of navbar -->
+<!-- end of navigation -->

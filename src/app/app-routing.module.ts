@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guard/auth.guard';
 
 import { ProfileComponent } from './profile/profile.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -12,6 +13,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: '/authentication/signin', pathMatch: 'full' },
+
       {
         path: 'dashboard',
         loadChildren: () =>
@@ -68,6 +70,12 @@ const routes: Routes = [
       import('./authentication/authentication.module').then(
         (m) => m.AuthenticationModule
       ),
+  },
+  {
+    path: 'landing',
+    component: AuthLayoutComponent,
+    loadChildren: () =>
+      import('./landing/landing.module').then((m) => m.LandingModule),
   },
 ];
 @NgModule({

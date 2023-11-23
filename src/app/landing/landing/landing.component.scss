@@ -1,0 +1,225 @@
+.landing-page .fold-1 {
+  background-image: linear-gradient(180deg, #061323, #37486e);
+}
+.landing-page .fold-1__container {
+  display: flex;
+  padding-bottom: 0;
+}
+.fold-container {
+  max-width: 1760px;
+  padding: 3rem 5rem;
+  margin: 0 auto;
+}
+p,
+h1,
+h2 {
+  color: #fff !important;
+}
+.cards-1 .card-title {
+  margin-bottom: 0.5rem;
+  color: rgb(1, 158, 255);
+}
+.landing-page h1,
+.landing-page h2,
+.landing-page h3,
+.landing-page h4 {
+  margin: 0;
+}
+.heading__secondary {
+  color: #37486e;
+  font-size: 1.75rem;
+  font-weight: 900;
+}
+.landing-page .fold-1__sub-content:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.landing-page .fold-1__sub-content {
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+}
+
+.landing-page .fold-1__left-item {
+  flex: 1 1 70%;
+  color: #fff;
+}
+.landing-page .fold-2__left .box,
+.landing-page .fold-4__left .box,
+.landing-page .fold-5__left .box,
+.landing-page .fold-6__left .box,
+.landing-page .fold-7__left .box {
+  display: flex;
+  align-items: flex-start;
+  padding: 2rem;
+  margin-top: 2rem;
+  cursor: pointer;
+}
+
+.header {
+  .btn-solid-lg {
+    display: block;
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+  .btn-outline-lg {
+    display: inline-block;
+    padding: 1.625rem 2.625rem 1.625rem 2.625rem;
+    border: 1px solid #ffffff;
+    border-radius: 32px;
+    background-color: transparent;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 0;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-solid-lg {
+    display: inline-block;
+    padding: 1.625rem 2.625rem 1.625rem 2.625rem;
+    border: 1px solid rgb(1, 158, 255);
+    border-radius: 32px;
+    background-color: rgb(1, 158, 255);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 0;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .partner-container {
+    text-align: center;
+    margin-top: 4em;
+  }
+  h1 {
+    color: #fff;
+  }
+  padding-top: 7.5rem;
+  padding-bottom: 7.5rem;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
+    url(../../../assets/images/header-background.jpg) center center no-repeat;
+  background-size: cover;
+}
+.cards-1 .card-image {
+  margin-bottom: 1.75rem;
+}
+.cards-1 .card-body {
+  padding: 0;
+}
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+}
+.cards-1 .fas {
+  color: rgb(1, 158, 255);
+  font-size: 4rem;
+}
+.cards-1 {
+  padding-top: 3.75rem;
+  padding-bottom: 2.75rem;
+  text-align: center;
+}
+.bg-dark-blue {
+  background-color: #0b0433;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 2.125rem;
+  line-height: 2.625rem;
+  letter-spacing: -0.2px;
+}
+.cards-1 .p-heading {
+  margin-bottom: 3.5rem;
+}
+.cards-1 .card {
+  margin-bottom: 4rem;
+  padding: 3.25rem 1.5rem 2.125rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #3a3458;
+}
+@media (min-width: 1200px) {
+  .cards-1 .card:nth-of-type(3n + 2) {
+    margin-right: 1.75rem;
+    margin-left: 1.75rem;
+  }
+  .cards-1 .card {
+    width: 348px;
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+  .h1-large {
+    font-size: 3.5rem;
+    line-height: 4.375rem;
+  }
+  .header {
+    padding-top: 18rem !important;
+    padding-bottom: 10rem;
+  }
+}
+@media (min-width: 992px) {
+  .cards-1 .card:nth-of-type(3n + 2) {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  .cards-1 .card {
+    display: inline-block;
+    width: 300px;
+    vertical-align: top;
+  }
+  .p-heading {
+    width: 40rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .h2-heading {
+    width: 35.25rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .header {
+    p {
+      color: #ffffff;
+      font: 400 1rem/1.625rem "Open Sans", sans-serif;
+    }
+    padding-top: 14rem !important;
+  }
+  .header .text-container p {
+    margin-bottom: 1.875rem;
+  }
+}
+.header h1 {
+  margin-bottom: 0.875rem;
+}
+.header .text-container p {
+  margin-bottom: 2.5rem;
+}
+.header .partner-container img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  max-height: 36px;
+  margin-right: auto;
+  margin-bottom: 2.25rem;
+  margin-left: auto;
+}
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .header .partner-container img {
+    display: inline-block;
+    max-width: 200px;
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+  }
+  .header .partner-container img:first-of-type {
+    margin-left: 0;
+  }
+}
