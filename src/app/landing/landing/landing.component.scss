@@ -1,19 +1,43 @@
-.landing-page .fold-1 {
-  background-image: linear-gradient(180deg, #061323, #37486e);
-}
-.landing-page .fold-1__container {
-  display: flex;
-  padding-bottom: 0;
+h1,
+ul,
+li {
+  color: #fff !important;
 }
 .fold-container {
   max-width: 1760px;
   padding: 3rem 5rem;
   margin: 0 auto;
 }
-p,
-h1,
-h2 {
-  color: #fff !important;
+.fold-7__heading,
+.fold-7__sub-text {
+  text-align: center;
+}
+.fold-7__box {
+  background-color: #f0f8ff;
+  padding: 2rem 0;
+  border-radius: 8px;
+}
+.fold-7 button {
+  margin: 2rem auto;
+}
+.fold-7 button {
+  margin: 2rem auto;
+}
+.fold-7__cta {
+  background-color: #2269ff;
+  border: 1px solid #2269ff;
+  color: #fff;
+  margin: 2rem auto;
+  border-radius: 4px;
+  width: 15rem;
+  font-size: 18px;
+  font-weight: 600;
+  height: 4rem;
+  text-align: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .cards-1 .card-title {
   margin-bottom: 0.5rem;
@@ -29,31 +53,6 @@ h2 {
   color: #37486e;
   font-size: 1.75rem;
   font-weight: 900;
-}
-.landing-page .fold-1__sub-content:not(:last-child) {
-  margin-bottom: 1rem;
-}
-
-.landing-page .fold-1__sub-content {
-  font-size: 22px;
-  display: flex;
-  align-items: center;
-}
-
-.landing-page .fold-1__left-item {
-  flex: 1 1 70%;
-  color: #fff;
-}
-.landing-page .fold-2__left .box,
-.landing-page .fold-4__left .box,
-.landing-page .fold-5__left .box,
-.landing-page .fold-6__left .box,
-.landing-page .fold-7__left .box {
-  display: flex;
-  align-items: flex-start;
-  padding: 2rem;
-  margin-top: 2rem;
-  cursor: pointer;
 }
 
 .header {
@@ -97,8 +96,9 @@ h2 {
   }
   padding-top: 7.5rem;
   padding-bottom: 7.5rem;
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
-    url(../../../assets/images/header-background.jpg) center center no-repeat;
+  background: url(../../../assets/images/header-background.jpg);
+  // background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
+  //   url(../../../assets/images/header-background.jpg) center center no-repeat;
   background-size: cover;
 }
 .cards-1 .card-image {
@@ -123,7 +123,7 @@ h2 {
   text-align: center;
 }
 .bg-dark-blue {
-  background-color: #0b0433;
+  // background-color: #0b0433;
 }
 
 h2 {
@@ -140,7 +140,91 @@ h2 {
   padding: 3.25rem 1.5rem 2.125rem 1.5rem;
   border: none;
   border-radius: 6px;
-  background-color: #3a3458;
+  // background-color: #3a3458;
+}
+.text-container li {
+  font-size: 17px;
+}
+.box__details {
+  margin-left: 2em;
+}
+.box-active {
+  background: rgba(231, 245, 255, 0.6);
+}
+.box {
+  display: flex;
+  align-items: flex-start;
+  padding: 2rem;
+  margin-top: 2rem;
+  cursor: pointer;
+}
+.fold-5__box {
+  display: flex;
+  border-radius: 8px;
+  background-color: #edf3ff;
+}
+.fold-5__left {
+  padding: 4rem;
+}
+.fold-5__right {
+  margin-left: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.fold-5__left h3 {
+  text-align: left;
+}
+.fold-5__sub-text {
+  text-align: center;
+}
+.fold-5__button {
+  margin-left: 0;
+}
+.fold-5__cta {
+  background-color: #2269ff;
+  border: 1px solid #2269ff;
+  color: #fff;
+  margin-left: 2rem;
+  margin-top: 2rem;
+  border-radius: 4px;
+  width: 15rem;
+  font-size: 18px;
+  font-weight: 600;
+  height: 4rem;
+  text-align: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fold-5__right {
+  margin-left: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+body {
+  background-color: unset;
+}
+.landingPage {
+  background: #fff;
+}
+.text-center.mt-8 {
+  margin-top: 8em;
+}
+.fold-5__right {
+  flex: 1 1 50%;
+  margin-left: 8rem;
+  display: flex;
+}
+.fold-5__right__container {
+  height: 300px;
+  width: 400px;
+}
+.fold-5__right__container img {
+  width: 100%;
+  height: 100%;
 }
 @media (min-width: 1200px) {
   .cards-1 .card:nth-of-type(3n + 2) {
@@ -153,8 +237,7 @@ h2 {
     padding-left: 2rem;
   }
   .h1-large {
-    font-size: 3.5rem;
-    line-height: 4.375rem;
+    font-size: 2rem;
   }
   .header {
     padding-top: 18rem !important;

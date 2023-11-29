@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guard/auth.guard';
 
 import { ProfileComponent } from './profile/profile.component';
+import { PricingComponent } from './landing/pricing/pricing.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
     component: MainLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: '/authentication/signin', pathMatch: 'full' },
+      { path: '', redirectTo: '/landing', pathMatch: 'full' },
 
       {
         path: 'dashboard',
@@ -59,6 +60,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+      },
+      {
+        path: 'pricing',
+        component: PricingComponent,
       },
     ],
   },

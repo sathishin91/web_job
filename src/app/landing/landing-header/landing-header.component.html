@@ -41,27 +41,20 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link page-scroll"
-            >HOME <span class="sr-only">(current)</span></a
+            >Find Job <span class="sr-only">(current)</span></a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link page-scroll">TRIAL</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link page-scroll">FEATURES</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link page-scroll" href="#details">DETAILS</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link page-scroll" href="#purchase">PURCHASE</a>
+          <a routerLink="/pricing" class="nav-link page-scroll">Pricing</a>
         </li>
 
         <li>
-          <button routerLink="/authentication/signin" class="btn btn-primary">
-            Signin
-          </button>
+          <a
+            class="btn btn-primary page-scroll"
+            routerLink="/authentication/signin"
+          >
+            Signup
+          </a>
         </li>
       </ul>
     </div>

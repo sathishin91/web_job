@@ -178,7 +178,9 @@
   form {
     margin: 0px 20px;
   }
-
+  .coinBal {
+    font-size: 20px;
+  }
   .form-control {
     border: 1px solid #d5dae2;
     padding: 15px 25px;
@@ -291,5 +293,6 @@
 }
 
 body {
+  background-color: unset;
   margin: 0; /* Remove default body margin to avoid any extra spacing */
 }

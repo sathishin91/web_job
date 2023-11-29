@@ -52,7 +52,7 @@ export class SigninComponent implements OnInit {
               if (res) {
                 const token = this.authService.currentUserValue.token;
                 if (token) {
-                  this.router.navigate(['/jobs']);
+                  this.router.navigate(['/authentication/signup']);
                 }
               } else {
                 this.error = 'Invalid Login';
