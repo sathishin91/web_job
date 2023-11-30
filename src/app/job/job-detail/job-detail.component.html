@@ -74,11 +74,7 @@
                 >
               </div>
             </div>
-            <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium w-max css-o7tyvo"
-              tabindex="0"
-              type="button"
-            >
+            <button class="btn btn-primary w-35" tabindex="0" type="button">
               Repost now
             </button>
           </div>
@@ -183,7 +179,14 @@
             <a ngbNavLink>Action Pending</a>
             <ng-template ngbNavContent>
               <div class="row">
-                <div class="col-md-4">Filter</div>
+                <div class="col-md-4">
+                  <button
+                    class="btn btn-outline-primary mb-2 msr-2"
+                    (click)="openVerticallyCentered(content)"
+                  >
+                    Filter
+                  </button>
+                </div>
                 <div class="col-md-8">
                   <span
                     >Show
@@ -204,7 +207,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-4">
+                <!-- <div class="col-md-4">
                   <div class="filterSection">
                     <ng-scrollbar style="height: 500px" visibility="hover">
                       <form>
@@ -682,8 +685,8 @@
                       </form>
                     </ng-scrollbar>
                   </div>
-                </div>
-                <div class="col-md-8">
+                </div> -->
+                <div class="col-md-12">
                   <div class="preview-dashboard">
                     <div class="row">
                       <div class="col-md-4">
@@ -716,7 +719,7 @@
                             <div class="col-md-1">
                               <div>
                                 <img
-                                  class="h-12 w-12 basis-12 rounded-full"
+                                  class="h-12 w-12 basis-12 b-r-10"
                                   src="https://cdn.apna.co/profile_photo/35502947_1656690638730"
                                 />
                               </div>
@@ -743,14 +746,16 @@
                                     >Not disclosed</span
                                   ></span
                                 >
-                                <div class="ml-1">
+                                <span class="ml-1">
                                   <i class="fas fa-map-marker-alt"></i
                                   ><span class="ml-0.3">Madhya, Chennai</span>
-                                </div>
+                                </span>
                               </div>
                             </div>
                             <div class="col-md-2">
-                              <span class="badge badge-light">Priority</span>
+                              <span class="badge badge-light f-right"
+                                >Priority</span
+                              >
                             </div>
                           </div>
                         </div>
@@ -790,7 +795,7 @@
                             </div>
                           </div>
                           <div class="col-md-4">
-                            <div>
+                            <div class="f-right">
                               <button class="btn btn-primary">Shortlist</button>
                               <button class="btn btn-danger ml-2">
                                 Reject
@@ -920,3 +925,433 @@
     </div>
   </div>
 </section>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Filter</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="filterSection">
+      <ng-scrollbar style="height: 500px" visibility="hover">
+        <form>
+          <div>
+            <div
+              class="border-0 border-b border-solid border-b-neutral-200 p-2"
+            >
+              <div class="">
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    id="Priority"
+                    class="form-check-input"
+                  /><label for="Priority" class="form-check-label">
+                    Priority candidates
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="border-0 border-b border-solid border-b-neutral-200 p-2"
+            >
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  id="Candidates"
+                  class="form-check-input"
+                /><label for="Candidates" class="form-check-label">
+                  Candidates with resume
+                </label>
+              </div>
+            </div>
+          </div>
+          <ngb-accordion #acc="ngbAccordion">
+            <ngb-panel title="Keywords (Upto 5 Selections)">
+              <ng-template ngbPanelContent>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search in profile / resume"
+                  />
+                </div>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <span>Applied in</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <div>
+                  <span class="badge badge-light m-1">last 3 days</span>
+                  <span class="badge badge-light m-1">last 7 days</span>
+                  <span class="badge badge-light m-1">last 15 days</span>
+                  <span class="badge badge-light m-1">last 30 days</span>
+                </div>
+              </ng-template>
+            </ngb-panel>
+
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <span>Location</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <div>
+                  <span class="badge badge-light m-1">Within 5 kms</span>
+                  <span class="badge badge-light m-1">Within 10 kms</span>
+                  <span class="badge badge-light m-1">Within 15 kms</span>
+                  <span class="badge badge-light m-1">Within 25 kms</span>
+                  <span class="badge badge-outline col-indigo m-1"
+                    >More than 25 kms</span
+                  >
+                </div>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel title="Job Title">
+              <ng-template ngbPanelContent>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search job title"
+                  />
+                </div>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <span>Experience</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <div class="row">
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <select class="form-select form-control">
+                        <option value="" disabled selected>Min</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2 mt-2 text-center">-</div>
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <select class="form-select form-control">
+                        <option value="" disabled selected>Max</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <span>Monthly Salary</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <div class="row">
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <select class="form-select form-control">
+                        <option value="" disabled selected>Min</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2 mt-2 text-center">-</div>
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <select class="form-select form-control">
+                        <option value="" disabled selected>Max</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <span>Education / Degree</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    id="12thPass"
+                    class="form-check-input"
+                  /><label for="12thPass" class="form-check-label">
+                    12th Pass
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    id="Graduate"
+                    class="form-check-input"
+                  /><label for="Graduate" class="form-check-label">
+                    Graduate
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    id="PostGraduate"
+                    class="form-check-input"
+                  /><label for="PostGraduate" class="form-check-label">
+                    Post Graduate
+                  </label>
+                </div>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <span>Gender</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <div>
+                  <span class="badge badge-outline col-indigo m-1">Female</span>
+                  <span class="badge badge-outline col-indigo m-1">Male</span>
+                </div>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <span>Age</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <div class="row">
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <select class="form-select form-control">
+                        <option value="" disabled selected>Min</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2 mt-2 text-center">-</div>
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <select class="form-select form-control">
+                        <option value="" disabled selected>Max</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <span>English Level</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    id="BasicEnglish"
+                    class="form-check-input"
+                  /><label for="BasicEnglish" class="form-check-label">
+                    Basic English
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    id="GoodEnglish"
+                    class="form-check-input"
+                  /><label for="GoodEnglish" class="form-check-label">
+                    Good English
+                  </label>
+                </div>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <span>Languages known</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <label>Languages known</label>
+                <select multiple="" class="form-control h-100">
+                  <option>Option 1</option>
+                  <option>Option 2</option>
+                  <option>Option 3</option>
+                  <option>Option 3</option>
+                </select>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <span>Candidate preference</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    id="Dayshift"
+                    class="form-check-input"
+                  /><label for="Dayshift" class="form-check-label">
+                    Day shift
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    id="Nightshift"
+                    class="form-check-input"
+                  /><label for="Nightshift" class="form-check-label">
+                    Night shift
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    id="Workfromoffice"
+                    class="form-check-input"
+                  /><label for="Workfromoffice" class="form-check-label">
+                    Work from office
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    id="Workfromhome"
+                    class="form-check-input"
+                  /><label for="Workfromhome" class="form-check-label">
+                    Work from home
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    id="Fieldjob"
+                    class="form-check-input"
+                  /><label for="Fieldjob" class="form-check-label">
+                    Field job
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    id="Fulltime"
+                    class="form-check-input"
+                  /><label for="Fulltime" class="form-check-label">
+                    Full time
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    id="Parttime"
+                    class="form-check-input"
+                  /><label for="Parttime" class="form-check-label">
+                    Part time
+                  </label>
+                </div>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <span>Industry</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <label>Industry</label>
+                <select multiple="" class="form-control h-100">
+                  <option>Option 1</option>
+                  <option>Option 2</option>
+                  <option>Option 3</option>
+                  <option>Option 3</option>
+                </select>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <span>Departments</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <label>Departments</label>
+                <select multiple="" class="form-control h-100">
+                  <option>Option 1</option>
+                  <option>Option 2</option>
+                  <option>Option 3</option>
+                  <option>Option 3</option>
+                </select>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <span>Sub departments</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <label>Sub departments</label>
+                <select multiple="" class="form-control h-100">
+                  <option>Option 1</option>
+                  <option>Option 2</option>
+                  <option>Option 3</option>
+                  <option>Option 3</option>
+                </select>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <span>Notice Period</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <div>
+                  <span class="badge badge-outline col-indigo m-1"
+                    >Immediately available</span
+                  >
+                  <span class="badge badge-outline col-indigo m-1"
+                    >upto 15 days</span
+                  >
+                  <span class="badge badge-outline col-indigo m-1"
+                    >upto 1 month</span
+                  >
+                  <span class="badge badge-outline col-indigo m-1"
+                    >upto 2 months</span
+                  >
+                  <span class="badge badge-outline col-indigo m-1"
+                    >upto 3 months</span
+                  >
+                </div>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
+        </form>
+      </ng-scrollbar>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary">Apply Filter</button>
+    <button class="btn btn-outlines">Clear Form</button>
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
