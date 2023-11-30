@@ -1,7 +1,7 @@
 h1,
 ul,
 li {
-  color: #fff !important;
+  color: #000000 !important;
 }
 .fold-container {
   max-width: 1760px;
@@ -13,7 +13,7 @@ li {
   text-align: center;
 }
 .fold-7__box {
-  background-color: #f0f8ff;
+  background-color: #ffffff;
   padding: 2rem 0;
   border-radius: 8px;
 }
@@ -92,7 +92,7 @@ li {
     margin-top: 4em;
   }
   h1 {
-    color: #fff;
+    color: #000000;
   }
   padding-top: 7.5rem;
   padding-bottom: 7.5rem;
@@ -127,6 +127,7 @@ li {
 }
 
 h2 {
+  
   font-weight: 700;
   font-size: 2.125rem;
   line-height: 2.625rem;
@@ -149,7 +150,7 @@ h2 {
   margin-left: 2em;
 }
 .box-active {
-  background: rgba(231, 245, 255, 0.6);
+  background: rgba(255, 255, 255, 0.6);
 }
 .box {
   display: flex;
@@ -161,7 +162,7 @@ h2 {
 .fold-5__box {
   display: flex;
   border-radius: 8px;
-  background-color: #edf3ff;
+  background-color: #ffffff;
 }
 .fold-5__left {
   padding: 4rem;
