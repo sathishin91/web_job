@@ -1,16 +1,31 @@
 <section class="main-content">
-  <ul class="breadcrumb breadcrumb-style">
-    <li class="breadcrumb-item">
-      <h5 class="page-title m-b-0">Jobs</h5>
-    </li>
-    <li class="breadcrumb-item bcrumb-1">
-      <a routerLink="/jobs"> <i class="fas fa-home font-17"></i></a>
-    </li>
-    <li class="breadcrumb-item">All Jobs</li>
-    <!-- <li class="text-right">
-      <button class="btn btn-primary">Post New Job</button>
-    </li> -->
-  </ul>
+  <div class="row">
+    <div class="col-md-10">
+      <ul class="breadcrumb breadcrumb-style">
+        <li class="breadcrumb-item">
+          <h5 class="page-title m-b-0">Jobs</h5>
+        </li>
+        <li class="breadcrumb-item bcrumb-1">
+          <a routerlink="/jobs" ng-reflect-router-link="/jobs" href="#/jobs"
+            ><i class="fas fa-home font-17"></i
+          ></a>
+        </li>
+        <li class="breadcrumb-item">All Jobs</li>
+      </ul>
+    </div>
+    <div class="col-md-2 mt-4">
+      <div class="alignRightBtn">
+        <button
+          (click)="editJob()"
+          class="btn btn-primary"
+          tabindex="0"
+          ng-reflect-router-link="new-job"
+        >
+          Edit Job
+        </button>
+      </div>
+    </div>
+  </div>
   <div class="section-body pb-5">
     <div class="expirySection">
       <div

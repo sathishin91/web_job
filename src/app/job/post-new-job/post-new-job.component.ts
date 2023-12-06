@@ -6,17 +6,24 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-post-new-job',
   templateUrl: './post-new-job.component.html',
   styleUrls: ['./post-new-job.component.scss'],
 })
 export class PostNewJobComponent implements OnInit {
-  constructor(private fb: UntypedFormBuilder) {}
+  constructor(private fb: UntypedFormBuilder, private router: Router) {}
+  active: any;
+
+  active3!: number;
+  active4: any;
   public Editor: any = ClassicEditor;
 
   postNewJobs!: UntypedFormGroup;
-  name = 'Angular';
+
   private stepper!: Stepper;
   displayOfficeLocation = false;
   displayFieldJob = false;
@@ -30,11 +37,23 @@ export class PostNewJobComponent implements OnInit {
   commOthers = false;
   notifyOthers = false;
 
-  next(event: Event) {
-    event.preventDefault();
-    if (this.stepper) {
-      this.stepper.next();
-    }
+  next() {
+    this.active = 'candidateRequirements';
+  }
+
+  next2() {
+    this.active = 'interviewerInformation';
+  }
+  next3() {
+    this.active = 'jobPreview';
+  }
+  next4() {
+    this.active = 'selectPlan';
+  }
+
+  submit() {
+    console.log('submit the form');
+    this.router.navigate(['/jobs']);
   }
 
   onSubmit() {

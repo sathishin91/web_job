@@ -23,6 +23,14 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  getOtp(mobile_number: number) {
+    const data = {
+      api_key: 'seekk!@#$%2023',
+      mobile: mobile_number,
+    };
+    return this.http.post(`${environment.apiUrl}/SignIn/login`, data);
+  }
+
   login(mobile_number: number, otp: number) {
     return this.http
       .post<User>(`${environment.apiUrl}/authenticate`, {

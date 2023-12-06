@@ -86,7 +86,28 @@ export class SigninComponent implements OnInit {
   }
 
   startFilling() {
-    console.log(true);
-    this.onSubmit();
+    this.authService.getOtp(this.f['mobile_number'].value).subscribe({
+      next: (res) => {
+        if (res) {
+          console.log('Otp entered');
+          // if (res) {
+          //   const token = this.authService.currentUserValue.token;
+          //   if (token) {
+          //     this.router.navigate(['/authentication/signup']);
+          //   }
+          // } else {
+          //   this.error = 'Invalid Login';
+          // }
+        } else {
+          this.error = 'Invalid Login';
+        }
+      },
+      error: (error) => {
+        this.error = error;
+        this.submitted = false;
+      },
+    });
+    // console.log(true);
+    // this.onSubmit();
   }
 }
