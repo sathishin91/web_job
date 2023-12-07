@@ -125,6 +125,78 @@ li {
 .bg-dark-blue {
   // background-color: #0b0433;
 }
+.btn-primary {
+  padding: 10px 50px;
+  line-height: 54px;
+  background:  rgb(1, 158, 255);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #286090;
+  border-color: #204d74;
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 60px;
+  overflow: hidden;
+  box-shadow: 10px 6px 10px 6px rgba(0, 0, 0, 0.1);
+
+}
+
+.search-section {
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.search-input {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  outline: none;
+}
+
+.dropdown-section {
+  padding: 15px;
+  border-left: 2px solid #ccc;
+}
+
+.dropdown {
+  border: none;
+  padding: 10px;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+h1{
+  text-align: center;
+}
+.user-content{
+  padding: 50px;
+  box-sizing: border-box;
+
+}
+.mb-0{
+  
+  color: #4f73c2;
+}
+.col-md-4{
+  padding: 15px;
+  position: relative;
+  box-sizing: border-box;
+}
+.user-content{
+  padding: 10px;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+.icon{
+  
+  color: #2269ff;
+}
+
 
 h2 {
   
@@ -145,6 +217,7 @@ h2 {
 }
 .text-container li {
   font-size: 17px;
+  
 }
 .box__details {
   margin-left: 2em;
@@ -239,6 +312,8 @@ body {
   }
   .h1-large {
     font-size: 2rem;
+   text-align: center;
+    margin-top: 20px;
   }
   .header {
     padding-top: 18rem !important;
