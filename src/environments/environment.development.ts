@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'https://sktexus.com/seekk_api/api',
+  api_key: 'seekk!@#$%2023',
 };
 
 /*

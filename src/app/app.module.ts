@@ -16,9 +16,9 @@ import { AuthLayoutComponent } from './layout/app-layout/auth-layout/auth-layout
 import { MainLayoutComponent } from './layout/app-layout/main-layout/main-layout.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { fakeBackendProvider } from './core/interceptor/fake-backend';
-import { ErrorInterceptor } from './core/interceptor/error.interceptor';
-import { JwtInterceptor } from './core/interceptor/jwt.interceptor';
+//import { fakeBackendProvider } from './core/interceptor/fake-backend';
+//import { ErrorInterceptor } from './core/interceptor/error.interceptor';
+//import { JwtInterceptor } from './core/interceptor/jwt.interceptor';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -27,13 +27,15 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 
 import {
   HttpClientModule,
-  HTTP_INTERCEPTORS,
+  //HTTP_INTERCEPTORS,
   HttpClient,
 } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from './profile/profile.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -72,12 +74,14 @@ export function createTranslateLoader(http: HttpClient) {
     NgbModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    fakeBackendProvider,
+    // { provide: LocationStrategy, useClass: HashLocationStrategy },
+    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // //fakeBackendProvider,
   ],
   bootstrap: [AppComponent],
 })

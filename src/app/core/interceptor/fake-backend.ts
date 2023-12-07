@@ -12,13 +12,42 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import { User } from '../models/user';
 
 const users: User[] = [
+  // {
+  //   id: 1,
+  //   mobile_number: 9876543210,
+  //   otp: 1234,
+  //   firstName: 'Sarah',
+  //   lastName: 'Smith',
+  //   token: 'admin-token',
+  // },
   {
-    id: 1,
-    mobile_number: 9876543210,
-    otp: 1234,
-    firstName: 'Sarah',
-    lastName: 'Smith',
-    token: 'admin-token',
+    code: 1000,
+    status: 'success',
+    message: 'Loggedin successfully',
+    user_role: 'SUPERADMIN',
+    data: {
+      id: 1,
+      role_id: '1',
+      first_name: 'Super',
+      last_name: 'Admin',
+      email: 'admin@gmail.com',
+      password: '',
+      website: '',
+      dob: '',
+      gender: '0',
+      address: null,
+      user_avatar: null,
+      token: 'seekk17019343471fq8Z2wS5iAt',
+      otp_code: '8831',
+      is_active: '1',
+      is_verify: '1',
+      is_registered: '0',
+      created_by: '',
+      created_at: '',
+      updated_at: '1701887400',
+      last_login: '2023-12-07 12:55:13 pm',
+      login_info: '2a02:4780:11:1226:0:372c:be06:2',
+    },
   },
 ];
 
@@ -53,8 +82,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return error('mobile number or otp is incorrect');
       }
       return ok({
-        id: user.id,
-        mobile_number: user.mobile_number,
+        id: user.data.id,
+        mobile_number: user.data.email,
         otp: user.otp,
         firstName: user.firstName,
         lastName: user.lastName,

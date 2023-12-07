@@ -1,9 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
+
+import {
+  Menus,
+  Roleaccess,
+  Roles,
+  Usercred,
+  Userinfo,
+  Users,
+} from '../../Store/Model/User.Model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,20 +32,32 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  // UserLogin(userdata: Usercred): Observable<Userinfo[]> {
+  //   return this.http.get<Userinfo[]>(
+  //     `${environment.apiUrl}/SignIn/verify` +
+  //       '?mobile=' +
+  //       userdata.mobile +
+  //       '&otp=' +
+  //       userdata.otp
+  //   );
+  // }
+
   getOtp(mobile_number: number) {
     const data = {
-      api_key: 'seekk!@#$%2023',
+      api_key: environment.api_key,
       mobile: mobile_number,
     };
     return this.http.post(`${environment.apiUrl}/SignIn/login`, data);
   }
 
   login(mobile_number: number, otp: number) {
+    const data = {
+      api_key: environment.api_key,
+      mobile: mobile_number,
+      otp_code: otp,
+    };
     return this.http
-      .post<User>(`${environment.apiUrl}/authenticate`, {
-        mobile_number,
-        otp,
-      })
+      .post<User>(`${environment.apiUrl}/SignIn/verify`, data)
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -48,10 +69,25 @@ export class AuthService {
       );
   }
 
+  registerUser() {
+    //     const details = {
+    // "api_key"   : "seekk!@#$%2023",
+    // "role_id"   : 2,
+    // "first_name": "vaibhav",
+    // "last_name" : "joshi",
+    // "email"     : "test2@gmail.com",
+    // "website"   : "www.test.com"
+    //     };
+  }
+
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(this.currentUserValue);
     return of({ success: false });
+  }
+
+  SetUserToLoaclStorage(userdata: Userinfo) {
+    localStorage.setItem('userdata', JSON.stringify(userdata));
   }
 }

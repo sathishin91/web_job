@@ -49,13 +49,16 @@ export class SigninComponent implements OnInit {
         .subscribe({
           next: (res) => {
             if (res) {
-              if (res) {
-                const token = this.authService.currentUserValue.token;
-                if (token) {
-                  this.router.navigate(['/authentication/signup']);
-                }
+              console.log('response of login api', res);
+              console.log('response of login api', res.data.is_registered);
+
+              if (res.data.is_registered === '0') {
+                console.log('on if');
+
+                this.router.navigate(['/authentication/signup']);
               } else {
-                this.error = 'Invalid Login';
+                console.log('on else');
+                this.router.navigate(['/jobs']);
               }
             } else {
               this.error = 'Invalid Login';
@@ -72,7 +75,7 @@ export class SigninComponent implements OnInit {
   startTimer() {
     this.getOtp = false;
     this.displayTimer = true;
-    this.counter = 30;
+    this.counter = 2;
     window.clearInterval(this.timer);
     this.timer = setInterval(() => {
       this.counter--;

@@ -5,7 +5,9 @@
     height: 70px;
   }
 }
-
+.registers {
+  overflow-x: unset;
+}
 .flex-container {
   display: flex;
   flex-direction: column;
