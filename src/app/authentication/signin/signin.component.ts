@@ -50,9 +50,9 @@ export class SigninComponent implements OnInit {
           next: (res) => {
             if (res) {
               console.log('response of login api', res);
-              console.log('response of login api', res.data.is_registered);
+              console.log('response of login api', res.is_registered);
 
-              if (res.data.is_registered === '0') {
+              if (res.is_registered === 0) {
                 console.log('on if');
 
                 this.router.navigate(['/authentication/signup']);

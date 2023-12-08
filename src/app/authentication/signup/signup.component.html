@@ -49,8 +49,9 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        name="com_consultancy"
-                        value="Company"
+                        name="is_company"
+                        formControlName="is_company"
+                        value="1"
                         id="rb1"
                       />
                       <label class="form-check-label" for="rb1">
@@ -61,9 +62,10 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        name="com_consultancy"
+                        name="is_company"
+                        formControlName="is_company"
                         id="rb2"
-                        value="Consultancy"
+                        value="2"
                       />
                       <label class="form-check-label" for="rb2">
                         Consultancy
@@ -107,7 +109,8 @@
                     class="form-check-input"
                     type="checkbox"
                     id="customCheck1"
-                    formControlName="termcondition"
+                    value="1"
+                    formControlName="is_accept"
                   />
                   <label class="form-check-label" for="customCheck1">
                     I Accept

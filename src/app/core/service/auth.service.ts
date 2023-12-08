@@ -46,6 +46,7 @@ export class AuthService {
     const data = {
       api_key: environment.api_key,
       mobile: mobile_number,
+      role_id: environment.role_id,
     };
     return this.http.post(`${environment.apiUrl}/SignIn/login`, data);
   }
@@ -69,15 +70,8 @@ export class AuthService {
       );
   }
 
-  registerUser() {
-    //     const details = {
-    // "api_key"   : "seekk!@#$%2023",
-    // "role_id"   : 2,
-    // "first_name": "vaibhav",
-    // "last_name" : "joshi",
-    // "email"     : "test2@gmail.com",
-    // "website"   : "www.test.com"
-    //     };
+  registerUser(data: any) {
+    return this.http.post(`${environment.apiUrl}/SignUp/signup`, data);
   }
 
   logout() {

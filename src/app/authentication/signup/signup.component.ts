@@ -7,6 +7,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
+interface MyApiResponse {
+  code: number;
+  status: string;
+  message: string;
+  // Add other properties as needed
+}
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -16,6 +25,9 @@ export class SignupComponent implements OnInit {
   registerForm!: UntypedFormGroup;
   submitted = false;
   error = '';
+  mobileNumber: any;
+  userMobile = localStorage.getItem('currentUser');
+
   constructor(
     private formBuilder: UntypedFormBuilder,
     private router: Router,
@@ -23,16 +35,31 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Check if userMobile is not null before using it
+    if (this.userMobile !== null) {
+      // Parse the JSON string into an object
+      const userData = JSON.parse(this.userMobile);
+
+      // Now you can access properties of userData safely
+      this.mobileNumber = userData.mobile;
+    } else {
+      console.error('User data not found in localStorage');
+    }
+
+    // Now, 'mobileNumber' contains the mobile number from localStorage
+    // console.log(mobileNumber);
+    // console.log('mobile', this.userMobile);
+    // console.log('mobile', this.userMobile.mobile);
     this.registerForm = this.formBuilder.group({
-      company_name: [''],
+      company_name: ['', Validators.required],
       website: [''],
-      no_employees: [''],
+      no_employees: ['', Validators.required],
       email: [
         '',
-        // [Validators.required, Validators.email, Validators.minLength(5)],
+        [Validators.required, Validators.email, Validators.minLength(5)],
       ],
-      com_consultancy: [''],
-      termcondition: [false, [Validators.requiredTrue]],
+      is_company: ['', Validators.required],
+      is_accept: ['', Validators.required],
     });
   }
   get f() {
@@ -47,31 +74,37 @@ export class SignupComponent implements OnInit {
       return;
     } else {
       console.log('register an user', this.registerForm.value);
-      // this.authService
-      //   .login(this.f['mobile_number'].value, this.f['otp'].value)
-      //   .subscribe({
-      //     next: (res) => {
-      //       if (res) {
-      //         console.log('response of login api', res);
-      //         console.log('response of login api', res.data.is_registered);
 
-      //         if (res.data.is_registered === '0') {
-      //           console.log('on if');
-
-      //           this.router.navigate(['/authentication/signup']);
-      //         } else {
-      //           console.log('on else');
-      //           this.router.navigate(['/jobs']);
-      //         }
-      //       } else {
-      //         this.error = 'Invalid Login';
-      //       }
-      //     },
-      //     error: (error) => {
-      //       this.error = error;
-      //       this.submitted = false;
-      //     },
-      //   });
+      const data = {
+        api_key: environment.api_key,
+        role_id: environment.role_id,
+        mobile: this.mobileNumber,
+        company_name: this.f['company_name'].value,
+        is_company: this.f['is_company'].value,
+        email: this.f['email'].value,
+        website: this.f['website'].value,
+        no_of_employees: this.f['no_employees'].value,
+        is_accept: this.f['is_accept'].value,
+      };
+      this.authService.registerUser(data).subscribe({
+        next: (res: any) => {
+          //const apiResponse = res as MyApiResponse;
+          if (res) {
+            console.log('response of register api', res);
+            if (res.status == 'success') {
+              this.router.navigate(['/jobs']);
+            } else {
+              this.error = 'Invalid Register';
+            }
+          } else {
+            this.error = 'Invalid Register';
+          }
+        },
+        error: (error) => {
+          this.error = error;
+          this.submitted = false;
+        },
+      });
     }
   }
 
