@@ -3,6 +3,7 @@ export class User {
   status!: string;
   message!: string;
   user_role!: string;
+  token!: string;
 
   id!: 1;
   role_id!: string;
@@ -15,7 +16,7 @@ export class User {
   gender!: string;
   address!: null;
   user_avatar!: null;
-  token!: string;
+
   otp_code!: string;
   is_active!: string;
   is_verify!: string;

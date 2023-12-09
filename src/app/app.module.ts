@@ -25,6 +25,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 
+import { AppStoreModule } from './app-state.module';
+
 import {
   HttpClientModule,
   //HTTP_INTERCEPTORS,
@@ -36,6 +38,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { TokenEffects } from './Store/Token/Token.Effects';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -72,9 +75,10 @@ export function createTranslateLoader(http: HttpClient) {
     CoreModule,
     SharedModule,
     NgbModule,
+    AppStoreModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([TokenEffects]),
     StoreRouterConnectingModule.forRoot(),
   ],
   providers: [

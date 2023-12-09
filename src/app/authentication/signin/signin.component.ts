@@ -6,6 +6,15 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from '../../Store/Common/App.state';
+import * as TokenActions from '../../Store/Token/Token.Actions';
+
+// interface ApiResponse {
+//   token: string;
+// }
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -22,16 +31,33 @@ export class SigninComponent implements OnInit {
   returnUrl!: string;
   error = '';
   hide = true;
+  tokens: any;
   constructor(
     private formBuilder: UntypedFormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store<AppState>
   ) {}
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       mobile_number: [9876543210, Validators.required],
       otp: [1234, Validators.required],
     });
+
+    this.store.dispatch(TokenActions.getToken());
+
+    // this.authService.getToken().subscribe({
+    //   next: (res: any) => {
+    //     // Specify the type of 'res' as ApiResponse
+    //     console.log('response on token', res);
+
+    //     this.tokens = res.token;
+    //     console.log('resposne token', this.tokens);
+    //   },
+    //   error: (err) => {
+    //     console.log('error', err);
+    //   },
+    // });
   }
   get f() {
     return this.loginForm.controls;

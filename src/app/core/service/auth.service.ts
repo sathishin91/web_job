@@ -4,6 +4,10 @@ import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../Store/Common/App.state';
+
+import * as TokenActions from '../../Store/Token/Token.Actions';
 
 import {
   Menus,
@@ -21,7 +25,7 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private store: Store<AppState>) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
     );
@@ -43,6 +47,7 @@ export class AuthService {
   // }
 
   getOtp(mobile_number: number) {
+    this.store.dispatch(TokenActions.getToken());
     const data = {
       api_key: environment.api_key,
       mobile: mobile_number,
@@ -83,5 +88,9 @@ export class AuthService {
 
   SetUserToLoaclStorage(userdata: Userinfo) {
     localStorage.setItem('userdata', JSON.stringify(userdata));
+  }
+
+  getToken() {
+    return this.http.get(`${environment.apiUrl}/Auth/getToken`);
   }
 }
