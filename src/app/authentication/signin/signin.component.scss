@@ -15,7 +15,9 @@
 .row.no-gutters {
   height: 100%; /* Make the row fill the container's height */
 }
-
+.fill_available {
+  width: -webkit-fill-available;
+}
 body {
   margin: 0; /* Remove default body margin to avoid any extra spacing */
 }

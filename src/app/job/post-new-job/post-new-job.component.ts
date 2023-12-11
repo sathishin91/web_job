@@ -22,7 +22,9 @@ export class PostNewJobComponent implements OnInit {
   active4: any;
   public Editor: any = ClassicEditor;
 
-  postNewJobs!: UntypedFormGroup;
+  jobDetailss!: UntypedFormGroup;
+  candidateDetails!: UntypedFormGroup;
+  interviewDetails!: UntypedFormGroup;
 
   private stepper!: Stepper;
   displayOfficeLocation = false;
@@ -57,11 +59,11 @@ export class PostNewJobComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Form Value', this.postNewJobs.value);
+    console.log('Form Value', this.jobDetailss.value);
   }
   onSalaryChange() {
     this.salaryPreview = true;
-    const salaryTypeControl = this.postNewJobs.get('salaryType');
+    const salaryTypeControl = this.jobDetailss.get('salaryType');
     console.log('Salary type changed');
     if (salaryTypeControl) {
       const selectedValue = salaryTypeControl.value;
@@ -85,7 +87,7 @@ export class PostNewJobComponent implements OnInit {
   }
 
   onRadioChange() {
-    const workLocationControl = this.postNewJobs.get('work_location');
+    const workLocationControl = this.jobDetailss.get('work_location');
 
     if (workLocationControl) {
       const selectedValue = workLocationControl.value;
@@ -110,7 +112,7 @@ export class PostNewJobComponent implements OnInit {
     }
   }
   commPrefChange() {
-    const commPrefChangeControl = this.postNewJobs.get('comm_pref');
+    const commPrefChangeControl = this.interviewDetails.get('comm_pref');
 
     if (commPrefChangeControl) {
       const selectedValue = commPrefChangeControl.value;
@@ -124,7 +126,7 @@ export class PostNewJobComponent implements OnInit {
   }
 
   notifyPrefChange() {
-    const commPrefChangeControl = this.postNewJobs.get('notify_pref');
+    const commPrefChangeControl = this.interviewDetails.get('notify_pref');
 
     if (commPrefChangeControl) {
       const selectedValue = commPrefChangeControl.value;
@@ -138,7 +140,7 @@ export class PostNewJobComponent implements OnInit {
   }
 
   WFHChange() {
-    const workFromHomeControl = this.postNewJobs.get('wfh_change');
+    const workFromHomeControl = this.jobDetailss.get('wfh_change');
 
     if (workFromHomeControl) {
       const selectedValue = workFromHomeControl.value;
@@ -153,7 +155,7 @@ export class PostNewJobComponent implements OnInit {
   }
 
   initForm() {
-    this.postNewJobs = this.fb.group({
+    this.jobDetailss = this.fb.group({
       company_name: [
         '',
         [Validators.required, Validators.pattern('[a-zA-Z]+')],
@@ -161,7 +163,12 @@ export class PostNewJobComponent implements OnInit {
       last: [''],
       department: ['', Validators.required],
       work_location: [''],
-      comm_pref: [''],
+      jobTitle: [''],
+      job_type: [''],
+      role: [''],
+      City: [''],
+      specificArea: [''],
+
       salaryType: [''],
       nightShift: [''],
       min_salary: [''],
@@ -192,11 +199,23 @@ export class PostNewJobComponent implements OnInit {
       country: ['', [Validators.required]],
       termcondition: [false, [Validators.requiredTrue]],
     });
+
+    this.interviewDetails = this.fb.group({
+      comm_pref: [''],
+      notify_pref: [''],
+    });
+
+    this.candidateDetails = this.fb.group({
+      minEducation: [''],
+      totalExpeience: [''],
+      englishLevel: [''],
+      additionalRequirements: [''],
+    });
   }
 
   ngOnInit() {
     this.initForm();
-    console.log('form value', this.postNewJobs.value);
+    console.log('form value', this.jobDetailss.value);
     const stepperElement = document.querySelector('#stepper1');
 
     if (stepperElement) {

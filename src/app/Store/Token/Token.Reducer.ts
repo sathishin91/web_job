@@ -1,7 +1,7 @@
 // token.reducer.ts
 
 import { createReducer, on } from '@ngrx/store';
-import * as TokenActions from './Token.Actions';
+import * as TokenActions from '../Token/Token.Actions';
 
 export interface TokenState {
   token: string | null;

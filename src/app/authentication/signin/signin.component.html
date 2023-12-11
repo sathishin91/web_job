@@ -16,7 +16,7 @@
         </div>
         <form class="validate-form" [formGroup]="loginForm">
           <div class="row">
-            <div class="col-lg-10 col-md-8 col-xs-12">
+            <div class="col-lg-9 col-md-8 col-xs-12">
               <div class="form-group position-relative">
                 <label>Mobile Number <span class="text-danger">*</span></label>
                 <i-feather name="user" class="login-icons"></i-feather>
@@ -28,19 +28,26 @@
                 />
               </div>
             </div>
-            <div class="col-lg-2 col-md-4 col-xs-12">
+            <div class="col-lg-3 col-md-4 col-xs-12">
               <button
                 *ngIf="getOtp === true"
                 (click)="startTimer()"
-                class="btn btn-primary mt-2em"
+                class="btn btn-primary mt-2em fill_available"
               >
                 Get OTP
               </button>
               <button
-                class="btn btn-primary mt-2em"
+                class="btn btn-primary mt-2em fill_available"
                 *ngIf="displayTimer === true && getOtp === false"
               >
                 {{ counter }}
+              </button>
+              <button
+                class="btn btn-primary mt-2em fill_available"
+                *ngIf="showResentOtp === true"
+                (click)="startTimer()"
+              >
+                Resend OTP
               </button>
             </div>
 

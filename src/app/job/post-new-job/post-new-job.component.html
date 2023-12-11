@@ -25,7 +25,7 @@
             <li ngbNavItem="jobDetail">
               <a ngbNavLink>Job Detail</a>
               <ng-template ngbNavContent>
-                <form [formGroup]="postNewJobs">
+                <form [formGroup]="jobDetailss">
                   <div id="test-l-1" class="content">
                     <div class="row mt-3">
                       <div class="col-md-12">
@@ -52,8 +52,8 @@
                         <small
                           class="form-text text-danger"
                           *ngIf="
-                            !postNewJobs.get('company_name')?.valid &&
-                            postNewJobs.get('company_name')?.touched
+                            !jobDetailss.get('company_name')?.valid &&
+                            jobDetailss.get('company_name')?.touched
                           "
                           >Please enter a company name!</small
                         >
@@ -64,7 +64,12 @@
                           <span class="text-danger">*</span>
                         </label>
 
-                        <select class="form-select form-control">
+                        <select
+                          name="jobTitle"
+                          id="jobTitle"
+                          class="form-select form-control"
+                          formControlName="jobTitle"
+                        >
                           <option>Option 1</option>
                           <option>Option 2</option>
                           <option>Option 3</option>
@@ -87,15 +92,18 @@
                         <small
                           class="form-text text-danger"
                           *ngIf="
-                            !postNewJobs.get('department')?.valid &&
-                            postNewJobs.get('department')?.touched
+                            !jobDetailss.get('department')?.valid &&
+                            jobDetailss.get('department')?.touched
                           "
                           >Please enter a Department !</small
                         >
                       </div>
                       <div class="form-group col-md-6">
                         <label>Role<span class="text-danger">*</span></label>
-                        <select class="form-select form-control">
+                        <select
+                          class="form-select form-control"
+                          formControlName="role"
+                        >
                           <option>Option 1</option>
                           <option>Option 2</option>
                           <option>Option 3</option>
@@ -110,7 +118,8 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="rbbuttons1"
+                              name="job_type"
+                              formControlName="job_type"
                               id="rb1"
                               checked
                             />
@@ -122,7 +131,8 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="rbbuttons1"
+                              name="job_type"
+                              formControlName="job_type"
                               id="rb2"
                             />
                             <label class="form-check-label" for="rb2">
@@ -133,7 +143,8 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="rbbuttons1"
+                              name="job_type"
+                              formControlName="job_type"
                               id="rb3"
                             />
                             <label class="form-check-label" for="rb3">
@@ -221,7 +232,10 @@
                             <span class="text-danger">*</span>
                           </label>
 
-                          <select class="form-select form-control">
+                          <select
+                            class="form-select form-control"
+                            formControlName="City"
+                          >
                             <option>Option 1</option>
                             <option>Option 2</option>
                             <option>Option 3</option>
@@ -297,7 +311,10 @@
                             <span class="text-danger">*</span>
                           </label>
 
-                          <select class="form-select form-control">
+                          <select
+                            class="form-select form-control"
+                            formControlName="specificCity"
+                          >
                             <option>Option 1</option>
                             <option>Option 2</option>
                             <option>Option 3</option>
@@ -311,7 +328,10 @@
                             <span class="text-danger">*</span>
                           </label>
 
-                          <select class="form-select form-control">
+                          <select
+                            class="form-select form-control"
+                            formControlName="specificArea"
+                          >
                             <option>Option 1</option>
                             <option>Option 2</option>
                             <option>Option 3</option>
@@ -508,28 +528,663 @@
             <li ngbNavItem="candidateRequirements">
               <a ngbNavLink>Candidate Requirements </a>
               <ng-template ngbNavContent>
-                <p>content2</p>
-                <button (click)="next2()" class="btn btn-primary">Next</button>
+                <form [formGroup]="candidateDetails">
+                  <div id="test-l-2" class="content">
+                    <div class="row mt-3">
+                      <div class="col-lg-12">
+                        <h6>Candidate Requirements</h6>
+                        <p>
+                          We’ll use these requirement details to make your job
+                          visible to the right candidates.
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="form-group col-md-6">
+                        <label
+                          >Minimum Education
+                          <span class="text-danger">*</span>
+                        </label>
+
+                        <select
+                          class="form-select form-control"
+                          formControlName="minEducation"
+                        >
+                          <option>Option 1</option>
+                          <option>Option 2</option>
+                          <option>Option 3</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label
+                          >Total experience required
+                          <span class="text-danger">*</span>
+                        </label>
+
+                        <select
+                          class="form-select form-control"
+                          formControlName="totalExpeience"
+                        >
+                          <option>Option 1</option>
+                          <option>Option 2</option>
+                          <option>Option 3</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label
+                          >English level required
+                          <span class="text-danger">*</span>
+                        </label>
+
+                        <select
+                          class="form-select form-control"
+                          formControlName="englishLevel"
+                        >
+                          <option>Option 1</option>
+                          <option>Option 2</option>
+                          <option>Option 3</option>
+                        </select>
+                      </div>
+                      <div class="dropdown-divider"></div>
+                      <div class="col-lg-12 mt-3">
+                        <h6>Job Description</h6>
+                        <p>
+                          Describe the responsibilities of this job and other
+                          specific requirements here.
+                        </p>
+                      </div>
+                      <div class="col-md-12">
+                        <label class="mb-3"
+                          ><strong>
+                            Description / Additional requirement</strong
+                          ></label
+                        >
+                        <ckeditor
+                          formControlName="additionalRequirements"
+                          [editor]="Editor"
+                          data="<p>Hello, world!</p>"
+                        ></ckeditor>
+                      </div>
+                    </div>
+                    <button (click)="next2()" class="btn btn-primary">
+                      Next
+                    </button>
+                  </div>
+                </form>
               </ng-template>
             </li>
             <li ngbNavItem="interviewerInformation">
               <a ngbNavLink>Interviewer Information </a>
               <ng-template ngbNavContent>
-                <p>content3</p>
-                <button (click)="next3()" class="btn btn-primary">Next</button>
+                <form [formGroup]="interviewDetails">
+                  <div id="testl-3" class="content">
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                        <div class="col-lg-12 mt-3">
+                          <h6>Communication Preferences</h6>
+                        </div>
+                        <label
+                          >Do you want candidates to contact you via Call /
+                          Whatsapp after they apply?
+                        </label>
+                        <span class="text-danger">*</span>
+                        <div class="form-check">
+                          <input
+                            type="radio"
+                            name="comm_pref"
+                            formControlName="comm_pref"
+                            value="Comm_myself"
+                            (change)="commPrefChange()"
+                            id="exampleRadios1"
+                            class="form-check-input"
+                          /><label
+                            for="exampleRadios1"
+                            class="form-check-label"
+                          >
+                            Yes, to myself
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            type="radio"
+                            formControlName="comm_pref"
+                            value="Comm_others"
+                            (change)="commPrefChange()"
+                            id="exampleRadios2"
+                            class="form-check-input"
+                          /><label
+                            for="exampleRadios2"
+                            class="form-check-label"
+                          >
+                            Yes, to other recruiter
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            type="radio"
+                            formControlName="comm_pref"
+                            value="Comm_candidate"
+                            (change)="commPrefChange()"
+                            id="exampleRadios3"
+                            class="form-check-input"
+                          /><label
+                            for="exampleRadios3"
+                            class="form-check-label"
+                          >
+                            No, I will contact candidates first
+                          </label>
+                        </div>
+                        <div class="row" *ngIf="commOthers">
+                          <div class="col-md-12">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <label
+                                  >Full Name
+                                  <span class="text-danger">*</span></label
+                                >
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="comm_other_name"
+                                  required
+                                />
+                              </div>
+                              <div class="col-md-6">
+                                <label
+                                  >Mobile Number
+                                  <span class="text-danger">*</span></label
+                                >
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="comm_other_mobile"
+                                  required
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <div class="col-lg-12 mt-3">
+                          <h6>Notification Preferences</h6>
+                        </div>
+                        <label
+                          >Every time you receive a application,do you want
+                          Whatsapp Alerts?
+                        </label>
+                        <span class="text-danger">*</span>
+                        <div class="form-check">
+                          <input
+                            type="radio"
+                            name="notify_pref"
+                            formControlName="notify_pref"
+                            value="notify_myself"
+                            (change)="notifyPrefChange()"
+                            id="exampleRadios4"
+                            class="form-check-input"
+                          /><label
+                            for="exampleRadios4"
+                            class="form-check-label"
+                          >
+                            Yes, to myself
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            type="radio"
+                            name="notify_pref"
+                            formControlName="notify_pref"
+                            value="notify_others"
+                            (change)="notifyPrefChange()"
+                            id="exampleRadios5"
+                            class="form-check-input"
+                          /><label
+                            for="exampleRadios5"
+                            class="form-check-label"
+                          >
+                            Yes, to other recruiter
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            type="radio"
+                            name="notify_pref"
+                            formControlName="notify_pref"
+                            value="notify_candidate"
+                            (change)="notifyPrefChange()"
+                            id="exampleRadios6"
+                            class="form-check-input"
+                          /><label
+                            for="exampleRadios6"
+                            class="form-check-label"
+                          >
+                            No, I will contact candidates first
+                          </label>
+                        </div>
+                        <div class="row" *ngIf="notifyOthers">
+                          <div class="col-md-12">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <label
+                                  >Full Name
+                                  <span class="text-danger">*</span></label
+                                >
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="comm_other_name"
+                                  required
+                                />
+                              </div>
+                              <div class="col-md-6">
+                                <label
+                                  >Mobile Number
+                                  <span class="text-danger">*</span></label
+                                >
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="comm_other_mobile"
+                                  required
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="dropdown-divider"></div>
+                      <div class="row mt-3">
+                        <div class="col-lg-12 mt-3">
+                          <h6>Interview method and address</h6>
+                          <p>
+                            Let candidates know how interview will be conducted
+                            for this job.
+                          </p>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label>Type of Interview </label>
+                          <span class="text-danger">*</span>
+                          <div class="input-group">
+                            <div class="form-check">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="rbbuttons4"
+                                id="rb12"
+                                checked
+                              />
+                              <label class="form-check-label" for="rb12">
+                                In-person interview
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="rbbuttons4"
+                                id="rb13"
+                              />
+                              <label class="form-check-label" for="rb13">
+                                Telephonic/Online interview
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button (click)="next3()" class="btn btn-primary">
+                      Next
+                    </button>
+                  </div>
+                </form>
               </ng-template>
             </li>
             <li ngbNavItem="jobPreview">
               <a ngbNavLink>Job Preview </a>
               <ng-template ngbNavContent>
-                <p>content3</p>
-                <button (click)="next4()" class="btn btn-primary">Next</button>
+                <div id="test-l-4" class="content previewBox">
+                  <div class="row mt-3">
+                    <div class="col-md-6">
+                      <div class="card">
+                        <div class="card-header">
+                          <h4 class="d-inline">Job Details</h4>
+                          <div class="card-header-action">
+                            <a
+                              href="#"
+                              onclick="return false;"
+                              class="btn btn-primary"
+                              >Edit</a
+                            >
+                          </div>
+                        </div>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <ul class="preview_list">
+                                <li>
+                                  <label>Company name<label></label></label>
+                                </li>
+                                <li><h6>Test</h6></li>
+                              </ul>
+
+                              <ul class="preview_list">
+                                <li><label>Job title</label></li>
+                                <li><h6>Category 1</h6></li>
+                              </ul>
+
+                              <ul class="preview_list">
+                                <li><label>Department | Role</label></li>
+                                <li>
+                                  <h6>Job Sub Category | Job Final Category</h6>
+                                </li>
+                              </ul>
+
+                              <ul class="preview_list">
+                                <li><label>Job type</label></li>
+                                <li><h6>Full Time | General Shift</h6></li>
+                              </ul>
+
+                              <ul class="preview_list">
+                                <li><label>Work type</label></li>
+                                <li><h6>Work From Office</h6></li>
+                              </ul>
+
+                              <ul class="preview_list">
+                                <li><label>Job location</label></li>
+                                <li><h6>Abohar</h6></li>
+                              </ul>
+
+                              <ul class="preview_list">
+                                <li>
+                                  <label>Monthly Salary | Pay Type</label>
+                                </li>
+                                <li>
+                                  <h6>Min. Salary: 200 - Max. Salary: 300</h6>
+                                </li>
+                              </ul>
+
+                              <ul class="preview_list">
+                                <li><label>Additional perks</label></li>
+                                <li><h6></h6></li>
+                              </ul>
+
+                              <ul class="preview_list">
+                                <li><label>Joining Fee</label></li>
+                                <li><h6>-</h6></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card">
+                        <div class="card-header">
+                          <h4 class="d-inline">Candidate Requirements</h4>
+                          <div class="card-header-action">
+                            <a
+                              href="#"
+                              onclick="return false;"
+                              class="btn btn-primary"
+                              >Edit</a
+                            >
+                          </div>
+                        </div>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <ul class="preview_list">
+                                <li><label>Minimum Education</label></li>
+                                <li><h6>10th or Below 10th</h6></li>
+                              </ul>
+
+                              <ul class="preview_list">
+                                <li><label>Experience Required</label></li>
+                                <li><h6>6 months</h6></li>
+                              </ul>
+
+                              <ul class="preview_list">
+                                <li><label>English</label></li>
+                                <li><h6>No English</h6></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card">
+                        <div class="card-header">
+                          <h4 class="d-inline">Interview Information</h4>
+                          <div class="card-header-action">
+                            <a
+                              href="#"
+                              onclick="return false;"
+                              class="btn btn-primary"
+                              >Edit</a
+                            >
+                          </div>
+                        </div>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <ul class="preview_list">
+                                <li>
+                                  <label>Communication Preferences</label>
+                                </li>
+                                <li><h6>vivekq - 852741852</h6></li>
+                              </ul>
+
+                              <ul class="preview_list">
+                                <li>
+                                  <label>Notification Preferences</label>
+                                </li>
+                                <li><h6>Viveka - 8098778216</h6></li>
+                              </ul>
+
+                              <ul class="preview_list">
+                                <li><label>Type of Interview</label></li>
+                                <li><h6>In-person interview</h6></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button (click)="next4()" class="btn btn-primary">
+                    Next
+                  </button>
+                </div>
               </ng-template>
             </li>
             <li ngbNavItem="selectPlan">
               <a ngbNavLink>Select Plan </a>
               <ng-template ngbNavContent>
-                <p>content3</p>
+                <div id="test-l-5" class="content text-center">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12 col-md-4 col-lg-4">
+                        <div class="pricing">
+                          <div class="pricing-title">Developer</div>
+                          <div class="pricing-padding">
+                            <div class="pricing-price">
+                              <div>$19</div>
+                              <div>per month</div>
+                            </div>
+                            <div class="pricing-details">
+                              <div class="pricing-item">
+                                <div class="pricing-item-icon">
+                                  <i class="fas fa-check"></i>
+                                </div>
+                                <div class="pricing-item-label">
+                                  1 user agent
+                                </div>
+                              </div>
+                              <div class="pricing-item">
+                                <div class="pricing-item-icon">
+                                  <i class="fas fa-check"></i>
+                                </div>
+                                <div class="pricing-item-label">
+                                  Core features
+                                </div>
+                              </div>
+                              <div class="pricing-item">
+                                <div class="pricing-item-icon">
+                                  <i class="fas fa-check"></i>
+                                </div>
+                                <div class="pricing-item-label">
+                                  1GB storage
+                                </div>
+                              </div>
+                              <div class="pricing-item">
+                                <div class="pricing-item-icon">
+                                  <i class="fas fa-check"></i>
+                                </div>
+                                <div class="pricing-item-label">
+                                  2 Custom domain
+                                </div>
+                              </div>
+                              <div class="pricing-item">
+                                <div
+                                  class="pricing-item-icon bg-danger text-white"
+                                >
+                                  <i class="fas fa-times"></i>
+                                </div>
+                                <div class="pricing-item-label">
+                                  Live Support
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="pricing-cta">
+                            <a href="#" onClick="return false;"
+                              >Subscribe <i class="fas fa-arrow-right"></i
+                            ></a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-4 col-lg-4">
+                        <div class="pricing pricing-highlight">
+                          <div class="pricing-title">Small Team</div>
+                          <div class="pricing-padding">
+                            <div class="pricing-price">
+                              <div>$60</div>
+                              <div>per month</div>
+                            </div>
+                            <div class="pricing-details">
+                              <div class="pricing-item">
+                                <div class="pricing-item-icon">
+                                  <i class="fas fa-check"></i>
+                                </div>
+                                <div class="pricing-item-label">
+                                  5 user agent
+                                </div>
+                              </div>
+                              <div class="pricing-item">
+                                <div class="pricing-item-icon">
+                                  <i class="fas fa-check"></i>
+                                </div>
+                                <div class="pricing-item-label">
+                                  Core features
+                                </div>
+                              </div>
+                              <div class="pricing-item">
+                                <div class="pricing-item-icon">
+                                  <i class="fas fa-check"></i>
+                                </div>
+                                <div class="pricing-item-label">
+                                  10GB storage
+                                </div>
+                              </div>
+                              <div class="pricing-item">
+                                <div class="pricing-item-icon">
+                                  <i class="fas fa-check"></i>
+                                </div>
+                                <div class="pricing-item-label">
+                                  10 Custom domain
+                                </div>
+                              </div>
+                              <div class="pricing-item">
+                                <div class="pricing-item-icon">
+                                  <i class="fas fa-check"></i>
+                                </div>
+                                <div class="pricing-item-label">
+                                  24/7 Support
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="pricing-cta">
+                            <a href="#" onClick="return false;"
+                              >Subscribe <i class="fas fa-arrow-right"></i
+                            ></a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-4 col-lg-4">
+                        <div class="pricing">
+                          <div class="pricing-title">Enterprise</div>
+                          <div class="pricing-padding">
+                            <div class="pricing-price">
+                              <div>$499</div>
+                              <div>per month</div>
+                            </div>
+                            <div class="pricing-details">
+                              <div class="pricing-item">
+                                <div class="pricing-item-icon">
+                                  <i class="fas fa-check"></i>
+                                </div>
+                                <div class="pricing-item-label">
+                                  Unlimited user agent
+                                </div>
+                              </div>
+                              <div class="pricing-item">
+                                <div class="pricing-item-icon">
+                                  <i class="fas fa-check"></i>
+                                </div>
+                                <div class="pricing-item-label">
+                                  Core features
+                                </div>
+                              </div>
+                              <div class="pricing-item">
+                                <div class="pricing-item-icon">
+                                  <i class="fas fa-check"></i>
+                                </div>
+                                <div class="pricing-item-label">
+                                  8TB storage
+                                </div>
+                              </div>
+                              <div class="pricing-item">
+                                <div class="pricing-item-icon">
+                                  <i class="fas fa-check"></i>
+                                </div>
+                                <div class="pricing-item-label">
+                                  Unlimited custom domain
+                                </div>
+                              </div>
+                              <div class="pricing-item">
+                                <div class="pricing-item-icon">
+                                  <i class="fas fa-check"></i>
+                                </div>
+                                <div class="pricing-item-label">
+                                  Lifetime Support
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="pricing-cta">
+                            <a href="#" onClick="return false;"
+                              >Subscribe <i class="fas fa-arrow-right"></i
+                            ></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <button (click)="submit()" class="btn btn-primary">
                   Submit
                 </button>

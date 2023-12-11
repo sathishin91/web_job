@@ -9,11 +9,8 @@ import {
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from '../../Store/Common/App.state';
-import * as TokenActions from '../../Store/Token/Token.Actions';
 
-// interface ApiResponse {
-//   token: string;
-// }
+import * as TokenActions from '../../Store/Token/Token.Actions';
 
 @Component({
   selector: 'app-signin',
@@ -28,6 +25,7 @@ export class SigninComponent implements OnInit {
 
   loginForm!: UntypedFormGroup;
   submitted = false;
+  showResentOtp = false;
   returnUrl!: string;
   error = '';
   hide = true;
@@ -39,12 +37,13 @@ export class SigninComponent implements OnInit {
     private store: Store<AppState>
   ) {}
   ngOnInit() {
+    this.store.dispatch(TokenActions.getToken());
     this.loginForm = this.formBuilder.group({
       mobile_number: [9876543210, Validators.required],
       otp: [1234, Validators.required],
     });
 
-    this.store.dispatch(TokenActions.getToken());
+    // this.store.dispatch(TokenActions.getToken());
 
     // this.authService.getToken().subscribe({
     //   next: (res: any) => {
@@ -74,7 +73,7 @@ export class SigninComponent implements OnInit {
         .login(this.f['mobile_number'].value, this.f['otp'].value)
         .subscribe({
           next: (res) => {
-            if (res) {
+            if (res.status !== 'failed') {
               console.log('response of login api', res);
               console.log('response of login api', res.is_registered);
 
@@ -99,6 +98,7 @@ export class SigninComponent implements OnInit {
   }
 
   startTimer() {
+    this.showResentOtp = false;
     this.getOtp = false;
     this.displayTimer = true;
     this.counter = 2;
@@ -110,6 +110,8 @@ export class SigninComponent implements OnInit {
 
         /*After counter value is 0 means 10000 is completed */
         this.startFilling();
+        this.showResentOtp = true;
+        this.displayTimer = false;
       }
     }, 1000);
   }

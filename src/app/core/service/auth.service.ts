@@ -30,6 +30,7 @@ export class AuthService {
       JSON.parse(localStorage.getItem('currentUser') || '{}')
     );
     this.currentUser = this.currentUserSubject.asObservable();
+    const token = this.store.select((state) => state.token.token);
   }
 
   public get currentUserValue(): User {
@@ -47,7 +48,7 @@ export class AuthService {
   // }
 
   getOtp(mobile_number: number) {
-    this.store.dispatch(TokenActions.getToken());
+    // this.store.dispatch(TokenActions.getToken());
     const data = {
       api_key: environment.api_key,
       mobile: mobile_number,
@@ -91,6 +92,7 @@ export class AuthService {
   }
 
   getToken() {
+    console.log('inside the token api');
     return this.http.get(`${environment.apiUrl}/Auth/getToken`);
   }
 }
