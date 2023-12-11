@@ -7,8 +7,8 @@ import { JobDetailComponent } from './job-detail/job-detail.component';
 const routes: Routes = [
   { path: '', component: AllJobsComponent },
   { path: 'jobs', component: AllJobsComponent },
-  { path: 'new-job', component: PostNewJobComponent },
-  { path: 'edit-job', component: PostNewJobComponent },
+  { path: 'new-job/:id', component: PostNewJobComponent },
+  { path: 'edit-job/:id', component: PostNewJobComponent },
   { path: 'job-detail', component: JobDetailComponent },
 ];
 

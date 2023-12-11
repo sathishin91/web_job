@@ -13,6 +13,15 @@
   overflow: hidden;
   opacity: 1;
 }
+ul.nav-pills.nav.flex-column {
+  padding: 20px;
+  height: 10%;
+  border-radius: 4px;
+  box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1),
+    0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1),
+    0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12),
+    0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
+}
 .salaryPreviewBox {
   margin: 2.5em 1em;
   background: #d9e9f4;

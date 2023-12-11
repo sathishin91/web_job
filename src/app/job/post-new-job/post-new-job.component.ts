@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import Stepper from 'bs-stepper';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { ActivatedRoute } from '@angular/router';
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -15,18 +15,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./post-new-job.component.scss'],
 })
 export class PostNewJobComponent implements OnInit {
-  constructor(private fb: UntypedFormBuilder, private router: Router) {}
-  active: any;
+  constructor(
+    private fb: UntypedFormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  active3!: number;
-  active4: any;
+  active: any;
   public Editor: any = ClassicEditor;
 
   jobDetailss!: UntypedFormGroup;
   candidateDetails!: UntypedFormGroup;
   interviewDetails!: UntypedFormGroup;
-
-  private stepper!: Stepper;
   displayOfficeLocation = false;
   displayFieldJob = false;
   displayHomeLocation = false;
@@ -214,15 +214,21 @@ export class PostNewJobComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initForm();
-    console.log('form value', this.jobDetailss.value);
-    const stepperElement = document.querySelector('#stepper1');
+    //Access the id from the params
+    this.route.params.subscribe((params) => {
+      const id = params['id'];
 
-    if (stepperElement) {
-      this.stepper = new Stepper(stepperElement, {
-        linear: false,
-        animation: true,
-      });
-    }
+      console.log('ID from params:', id);
+      if (id == 1) {
+        console.log('id is 1');
+        this.active = 'jobDetail';
+      }
+      if (id == 4) {
+        console.log('id is 4');
+        this.active = 'jobPreview';
+      }
+    });
+
+    this.initForm();
   }
 }

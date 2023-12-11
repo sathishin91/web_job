@@ -24,7 +24,7 @@ export class JobDetailComponent {
   }
 
   editJob() {
-    this.router.navigate(['/jobs/edit-job']);
+    this.router.navigate(['/jobs/edit-job/4']);
   }
 
   activateJobPreviewTab() {
