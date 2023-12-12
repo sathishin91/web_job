@@ -8,6 +8,16 @@ import {
 } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/Store/Common/App.state';
+
+import * as TokenActions from '../../Store/Token/Token.Actions';
+
+import * as JobActions from '../../Store/Job/Job.Action';
+import { Observable } from 'rxjs/internal/Observable';
+import { selectDesignation } from '../../Store/Job/Job.Selector';
+import { environment } from 'src/environments/environment';
+import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 @Component({
   selector: 'app-post-new-job',
@@ -15,11 +25,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./post-new-job.component.scss'],
 })
 export class PostNewJobComponent implements OnInit {
+  designation$: Observable<object>;
   constructor(
     private fb: UntypedFormBuilder,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private store: Store<AppState>
+  ) {
+    this.designation$ = this.store.select(selectDesignation);
+  }
 
   active: any;
   public Editor: any = ClassicEditor;
@@ -40,9 +54,21 @@ export class PostNewJobComponent implements OnInit {
   notifyOthers = false;
 
   next() {
+    console.log('jobDetailss value', this.jobDetailss.value);
     this.active = 'candidateRequirements';
   }
 
+  onJobTitleChange(event: any) {
+    console.log('Job title changed:', event.target.value);
+    const ids = Number(event.target.value);
+
+    this.store.dispatch(
+      JobActions.getDepartmentList({
+        api_key: environment.api_key,
+        id: ids,
+      })
+    );
+  }
   next2() {
     this.active = 'interviewerInformation';
   }
@@ -212,8 +238,22 @@ export class PostNewJobComponent implements OnInit {
       additionalRequirements: [''],
     });
   }
-
+  desinationList: any;
   ngOnInit() {
+    this.store.dispatch(TokenActions.getToken());
+
+    this.store.dispatch(
+      JobActions.getDesignationList({
+        designation: JobActions.getDesignationList,
+      })
+    );
+
+    // Subscribe to the observable to get the value
+    this.designation$.subscribe((designation) => {
+      this.desinationList = designation;
+      console.log('designation list', this.desinationList);
+    });
+
     //Access the id from the params
     this.route.params.subscribe((params) => {
       const id = params['id'];

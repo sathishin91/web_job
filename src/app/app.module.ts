@@ -43,6 +43,8 @@ import { TokenEffects } from './Store/Token/Token.Effects';
 
 import { TokenInterceptor } from './core/interceptor/token.interceptor';
 import { tokenReducer } from './Store/Token/Token.Reducer';
+import { jobReducer } from './Store/Job/Job.Reducer';
+import { JobEffects } from './Store/Job/Job.Effects';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -80,9 +82,13 @@ export function createTranslateLoader(http: HttpClient) {
     SharedModule,
     NgbModule,
     AppStoreModule,
-    StoreModule.forRoot({ token: tokenReducer }),
+    StoreModule.forRoot({
+      token: tokenReducer,
+      job: jobReducer,
+    }),
+
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([TokenEffects]),
+    EffectsModule.forRoot([TokenEffects, JobEffects]),
     StoreRouterConnectingModule.forRoot(),
   ],
   providers: [

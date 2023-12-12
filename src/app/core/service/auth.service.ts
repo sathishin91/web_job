@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
@@ -94,5 +94,26 @@ export class AuthService {
   getToken() {
     console.log('inside the token api');
     return this.http.get(`${environment.apiUrl}/Auth/getToken`);
+  }
+  getDesignationLists() {
+    const data = {
+      api_key: environment.api_key,
+    };
+    return this.http.post(
+      `${environment.apiUrl}/JobDetails/getDesignationList`,
+      data
+    );
+  }
+
+  getDepartmentsList(apiKey: string, id: any) {
+    const data = {
+      api_key: apiKey,
+      id: id,
+    };
+
+    return this.http.post(
+      `${environment.apiUrl}/JobDetails/getListByDesignationId`,
+      data
+    );
   }
 }
