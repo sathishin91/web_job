@@ -32,7 +32,10 @@ export class JobEffects {
       mergeMap((action) =>
         this.authService.getDepartmentsList(action.api_key, action.id).pipe(
           map((response: any) => {
-            return JobActions.setDepartmentList({ department: response.data });
+            return JobActions.setDepartmentList({
+              department: response.department_list,
+              category: response.category_list,
+            });
           })
         )
       )

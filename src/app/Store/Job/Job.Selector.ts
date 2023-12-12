@@ -10,3 +10,15 @@ export const selectDesignation = createSelector(
   selectJobState,
   (state: JobState) => state.designation
 );
+
+// Get the 'department' property from the feature state
+export const selectDepartment = createSelector(
+  selectJobState,
+  (state: JobState) => state.department
+);
+
+// Get the 'category' property from the feature state
+export const selectCategory = createSelector(
+  selectJobState,
+  (state: JobState) => state.category
+);

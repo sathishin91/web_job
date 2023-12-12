@@ -17,5 +17,5 @@ export const getDepartmentList = createAction(
 
 export const setDepartmentList = createAction(
   '[Job] Set Department List',
-  props<{ department: object }>()
+  props<{ department: any; category: any }>()
 );

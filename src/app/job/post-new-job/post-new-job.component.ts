@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -14,18 +14,27 @@ import { AppState } from 'src/app/Store/Common/App.state';
 import * as TokenActions from '../../Store/Token/Token.Actions';
 
 import * as JobActions from '../../Store/Job/Job.Action';
-import { Observable } from 'rxjs/internal/Observable';
-import { selectDesignation } from '../../Store/Job/Job.Selector';
+import { Observable, Subject } from 'rxjs';
+import {
+  selectCategory,
+  selectDesignation,
+} from '../../Store/Job/Job.Selector';
+import { selectDepartment } from '../../Store/Job/Job.Selector';
 import { environment } from 'src/environments/environment';
-import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-post-new-job',
   templateUrl: './post-new-job.component.html',
   styleUrls: ['./post-new-job.component.scss'],
 })
-export class PostNewJobComponent implements OnInit {
+export class PostNewJobComponent implements OnInit, OnDestroy {
   designation$: Observable<object>;
+  department$: Observable<object>;
+  category$: Observable<object>;
+
+  private unsubscribe$ = new Subject<void>();
+
   constructor(
     private fb: UntypedFormBuilder,
     private router: Router,
@@ -33,6 +42,8 @@ export class PostNewJobComponent implements OnInit {
     private store: Store<AppState>
   ) {
     this.designation$ = this.store.select(selectDesignation);
+    this.department$ = this.store.select(selectDepartment);
+    this.category$ = this.store.select(selectCategory);
   }
 
   active: any;
@@ -239,6 +250,8 @@ export class PostNewJobComponent implements OnInit {
     });
   }
   desinationList: any;
+  departmentList: any;
+  categoryList: any;
   ngOnInit() {
     this.store.dispatch(TokenActions.getToken());
 
@@ -249,9 +262,25 @@ export class PostNewJobComponent implements OnInit {
     );
 
     // Subscribe to the observable to get the value
-    this.designation$.subscribe((designation) => {
-      this.desinationList = designation;
-      console.log('designation list', this.desinationList);
+    this.designation$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((designation) => {
+        this.desinationList = designation;
+        console.log('designation list', this.desinationList);
+      });
+
+    this.department$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((department) => {
+        this.departmentList = department;
+
+        console.log('department list', this.departmentList);
+      });
+
+    this.category$.pipe(takeUntil(this.unsubscribe$)).subscribe((category) => {
+      this.categoryList = category;
+
+      console.log('categoryList list', this.categoryList);
     });
 
     //Access the id from the params
@@ -270,5 +299,10 @@ export class PostNewJobComponent implements OnInit {
     });
 
     this.initForm();
+  }
+  ngOnDestroy() {
+    // Unsubscribe from observables to avoid memory leaks
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
