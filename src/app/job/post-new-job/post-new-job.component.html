@@ -49,14 +49,14 @@
                           formControlName="company_name"
                           required
                         />
-                        <small
+                        <!-- <small
                           class="form-text text-danger"
                           *ngIf="
                             !jobDetailss.get('company_name')?.valid &&
                             jobDetailss.get('company_name')?.touched
                           "
                           >Please enter a company name!</small
-                        >
+                        > -->
                       </div>
                       <div class="form-group col-md-6">
                         <label
@@ -131,7 +131,7 @@
                               name="job_type"
                               formControlName="job_type"
                               id="rb1"
-                              checked
+                              value="1"
                             />
                             <label class="form-check-label" for="rb1">
                               Full Time
@@ -144,6 +144,7 @@
                               name="job_type"
                               formControlName="job_type"
                               id="rb2"
+                              value="2"
                             />
                             <label class="form-check-label" for="rb2">
                               Part Time
@@ -156,6 +157,7 @@
                               name="job_type"
                               formControlName="job_type"
                               id="rb3"
+                              value="3"
                             />
                             <label class="form-check-label" for="rb3">
                               Both (Full Time & Part Time)
@@ -169,7 +171,8 @@
                             class="form-check-input"
                             type="checkbox"
                             id="cb6"
-                            formControlName="nightShift"
+                            formControlName="night_shift"
+                            value="1"
                           />
                           <label class="form-check-label" for="cb6">
                             This is a night shift job
@@ -195,10 +198,10 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              formControlName="work_location"
-                              name="work_location"
+                              formControlName="location_type"
+                              name="location_type"
                               id="rb4"
-                              value="Work From Office"
+                              value="1"
                               (change)="onRadioChange()"
                             />
                             <label class="form-check-label" for="rb4">
@@ -209,10 +212,10 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="work_location"
-                              formControlName="work_location"
+                              name="location_type"
+                              formControlName="location_type"
                               id="rb5"
-                              value="Work From Home"
+                              value="2"
                               (change)="onRadioChange()"
                             />
                             <label class="form-check-label" for="rb5">
@@ -223,10 +226,10 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              formControlName="work_location"
-                              name="work_location"
+                              formControlName="location_type"
+                              name="location_type"
                               id="rb6"
-                              value="Field Job"
+                              value="3"
                               (change)="onRadioChange()"
                             />
                             <label class="form-check-label" for="rb6">
@@ -244,7 +247,7 @@
 
                           <select
                             class="form-select form-control"
-                            formControlName="City"
+                            formControlName="wo_city"
                           >
                             <option>Option 1</option>
                             <option>Option 2</option>
@@ -504,7 +507,7 @@
                         <input
                           type="text"
                           class="form-control"
-                          formControlName="over_time"
+                          formControlName="add_perks"
                         />
                       </div>
                       <div class="form-group col-md-6">
@@ -523,7 +526,7 @@
                           type="textarea"
                           class="form-control"
                           placeholder="comments"
-                          formControlName="comment"
+                          formControlName="comments"
                         ></textarea>
                       </div>
                     </div>

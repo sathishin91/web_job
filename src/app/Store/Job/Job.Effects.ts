@@ -41,4 +41,18 @@ export class JobEffects {
       )
     );
   });
+
+  // job.effects.ts
+  setAddJobDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(JobActions.setAddJobDetails),
+      mergeMap((action) =>
+        this.authService.postJobDetails(action.data).pipe(
+          map((response: any) => {
+            return JobActions.getAddJobDetails({ addJobDetails: response });
+          })
+        )
+      )
+    )
+  );
 }

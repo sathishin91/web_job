@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ActivatedRoute } from '@angular/router';
 import {
+  FormBuilder,
+  FormGroup,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
@@ -34,9 +36,10 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   category$: Observable<object>;
 
   private unsubscribe$ = new Subject<void>();
+  userId = localStorage.getItem('currentUser');
 
   constructor(
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private store: Store<AppState>
@@ -49,7 +52,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   active: any;
   public Editor: any = ClassicEditor;
 
-  jobDetailss!: UntypedFormGroup;
+  jobDetailss!: FormGroup;
   candidateDetails!: UntypedFormGroup;
   interviewDetails!: UntypedFormGroup;
   displayOfficeLocation = false;
@@ -66,6 +69,42 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
 
   next() {
     console.log('jobDetailss value', this.jobDetailss.value);
+
+    const data = {
+      //job details
+      api_key: environment.api_key,
+      user_id: this.userId,
+      company_name: this.jobDetailss.get('company_name')?.value,
+      designation: this.jobDetailss.get('designation')?.value,
+      department: this.jobDetailss.get('department')?.value,
+      role: this.jobDetailss.get('role')?.value,
+      job_type: this.jobDetailss.get('job_type')?.value,
+      night_shift: this.jobDetailss.get('night_shift')?.value,
+      add_perks: this.jobDetailss.get('add_perks')?.value,
+      joining_fee: this.jobDetailss.get('joining_fee')?.value,
+      comments: this.jobDetailss.get('comments')?.value,
+
+      //job location
+      location_type: this.jobDetailss.get('location_type')?.value,
+      wo_city: this.jobDetailss.get('wo_city')?.value,
+      wo_address: this.jobDetailss.get('wo_address')?.value,
+      wo_address2: this.jobDetailss.get('wo_address2')?.value,
+      wh_place: this.jobDetailss.get('wh_place')?.value,
+      wh_city: this.jobDetailss.get('wh_city')?.value,
+      fj_area: this.jobDetailss.get('fj_area')?.value,
+
+      //compensation
+      paytype: this.jobDetailss.get('paytype')?.value,
+      min_salary: this.jobDetailss.get('min_salary')?.value,
+      max_salary: this.jobDetailss.get('max_salary')?.value,
+      incentive: this.jobDetailss.get('incentive')?.value,
+    };
+
+    this.store.dispatch(
+      JobActions.setAddJobDetails({
+        data,
+      })
+    );
     this.active = 'candidateRequirements';
   }
 
@@ -124,23 +163,26 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   }
 
   onRadioChange() {
-    const workLocationControl = this.jobDetailss.get('work_location');
+    const workLocationControl = this.jobDetailss.get('location_type');
 
     if (workLocationControl) {
       const selectedValue = workLocationControl.value;
       console.log('radio value', selectedValue);
-      if (selectedValue === 'Work From Home') {
+
+      if (selectedValue === '1') {
         this.displayHomeLocation = true;
         this.displayOfficeLocation = false;
         this.displayFieldJob = false;
       }
-      if (selectedValue === 'Field Job') {
+
+      if (selectedValue === '3') {
         this.specificCity = false;
         this.displayFieldJob = true;
         this.displayOfficeLocation = false;
         this.displayHomeLocation = false;
       }
-      if (selectedValue === 'Work From Office') {
+
+      if (selectedValue === '2') {
         this.specificCity = false;
         this.displayOfficeLocation = true;
         this.displayFieldJob = false;
@@ -199,13 +241,24 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       ],
       last: [''],
       department: ['', Validators.required],
+      designation: ['', Validators.required],
       work_location: [''],
       jobTitle: [''],
+      wo_address: [''],
       job_type: [''],
+      wh_city: [''],
+      fj_area: [''],
       role: [''],
       City: [''],
+      wh_place: [''],
       specificArea: [''],
+      wo_city: [''],
+      night_shift: [''],
+      location_type: [''],
+      wo_address2: [''],
+      paytype: [''],
 
+      add_perks: [''],
       salaryType: [''],
       nightShift: [''],
       min_salary: [''],
@@ -217,7 +270,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       incentive: [''],
       over_time: [''],
       joining_fee: [''],
-      comment: [''],
+      comments: [''],
       password: [
         '',
         [
@@ -253,6 +306,8 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   departmentList: any;
   categoryList: any;
   ngOnInit() {
+    this.initForm();
+
     this.store.dispatch(TokenActions.getToken());
 
     this.store.dispatch(
@@ -298,7 +353,17 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.initForm();
+    // Check if userMobile is not null before using it
+    if (this.userId !== null) {
+      // Parse the JSON string into an object
+      const userData = JSON.parse(this.userId);
+
+      // Now you can access properties of userData safely
+      this.userId = userData?.data.id;
+      console.log('user number', this.userId);
+    } else {
+      console.error('User data not found in localStorage');
+    }
   }
   ngOnDestroy() {
     // Unsubscribe from observables to avoid memory leaks

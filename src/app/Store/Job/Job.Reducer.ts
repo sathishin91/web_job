@@ -4,14 +4,16 @@ import * as JobActions from '../Job/Job.Action';
 
 export interface JobState {
   designation: object;
-  department: any; // Adjust the type based on your API response structure
-  category: any; // Adjust the type based on your API response structure
+  department: any;
+  category: any;
+  addJobDetails: any;
 }
 
 export const initialState: JobState = {
   designation: {},
-  department: null, // Adjust the initial value and type based on your needs
-  category: null, // Adjust the initial value and type based on your needs
+  addJobDetails: null,
+  department: null,
+  category: null,
 };
 
 export const jobReducer = createReducer(
@@ -35,5 +37,16 @@ export const jobReducer = createReducer(
   on(JobActions.getDepartmentList, (state, { api_key, id }) => ({
     ...state,
     department: id,
+  })),
+
+  // job.reducer.ts
+  on(JobActions.getAddJobDetails, (state, { addJobDetails }) => ({
+    ...state,
+    addJobDetails,
+  })),
+
+  on(JobActions.setAddJobDetails, (state, { data }) => ({
+    ...state,
+    addJobDetails: data,
   }))
 );

@@ -8,13 +8,11 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from '../../Store/Common/App.state';
 
-interface MyApiResponse {
-  code: number;
-  status: string;
-  message: string;
-  // Add other properties as needed
-}
+import * as TokenActions from '../../Store/Token/Token.Actions';
 
 @Component({
   selector: 'app-signup',
@@ -31,10 +29,12 @@ export class SignupComponent implements OnInit {
   constructor(
     private formBuilder: UntypedFormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit() {
+    this.store.dispatch(TokenActions.getToken());
     // Check if userMobile is not null before using it
     if (this.userMobile !== null) {
       // Parse the JSON string into an object
@@ -42,6 +42,7 @@ export class SignupComponent implements OnInit {
 
       // Now you can access properties of userData safely
       this.mobileNumber = userData.mobile;
+      console.log('mobile number', this.mobileNumber);
     } else {
       console.error('User data not found in localStorage');
     }
@@ -94,7 +95,7 @@ export class SignupComponent implements OnInit {
             if (res.status == 'success') {
               this.router.navigate(['/jobs']);
             } else {
-              this.error = 'Invalid Register';
+              this.error = res.message;
             }
           } else {
             this.error = 'Invalid Register';

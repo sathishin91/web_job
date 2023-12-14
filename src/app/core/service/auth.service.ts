@@ -17,6 +17,7 @@ import {
   Userinfo,
   Users,
 } from '../../Store/Model/User.Model';
+import { env } from 'echarts';
 
 @Injectable({
   providedIn: 'root',
@@ -115,5 +116,9 @@ export class AuthService {
       `${environment.apiUrl}/JobDetails/getListByDesignationId`,
       data
     );
+  }
+
+  postJobDetails(data: any) {
+    return this.http.post(`${environment.apiUrl}/JobDetails/add`, data);
   }
 }

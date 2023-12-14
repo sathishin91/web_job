@@ -39,8 +39,8 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(TokenActions.getToken());
     this.loginForm = this.formBuilder.group({
-      mobile_number: [9876543210, Validators.required],
-      otp: [1234, Validators.required],
+      mobile_number: ['', Validators.required],
+      otp: ['', Validators.required],
     });
 
     // this.store.dispatch(TokenActions.getToken());
@@ -72,12 +72,12 @@ export class SigninComponent implements OnInit {
       this.authService
         .login(this.f['mobile_number'].value, this.f['otp'].value)
         .subscribe({
-          next: (res) => {
+          next: (res: any) => {
             if (res.status !== 'failed') {
               console.log('response of login api', res);
-              console.log('response of login api', res.is_registered);
+              console.log('response of login api', res.data.is_registered);
 
-              if (res.is_registered === 0) {
+              if (res.data.is_registered === '0') {
                 console.log('on if');
 
                 this.router.navigate(['/authentication/signup']);
