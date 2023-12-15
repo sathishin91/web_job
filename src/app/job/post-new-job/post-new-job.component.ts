@@ -21,6 +21,9 @@ import {
   selectCategory,
   selectCity,
   selectDesignation,
+  selectEnglishLevel,
+  selectExpLevel,
+  selectMinEducation,
 } from '../../Store/Job/Job.Selector';
 import { selectDepartment } from '../../Store/Job/Job.Selector';
 import { environment } from 'src/environments/environment';
@@ -35,11 +38,17 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   designation$: Observable<object>;
   department$: Observable<object>;
   category$: Observable<object>;
+  education$: Observable<object>;
 
   private unsubscribe$ = new Subject<void>();
   userId = localStorage.getItem('currentUser');
   city$: any;
   cityList: any;
+  educationList: any;
+  englishLevel$: any;
+  englishList: any;
+  expLevel$: any;
+  expList: any;
 
   constructor(
     private fb: FormBuilder,
@@ -51,6 +60,9 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     this.department$ = this.store.select(selectDepartment);
     this.category$ = this.store.select(selectCategory);
     this.city$ = this.store.select(selectCity);
+    this.education$ = this.store.select(selectMinEducation);
+    this.englishLevel$ = this.store.select(selectEnglishLevel);
+    this.expLevel$ = this.store.select(selectExpLevel);
   }
 
   active: any;
@@ -126,6 +138,24 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     );
   }
   next2() {
+    console.log('candidateDetails value', this.candidateDetails.value);
+    const data = {
+      api_key: environment.api_key,
+      user_id: this.userId,
+      job_id: 55,
+      education: this.candidateDetails.get('education')?.value,
+      experience: this.candidateDetails.get('experience')?.value,
+      eng_lvl: this.candidateDetails.get('eng_lvl')?.value,
+      description: this.candidateDetails.get('description')?.value,
+    };
+
+    console.log('data for candidate requirements', data);
+
+    //  this.store.dispatch(
+    //    JobActions.set({
+    //      data,
+    //    })
+    //  );
     this.active = 'interviewerInformation';
   }
   next3() {
@@ -302,10 +332,10 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     });
 
     this.candidateDetails = this.fb.group({
-      minEducation: [''],
-      totalExpeience: [''],
-      englishLevel: [''],
-      additionalRequirements: [''],
+      education: [''],
+      experience: [''],
+      eng_lvl: [''],
+      description: [''],
     });
   }
   desinationList: any;
@@ -324,6 +354,24 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     this.store.dispatch(
       JobActions.getDesignationList({
         designation: JobActions.getDesignationList,
+      })
+    );
+
+    this.store.dispatch(
+      JobActions.getEducationList({
+        education: JobActions.getEducationList,
+      })
+    );
+
+    this.store.dispatch(
+      JobActions.getEnglishLevelList({
+        englishLevel: JobActions.getEnglishLevelList,
+      })
+    );
+
+    this.store.dispatch(
+      JobActions.getExperienceList({
+        experience: JobActions.getExperienceList,
       })
     );
 
@@ -353,6 +401,28 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       this.cityList = city;
       console.log('city list', this.cityList);
     });
+
+    this.education$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((education: any) => {
+        this.educationList = education;
+        console.log('education list', this.educationList);
+      });
+
+    this.englishLevel$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((englishLevel: any) => {
+        this.englishList = englishLevel;
+        console.log('englishLevel list', this.englishList);
+      });
+
+    this.expLevel$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((experience: any) => {
+        this.expList = experience;
+        console.log('experience list', this.expList);
+      });
+
     //Access the id from the params
     this.route.params.subscribe((params) => {
       const id = params['id'];

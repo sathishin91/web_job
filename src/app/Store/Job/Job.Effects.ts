@@ -68,4 +68,49 @@ export class JobEffects {
       )
     );
   });
+
+  getEducationLists$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(JobActions.getEducationList),
+      mergeMap(() =>
+        this.authService
+          .getEducationLists()
+          .pipe(
+            map((response: any) =>
+              JobActions.setEducationList({ education: response.data })
+            )
+          )
+      )
+    );
+  });
+
+  getEngLists$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(JobActions.getEnglishLevelList),
+      mergeMap(() =>
+        this.authService
+          .getEngLevelLists()
+          .pipe(
+            map((response: any) =>
+              JobActions.setEnglishLevelList({ englishLevel: response.data })
+            )
+          )
+      )
+    );
+  });
+
+  getExpLists$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(JobActions.getExperienceList),
+      mergeMap(() =>
+        this.authService
+          .getExperienceLists()
+          .pipe(
+            map((response: any) =>
+              JobActions.setExperienceList({ experience: response.data })
+            )
+          )
+      )
+    );
+  });
 }

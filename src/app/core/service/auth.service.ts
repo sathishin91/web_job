@@ -128,4 +128,34 @@ export class AuthService {
     };
     return this.http.post(`${environment.apiUrl}/JobDetails/getCityList`, data);
   }
+
+  getEducationLists() {
+    const data = {
+      api_key: environment.api_key,
+    };
+    return this.http.post(
+      `${environment.apiUrl}/CandidateReq/getEducationList`,
+      data
+    );
+  }
+
+  getEngLevelLists() {
+    const data = {
+      api_key: environment.api_key,
+    };
+    return this.http.post(
+      `${environment.apiUrl}/CandidateReq/getEngLvlList`,
+      data
+    );
+  }
+
+  getExperienceLists() {
+    const data = {
+      api_key: environment.api_key,
+    };
+    return this.http.post(
+      `${environment.apiUrl}/CandidateReq/getExperienceList`,
+      data
+    );
+  }
 }

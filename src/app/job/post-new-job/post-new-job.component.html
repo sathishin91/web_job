@@ -570,11 +570,14 @@
 
                         <select
                           class="form-select form-control"
-                          formControlName="minEducation"
+                          formControlName="education"
                         >
-                          <option>Option 1</option>
-                          <option>Option 2</option>
-                          <option>Option 3</option>
+                          <option
+                            *ngFor="let list of educationList"
+                            value="{{ list.id }}"
+                          >
+                            {{ list.education }}
+                          </option>
                         </select>
                       </div>
                       <div class="form-group col-md-6">
@@ -585,11 +588,14 @@
 
                         <select
                           class="form-select form-control"
-                          formControlName="totalExpeience"
+                          formControlName="experience"
                         >
-                          <option>Option 1</option>
-                          <option>Option 2</option>
-                          <option>Option 3</option>
+                          <option
+                            *ngFor="let list of expList"
+                            value="{{ list.id }}"
+                          >
+                            {{ list.experience }}
+                          </option>
                         </select>
                       </div>
                       <div class="form-group col-md-6">
@@ -600,11 +606,14 @@
 
                         <select
                           class="form-select form-control"
-                          formControlName="englishLevel"
+                          formControlName="eng_lvl"
                         >
-                          <option>Option 1</option>
-                          <option>Option 2</option>
-                          <option>Option 3</option>
+                          <option
+                            *ngFor="let list of englishList"
+                            value="{{ list.id }}"
+                          >
+                            {{ list.eng_lvl }}
+                          </option>
                         </select>
                       </div>
                       <div class="dropdown-divider"></div>
@@ -622,7 +631,7 @@
                           ></label
                         >
                         <ckeditor
-                          formControlName="additionalRequirements"
+                          formControlName="description"
                           [editor]="Editor"
                           data="<p>Hello, world!</p>"
                         ></ckeditor>

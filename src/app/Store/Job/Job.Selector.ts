@@ -23,8 +23,26 @@ export const selectCategory = createSelector(
   (state: JobState) => state.category
 );
 
-// Get the 'category' property from the feature state
+// Get the 'city' property from the feature state
 export const selectCity = createSelector(
   selectJobState,
   (state: JobState) => state.city
+);
+
+// Get the 'Education list'
+export const selectMinEducation = createSelector(
+  selectJobState,
+  (state: JobState) => state.education
+);
+
+// Get the 'English level list'
+export const selectEnglishLevel = createSelector(
+  selectJobState,
+  (state: JobState) => state.englishLevel
+);
+
+// Get the 'Experience level list'
+export const selectExpLevel = createSelector(
+  selectJobState,
+  (state: JobState) => state.experience
 );

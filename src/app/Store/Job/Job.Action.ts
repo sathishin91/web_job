@@ -38,3 +38,42 @@ export const setCityList = createAction(
   '[Job] Set City List',
   props<{ city: object }>()
 );
+
+export const getEducationList = createAction(
+  '[Job] Get Education List',
+  props<{ education: object }>()
+);
+
+export const setEducationList = createAction(
+  '[Job] Set Education List',
+  props<{ education: object }>()
+);
+
+export const getEnglishLevelList = createAction(
+  '[Job] Get English Level List',
+  props<{ englishLevel: object }>()
+);
+
+export const setEnglishLevelList = createAction(
+  '[Job] Set English Level List',
+  props<{ englishLevel: object }>()
+);
+
+export const getExperienceList = createAction(
+  '[Job] Get Experience  List',
+  props<{ experience: object }>()
+);
+
+export const setExperienceList = createAction(
+  '[Job] Set Experience List',
+  props<{ experience: object }>()
+);
+
+export const setAddCandidateDetails = createAction(
+  '[Job] Set Add Candidate Details',
+  props<{ data: any }>()
+);
+export const getAddCandidateDetails = createAction(
+  '[Job] Get Add Candidate Details',
+  props<{ addCandidateDetails: any }>()
+);

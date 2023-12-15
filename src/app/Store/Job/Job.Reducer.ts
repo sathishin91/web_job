@@ -8,11 +8,17 @@ export interface JobState {
   category: any;
   addJobDetails: any;
   city: any;
+  education: any;
+  englishLevel: any;
+  experience: any;
 }
 
 export const initialState: JobState = {
   designation: {},
   city: {},
+  education: {},
+  experience: {},
+  englishLevel: {},
   addJobDetails: null,
   department: null,
   category: null,
@@ -60,5 +66,35 @@ export const jobReducer = createReducer(
   on(JobActions.setCityList, (state, { city }) => ({
     ...state,
     city,
+  })),
+
+  on(JobActions.getEducationList, (state, { education }) => ({
+    ...state,
+    education,
+  })),
+
+  on(JobActions.setEducationList, (state, { education }) => ({
+    ...state,
+    education,
+  })),
+
+  on(JobActions.getEnglishLevelList, (state, { englishLevel }) => ({
+    ...state,
+    englishLevel,
+  })),
+
+  on(JobActions.setEnglishLevelList, (state, { englishLevel }) => ({
+    ...state,
+    englishLevel,
+  })),
+
+  on(JobActions.getExperienceList, (state, { experience }) => ({
+    ...state,
+    experience,
+  })),
+
+  on(JobActions.setExperienceList, (state, { experience }) => ({
+    ...state,
+    experience,
   }))
 );
