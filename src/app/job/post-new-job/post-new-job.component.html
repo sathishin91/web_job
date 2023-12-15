@@ -65,10 +65,10 @@
                         </label>
 
                         <select
-                          name="jobTitle"
-                          id="jobTitle"
+                          name="designation"
+                          id="designation"
                           class="form-select form-control"
-                          formControlName="jobTitle"
+                          formControlName="designation"
                           (input)="onJobTitleChange($event)"
                         >
                           <option
@@ -249,9 +249,12 @@
                             class="form-select form-control"
                             formControlName="wo_city"
                           >
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
+                            <option
+                              *ngFor="let list of cityList"
+                              value="{{ list.city_id }}"
+                            >
+                              {{ list.city_name }}
+                            </option>
                           </select>
                         </div>
                         <div class="form-group col-md-6">
@@ -262,7 +265,7 @@
                           <input
                             type="text"
                             class="form-control"
-                            formControlName="min_salary"
+                            formControlName="wo_address"
                             required
                           />
                         </div>
@@ -274,7 +277,7 @@
                           <input
                             type="text"
                             class="form-control"
-                            formControlName="plot_number"
+                            formControlName="wo_address2"
                             required
                           />
                         </div>
@@ -292,7 +295,7 @@
                                 type="radio"
                                 name="wfh_change"
                                 formControlName="wfh_change"
-                                value="Specific city"
+                                value="1"
                                 (change)="WFHChange()"
                                 id="rb10"
                               />
@@ -306,7 +309,7 @@
                                 type="radio"
                                 name="wfh_change"
                                 formControlName="wfh_change"
-                                value="Anywhere"
+                                value="2"
                                 (change)="WFHChange()"
                                 id="rb11"
                               />
@@ -326,11 +329,14 @@
 
                           <select
                             class="form-select form-control"
-                            formControlName="specificCity"
+                            formControlName="wh_city"
                           >
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
+                            <option
+                              *ngFor="let list of cityList"
+                              value="{{ list.city_id }}"
+                            >
+                              {{ list.city_name }}
+                            </option>
                           </select>
                         </div>
                       </div>
@@ -343,11 +349,14 @@
 
                           <select
                             class="form-select form-control"
-                            formControlName="specificArea"
+                            formControlName="fj_area"
                           >
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
+                            <option
+                              *ngFor="let list of cityList"
+                              value="{{ list.city_id }}"
+                            >
+                              {{ list.city_name }}
+                            </option>
                           </select>
                         </div>
                       </div>
@@ -372,9 +381,9 @@
                               class="form-check-input"
                               type="radio"
                               id="rb7"
-                              formControlName="salaryType"
-                              name="salaryType"
-                              value="fixed_only"
+                              formControlName="paytype"
+                              name="paytype"
+                              value="1"
                               (change)="onSalaryChange()"
                             />
                             <label class="form-check-label" for="rb7">
@@ -385,9 +394,9 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              formControlName="salaryType"
-                              value="fixed_incentive"
-                              name="salaryType"
+                              formControlName="paytype"
+                              value="2"
+                              name="paytype"
                               (change)="onSalaryChange()"
                               id="rb8"
                             />
@@ -399,9 +408,9 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              value="incentive_only"
-                              formControlName="salaryType"
-                              name="salaryType"
+                              value="3"
+                              formControlName="paytype"
+                              name="paytype"
                               (change)="onSalaryChange()"
                               id="rb9"
                             />

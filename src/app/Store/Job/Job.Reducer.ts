@@ -7,10 +7,12 @@ export interface JobState {
   department: any;
   category: any;
   addJobDetails: any;
+  city: any;
 }
 
 export const initialState: JobState = {
   designation: {},
+  city: {},
   addJobDetails: null,
   department: null,
   category: null,
@@ -48,5 +50,15 @@ export const jobReducer = createReducer(
   on(JobActions.setAddJobDetails, (state, { data }) => ({
     ...state,
     addJobDetails: data,
+  })),
+
+  on(JobActions.getCityList, (state, { city }) => ({
+    ...state,
+    city,
+  })),
+
+  on(JobActions.setCityList, (state, { city }) => ({
+    ...state,
+    city,
   }))
 );

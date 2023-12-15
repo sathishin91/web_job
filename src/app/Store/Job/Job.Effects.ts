@@ -1,9 +1,7 @@
-// token.effects.ts
-
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mergeMap, map } from 'rxjs/operators';
-import { AuthService } from '../../core/service/auth.service'; // Create this service for API calls
+import { AuthService } from '../../core/service/auth.service';
 import * as JobActions from './Job.Action';
 
 @Injectable()
@@ -42,9 +40,8 @@ export class JobEffects {
     );
   });
 
-  // job.effects.ts
-  setAddJobDetails$ = createEffect(() =>
-    this.actions$.pipe(
+  setAddJobDetails$ = createEffect(() => {
+    return this.actions$.pipe(
       ofType(JobActions.setAddJobDetails),
       mergeMap((action) =>
         this.authService.postJobDetails(action.data).pipe(
@@ -53,6 +50,22 @@ export class JobEffects {
           })
         )
       )
-    )
-  );
+    );
+  });
+
+  getCityLists$ = createEffect(() => {
+    console.log('Entered inside');
+    return this.actions$.pipe(
+      ofType(JobActions.getCityList),
+      mergeMap(() =>
+        this.authService
+          .getCityList()
+          .pipe(
+            map((response: any) =>
+              JobActions.setCityList({ city: response.city_id })
+            )
+          )
+      )
+    );
+  });
 }

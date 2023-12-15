@@ -19,6 +19,7 @@ import * as JobActions from '../../Store/Job/Job.Action';
 import { Observable, Subject } from 'rxjs';
 import {
   selectCategory,
+  selectCity,
   selectDesignation,
 } from '../../Store/Job/Job.Selector';
 import { selectDepartment } from '../../Store/Job/Job.Selector';
@@ -37,6 +38,8 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
   userId = localStorage.getItem('currentUser');
+  city$: any;
+  cityList: any;
 
   constructor(
     private fb: FormBuilder,
@@ -47,6 +50,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     this.designation$ = this.store.select(selectDesignation);
     this.department$ = this.store.select(selectDepartment);
     this.category$ = this.store.select(selectCategory);
+    this.city$ = this.store.select(selectCity);
   }
 
   active: any;
@@ -105,6 +109,8 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
         data,
       })
     );
+
+    console.log('data passed to api', data);
     this.active = 'candidateRequirements';
   }
 
@@ -139,22 +145,22 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   }
   onSalaryChange() {
     this.salaryPreview = true;
-    const salaryTypeControl = this.jobDetailss.get('salaryType');
+    const salaryTypeControl = this.jobDetailss.get('paytype');
     console.log('Salary type changed');
     if (salaryTypeControl) {
       const selectedValue = salaryTypeControl.value;
       console.log('radio value', selectedValue);
-      if (selectedValue === 'incentive_only') {
+      if (selectedValue === '3') {
         this.displayIncentive = true;
         this.displayFixedIncentive = false;
         this.displayFixed = false;
       }
-      if (selectedValue === 'fixed_only') {
+      if (selectedValue === '1') {
         this.displayIncentive = false;
         this.displayFixedIncentive = false;
         this.displayFixed = true;
       }
-      if (selectedValue === 'fixed_incentive') {
+      if (selectedValue === '2') {
         this.displayIncentive = false;
         this.displayFixedIncentive = true;
         this.displayFixed = false;
@@ -223,7 +229,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
 
     if (workFromHomeControl) {
       const selectedValue = workFromHomeControl.value;
-      if (selectedValue === 'Specific city') {
+      if (selectedValue === '1') {
         this.specificCity = true;
         this.anywhere = false;
       } else {
@@ -259,7 +265,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       paytype: [''],
 
       add_perks: [''],
-      salaryType: [''],
+
       nightShift: [''],
       min_salary: [''],
       specificCity: [''],
@@ -309,6 +315,11 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     this.initForm();
 
     this.store.dispatch(TokenActions.getToken());
+    this.store.dispatch(
+      JobActions.getCityList({
+        city: JobActions.getCityList,
+      })
+    );
 
     this.store.dispatch(
       JobActions.getDesignationList({
@@ -338,6 +349,10 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       console.log('categoryList list', this.categoryList);
     });
 
+    this.city$.pipe(takeUntil(this.unsubscribe$)).subscribe((city: any) => {
+      this.cityList = city;
+      console.log('city list', this.cityList);
+    });
     //Access the id from the params
     this.route.params.subscribe((params) => {
       const id = params['id'];

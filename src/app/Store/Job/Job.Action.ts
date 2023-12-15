@@ -20,7 +20,6 @@ export const setDepartmentList = createAction(
   props<{ department: any; category: any }>()
 );
 
-// actions.ts
 export const setAddJobDetails = createAction(
   '[Job] Set Add Job Details',
   props<{ data: any }>()
@@ -28,4 +27,14 @@ export const setAddJobDetails = createAction(
 export const getAddJobDetails = createAction(
   '[Job] Get Add Job Details',
   props<{ addJobDetails: any }>()
+);
+
+export const getCityList = createAction(
+  '[Job] Get City List',
+  props<{ city: object }>()
+);
+
+export const setCityList = createAction(
+  '[Job] Set City List',
+  props<{ city: object }>()
 );

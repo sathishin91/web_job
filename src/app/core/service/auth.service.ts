@@ -121,4 +121,11 @@ export class AuthService {
   postJobDetails(data: any) {
     return this.http.post(`${environment.apiUrl}/JobDetails/add`, data);
   }
+
+  getCityList() {
+    const data = {
+      api_key: environment.api_key,
+    };
+    return this.http.post(`${environment.apiUrl}/JobDetails/getCityList`, data);
+  }
 }

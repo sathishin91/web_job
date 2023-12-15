@@ -22,3 +22,9 @@ export const selectCategory = createSelector(
   selectJobState,
   (state: JobState) => state.category
 );
+
+// Get the 'category' property from the feature state
+export const selectCity = createSelector(
+  selectJobState,
+  (state: JobState) => state.city
+);
