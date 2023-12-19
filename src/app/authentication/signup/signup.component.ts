@@ -9,7 +9,6 @@ import {
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { AppState } from '../../Store/Common/App.state';
 
 import * as TokenActions from '../../Store/Token/Token.Actions';
@@ -23,7 +22,7 @@ export class SignupComponent implements OnInit {
   registerForm!: UntypedFormGroup;
   submitted = false;
   error = '';
-  mobileNumber: any;
+  mobileNumber!: number;
   userMobile = localStorage.getItem('currentUser');
 
   constructor(
@@ -37,20 +36,13 @@ export class SignupComponent implements OnInit {
     this.store.dispatch(TokenActions.getToken());
     // Check if userMobile is not null before using it
     if (this.userMobile !== null) {
-      // Parse the JSON string into an object
       const userData = JSON.parse(this.userMobile);
-
-      // Now you can access properties of userData safely
       this.mobileNumber = userData.mobile;
       console.log('mobile number', this.mobileNumber);
     } else {
       console.error('User data not found in localStorage');
     }
 
-    // Now, 'mobileNumber' contains the mobile number from localStorage
-    // console.log(mobileNumber);
-    // console.log('mobile', this.userMobile);
-    // console.log('mobile', this.userMobile.mobile);
     this.registerForm = this.formBuilder.group({
       company_name: ['', Validators.required],
       website: [''],
@@ -120,12 +112,6 @@ export class SignupComponent implements OnInit {
       confirmButtonText: 'Confirm',
     }).then((result) => {
       if (result.value) {
-        // Swal.fire(
-        //   'Account created!',
-        //   'Your account has been created.',
-        //   'success'
-        // );
-        //this.router.navigate(['/jobs']);
         this.onSubmit();
       }
     });

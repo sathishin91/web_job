@@ -40,19 +40,6 @@ export class JobEffects {
     );
   });
 
-  setAddJobDetails$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(JobActions.setAddJobDetails),
-      mergeMap((action) =>
-        this.authService.postJobDetails(action.data).pipe(
-          map((response: any) => {
-            return JobActions.getAddJobDetails({ addJobDetails: response });
-          })
-        )
-      )
-    );
-  });
-
   getCityLists$ = createEffect(() => {
     console.log('Entered inside');
     return this.actions$.pipe(
@@ -62,7 +49,7 @@ export class JobEffects {
           .getCityList()
           .pipe(
             map((response: any) =>
-              JobActions.setCityList({ city: response.city_id })
+              JobActions.setCityList({ city: response.data })
             )
           )
       )
@@ -111,6 +98,80 @@ export class JobEffects {
             )
           )
       )
+    );
+  });
+  setAddJobDetails$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(JobActions.setAddJobDetails),
+      mergeMap((action) =>
+        this.authService.postJobDetails(action.data).pipe(
+          map((response: any) => {
+            return JobActions.getAddJobDetails({ addJobDetails: response });
+          })
+        )
+      )
+    );
+  });
+  setAddCandidateDetails$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(JobActions.setAddCandidateDetails),
+      mergeMap((action) =>
+        this.authService.postCandidateDetails(action.data).pipe(
+          map((response: any) =>
+            JobActions.getAddCandidateDetails({
+              addCandidateDetails: response,
+            })
+          )
+        )
+      )
+    );
+  });
+
+  setAddInterviewDetails$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(JobActions.setAddInterviewDetails),
+      mergeMap((action) =>
+        this.authService.postInterviewDetails(action.data).pipe(
+          map((response: any) =>
+            JobActions.getAddInterviewDetails({
+              addInterviewDetails: response,
+            })
+          )
+        )
+      )
+    );
+  });
+
+  getJobList$ = createEffect(() => {
+    console.log('Entered the effects of get job list');
+    return this.actions$.pipe(
+      ofType(JobActions.setJobsList),
+      mergeMap((action) => {
+        console.log('Merging action:', action);
+        return this.authService.getTheJobsList(action.list).pipe(
+          map((response: any) =>
+            JobActions.getJobsList({
+              list: response,
+            })
+          )
+        );
+      })
+    );
+  });
+
+  getPreviewList$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(JobActions.setPreviewDetails),
+      mergeMap((action) => {
+        return this.authService.getJobpreview(action.preview).pipe(
+          map((response: any) => {
+            // Return the action here
+            return JobActions.getPreviewDetails({
+              preview: response,
+            });
+          })
+        );
+      })
     );
   });
 }

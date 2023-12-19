@@ -158,4 +158,26 @@ export class AuthService {
       data
     );
   }
+
+  postCandidateDetails(data: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/JobDetails/add`, data);
+  }
+  postInterviewDetails(data: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/InterviewerInfo/add`, data);
+  }
+
+  getTheJobsList(list: any): Observable<any> {
+    console.log('getTheJobsList called with:', list);
+    return this.http.post(
+      `${environment.apiUrl}/JobDetails/getJobListByUserId`,
+      list
+    );
+  }
+
+  getJobpreview(preview: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/JobDetails/getJobPreviewById`,
+      preview
+    );
+  }
 }

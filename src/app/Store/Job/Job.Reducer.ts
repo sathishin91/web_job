@@ -11,6 +11,9 @@ export interface JobState {
   education: any;
   englishLevel: any;
   experience: any;
+  addCandidateDetails: any;
+  addInterviewDetails: any;
+  list: any;
 }
 
 export const initialState: JobState = {
@@ -22,6 +25,9 @@ export const initialState: JobState = {
   addJobDetails: null,
   department: null,
   category: null,
+  addCandidateDetails: null,
+  addInterviewDetails: null,
+  list: null,
 };
 
 export const jobReducer = createReducer(
@@ -45,17 +51,6 @@ export const jobReducer = createReducer(
   on(JobActions.getDepartmentList, (state, { api_key, id }) => ({
     ...state,
     department: id,
-  })),
-
-  // job.reducer.ts
-  on(JobActions.getAddJobDetails, (state, { addJobDetails }) => ({
-    ...state,
-    addJobDetails,
-  })),
-
-  on(JobActions.setAddJobDetails, (state, { data }) => ({
-    ...state,
-    addJobDetails: data,
   })),
 
   on(JobActions.getCityList, (state, { city }) => ({
@@ -96,5 +91,52 @@ export const jobReducer = createReducer(
   on(JobActions.setExperienceList, (state, { experience }) => ({
     ...state,
     experience,
+  })),
+
+  on(JobActions.getAddJobDetails, (state, { addJobDetails }) => ({
+    ...state,
+    addJobDetails,
+  })),
+
+  on(JobActions.setAddJobDetails, (state, { data }) => ({
+    ...state,
+    addJobDetails: data,
+  })),
+
+  on(JobActions.getAddCandidateDetails, (state, { addCandidateDetails }) => ({
+    ...state,
+    addCandidateDetails,
+  })),
+
+  on(JobActions.setAddCandidateDetails, (state, { data }) => ({
+    ...state,
+    addCandidateDetails: data,
+  })),
+  on(JobActions.getAddInterviewDetails, (state, { addInterviewDetails }) => ({
+    ...state,
+    addInterviewDetails,
+  })),
+
+  on(JobActions.setAddInterviewDetails, (state, { data }) => ({
+    ...state,
+    addInterviewDetails: data,
+  })),
+  on(JobActions.getJobsList, (state, { list }) => ({
+    ...state,
+    list,
+  })),
+
+  on(JobActions.setJobsList, (state, { list }) => ({
+    ...state,
+    list: list,
+  })),
+  on(JobActions.setPreviewDetails, (state, { preview }) => ({
+    ...state,
+    preview,
+  })),
+
+  on(JobActions.getPreviewDetails, (state, { preview }) => ({
+    ...state,
+    preview,
   }))
 );

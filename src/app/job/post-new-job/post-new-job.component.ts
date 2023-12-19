@@ -39,15 +39,16 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   department$: Observable<object>;
   category$: Observable<object>;
   education$: Observable<object>;
+  city$: Observable<object>;
+  expLevel$: Observable<object>;
 
   private unsubscribe$ = new Subject<void>();
   userId = localStorage.getItem('currentUser');
-  city$: any;
+
   cityList: any;
   educationList: any;
   englishLevel$: any;
   englishList: any;
-  expLevel$: any;
   expList: any;
 
   constructor(
@@ -89,7 +90,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     const data = {
       //job details
       api_key: environment.api_key,
-      user_id: this.userId,
+      user_id: 67,
       company_name: this.jobDetailss.get('company_name')?.value,
       designation: this.jobDetailss.get('designation')?.value,
       department: this.jobDetailss.get('department')?.value,
@@ -141,7 +142,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     console.log('candidateDetails value', this.candidateDetails.value);
     const data = {
       api_key: environment.api_key,
-      user_id: this.userId,
+      user_id: 67,
       job_id: 55,
       education: this.candidateDetails.get('education')?.value,
       experience: this.candidateDetails.get('experience')?.value,
@@ -151,15 +152,43 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
 
     console.log('data for candidate requirements', data);
 
-    //  this.store.dispatch(
-    //    JobActions.set({
-    //      data,
-    //    })
-    //  );
+    this.store.dispatch(
+      JobActions.setAddCandidateDetails({
+        data,
+      })
+    );
     this.active = 'interviewerInformation';
   }
   next3() {
+    const data = {
+      api_key: environment.api_key,
+      //user_id: this.userId,
+      user_id: 67,
+      job_id: 43,
+      com_pref: this.interviewDetails.get('com_pref')?.value,
+      com_pref_fn: this.interviewDetails.get('com_pref_fn')?.value,
+      com_pref_mob: this.interviewDetails.get('com_pref_mob')?.value,
+      noti_pref: this.interviewDetails.get('noti_pref')?.value,
+      noti_pref_fn: this.interviewDetails.get('noti_pref_fn')?.value,
+      noti_pref_mob: this.interviewDetails.get('noti_pref_mob')?.value,
+      interview_method: this.interviewDetails.get('interview_method')?.value,
+    };
+    console.log('data passing to interview info form', data);
+    this.store.dispatch(
+      JobActions.setAddInterviewDetails({
+        data,
+      })
+    );
     this.active = 'jobPreview';
+    const preview = {
+      api_key: environment.api_key,
+      job_id: 55,
+    };
+    this.store.dispatch(
+      JobActions.setPreviewDetails({
+        preview,
+      })
+    );
   }
   next4() {
     this.active = 'selectPlan';
@@ -227,12 +256,12 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     }
   }
   commPrefChange() {
-    const commPrefChangeControl = this.interviewDetails.get('comm_pref');
+    const commPrefChangeControl = this.interviewDetails.get('com_pref');
 
     if (commPrefChangeControl) {
       const selectedValue = commPrefChangeControl.value;
       console.log('comm_pref value', selectedValue);
-      if (selectedValue === 'Comm_others') {
+      if (selectedValue === '2') {
         this.commOthers = true;
       } else {
         this.commOthers = false;
@@ -241,12 +270,12 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   }
 
   notifyPrefChange() {
-    const commPrefChangeControl = this.interviewDetails.get('notify_pref');
+    const commPrefChangeControl = this.interviewDetails.get('noti_pref');
 
     if (commPrefChangeControl) {
       const selectedValue = commPrefChangeControl.value;
       console.log('notify_pref value', selectedValue);
-      if (selectedValue === 'notify_others') {
+      if (selectedValue === '2') {
         this.notifyOthers = true;
       } else {
         this.notifyOthers = false;
@@ -300,7 +329,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       min_salary: [''],
       specificCity: [''],
       wfh_change: [''],
-      notify_pref: [''],
+
       plot_number: [''],
       max_salary: [''],
       incentive: [''],
@@ -327,8 +356,13 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     });
 
     this.interviewDetails = this.fb.group({
-      comm_pref: [''],
-      notify_pref: [''],
+      com_pref: [''],
+      com_pref_fn: [''],
+      com_pref_mob: [''],
+      noti_pref: [''],
+      noti_pref_fn: [''],
+      noti_pref_mob: [''],
+      interview_method: [''],
     });
 
     this.candidateDetails = this.fb.group({
@@ -345,6 +379,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     this.initForm();
 
     this.store.dispatch(TokenActions.getToken());
+
     this.store.dispatch(
       JobActions.getCityList({
         city: JobActions.getCityList,
@@ -444,7 +479,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       const userData = JSON.parse(this.userId);
 
       // Now you can access properties of userData safely
-      this.userId = userData?.data.id;
+      this.userId = userData?.data?.id;
       console.log('user number', this.userId);
     } else {
       console.error('User data not found in localStorage');
@@ -454,5 +489,9 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     // Unsubscribe from observables to avoid memory leaks
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  subscribe() {
+    this.router.navigate(['/jobs']);
   }
 }

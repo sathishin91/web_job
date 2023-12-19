@@ -23,7 +23,10 @@
             orientation="vertical"
           >
             <li ngbNavItem="jobDetail">
-              <a ngbNavLink>Job Detail</a>
+              <ng-template #tipContent>Job Detail</ng-template>
+              <a ngbNavLink [ngbTooltip]="tipContent"
+                ><i class="material-icons">assignment</i></a
+              >
               <ng-template ngbNavContent>
                 <form [formGroup]="jobDetailss">
                   <div id="test-l-1" class="content">
@@ -548,7 +551,10 @@
               </ng-template>
             </li>
             <li ngbNavItem="candidateRequirements">
-              <a ngbNavLink>Candidate Requirements </a>
+              <ng-template #tipCandidate>Candidate Requirements</ng-template>
+              <a ngbNavLink [ngbTooltip]="tipCandidate">
+                <i class="material-icons">assignment_ind</i>
+              </a>
               <ng-template ngbNavContent>
                 <form [formGroup]="candidateDetails">
                   <div id="test-l-2" class="content">
@@ -648,10 +654,13 @@
               </ng-template>
             </li>
             <li ngbNavItem="interviewerInformation">
-              <a ngbNavLink>Interviewer Information </a>
+              <ng-template #tipinterview>Interviewer Information</ng-template>
+              <a ngbNavLink [ngbTooltip]="tipinterview"
+                ><i class="material-icons">assignment_return</i></a
+              >
               <ng-template ngbNavContent>
                 <form [formGroup]="interviewDetails">
-                  <div id="testl-3" class="content">
+                  <div id="test-l-3" class="content">
                     <div class="row">
                       <div class="form-group col-md-6">
                         <div class="col-lg-12 mt-3">
@@ -665,9 +674,9 @@
                         <div class="form-check">
                           <input
                             type="radio"
-                            name="comm_pref"
-                            formControlName="comm_pref"
-                            value="Comm_myself"
+                            name="com_pref"
+                            formControlName="com_pref"
+                            value="1"
                             (change)="commPrefChange()"
                             id="exampleRadios1"
                             class="form-check-input"
@@ -681,8 +690,8 @@
                         <div class="form-check">
                           <input
                             type="radio"
-                            formControlName="comm_pref"
-                            value="Comm_others"
+                            formControlName="com_pref"
+                            value="2"
                             (change)="commPrefChange()"
                             id="exampleRadios2"
                             class="form-check-input"
@@ -696,8 +705,8 @@
                         <div class="form-check">
                           <input
                             type="radio"
-                            formControlName="comm_pref"
-                            value="Comm_candidate"
+                            formControlName="com_pref"
+                            value="3"
                             (change)="commPrefChange()"
                             id="exampleRadios3"
                             class="form-check-input"
@@ -719,7 +728,7 @@
                                 <input
                                   type="text"
                                   class="form-control"
-                                  formControlName="comm_other_name"
+                                  formControlName="com_pref_fn"
                                   required
                                 />
                               </div>
@@ -731,7 +740,7 @@
                                 <input
                                   type="text"
                                   class="form-control"
-                                  formControlName="comm_other_mobile"
+                                  formControlName="com_pref_mob"
                                   required
                                 />
                               </div>
@@ -752,9 +761,9 @@
                         <div class="form-check">
                           <input
                             type="radio"
-                            name="notify_pref"
-                            formControlName="notify_pref"
-                            value="notify_myself"
+                            name="noti_pref"
+                            formControlName="noti_pref"
+                            value="1"
                             (change)="notifyPrefChange()"
                             id="exampleRadios4"
                             class="form-check-input"
@@ -768,9 +777,9 @@
                         <div class="form-check">
                           <input
                             type="radio"
-                            name="notify_pref"
-                            formControlName="notify_pref"
-                            value="notify_others"
+                            name="noti_pref"
+                            formControlName="noti_pref"
+                            value="2"
                             (change)="notifyPrefChange()"
                             id="exampleRadios5"
                             class="form-check-input"
@@ -784,9 +793,9 @@
                         <div class="form-check">
                           <input
                             type="radio"
-                            name="notify_pref"
-                            formControlName="notify_pref"
-                            value="notify_candidate"
+                            name="noti_pref"
+                            formControlName="noti_pref"
+                            value="3"
                             (change)="notifyPrefChange()"
                             id="exampleRadios6"
                             class="form-check-input"
@@ -808,7 +817,7 @@
                                 <input
                                   type="text"
                                   class="form-control"
-                                  formControlName="comm_other_name"
+                                  formControlName="noti_pref_fn"
                                   required
                                 />
                               </div>
@@ -820,7 +829,7 @@
                                 <input
                                   type="text"
                                   class="form-control"
-                                  formControlName="comm_other_mobile"
+                                  formControlName="noti_pref_mob"
                                   required
                                 />
                               </div>
@@ -845,9 +854,10 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="rbbuttons4"
+                                name="interview_method"
                                 id="rb12"
-                                checked
+                                value="1"
+                                formControlName="interview_method"
                               />
                               <label class="form-check-label" for="rb12">
                                 In-person interview
@@ -857,8 +867,10 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="rbbuttons4"
+                                name="interview_method"
                                 id="rb13"
+                                value="2"
+                                formControlName="interview_method"
                               />
                               <label class="form-check-label" for="rb13">
                                 Telephonic/Online interview
@@ -876,7 +888,10 @@
               </ng-template>
             </li>
             <li ngbNavItem="jobPreview">
-              <a ngbNavLink>Job Preview </a>
+              <ng-template #jobPreview>Job Preview</ng-template>
+              <a ngbNavLink [ngbTooltip]="jobPreview"
+                ><i class="material-icons">description</i>
+              </a>
               <ng-template ngbNavContent>
                 <div id="test-l-4" class="content previewBox">
                   <div class="row mt-3">
@@ -1035,190 +1050,168 @@
               </ng-template>
             </li>
             <li ngbNavItem="selectPlan">
-              <a ngbNavLink>Select Plan </a>
+              <ng-template #tipPlan>select Plan </ng-template>
+              <a ngbNavLink [ngbTooltip]="tipPlan"
+                ><i class="material-icons">offline_pin</i>
+              </a>
               <ng-template ngbNavContent>
-                <div id="test-l-5" class="content text-center">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-12 col-md-4 col-lg-4">
-                        <div class="pricing">
-                          <div class="pricing-title">Developer</div>
-                          <div class="pricing-padding">
-                            <div class="pricing-price">
-                              <div>$19</div>
-                              <div>per month</div>
+                <div class="row">
+                  <div class="col-12 col-md-4 col-lg-4">
+                    <div class="pricing">
+                      <div class="pricing-title">Developer</div>
+                      <div class="pricing-padding">
+                        <div class="pricing-price">
+                          <div>Free</div>
+                          <!-- <div>per month</div> -->
+                        </div>
+                        <div class="pricing-details">
+                          <div class="pricing-item">
+                            <div class="pricing-item-icon">
+                              <i class="fas fa-check"></i>
                             </div>
-                            <div class="pricing-details">
-                              <div class="pricing-item">
-                                <div class="pricing-item-icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="pricing-item-label">
-                                  1 user agent
-                                </div>
-                              </div>
-                              <div class="pricing-item">
-                                <div class="pricing-item-icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="pricing-item-label">
-                                  Core features
-                                </div>
-                              </div>
-                              <div class="pricing-item">
-                                <div class="pricing-item-icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="pricing-item-label">
-                                  1GB storage
-                                </div>
-                              </div>
-                              <div class="pricing-item">
-                                <div class="pricing-item-icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="pricing-item-label">
-                                  2 Custom domain
-                                </div>
-                              </div>
-                              <div class="pricing-item">
-                                <div
-                                  class="pricing-item-icon bg-danger text-white"
-                                >
-                                  <i class="fas fa-times"></i>
-                                </div>
-                                <div class="pricing-item-label">
-                                  Live Support
-                                </div>
-                              </div>
+                            <div class="pricing-item-label">1 user agent</div>
+                          </div>
+                          <div class="pricing-item">
+                            <div class="pricing-item-icon">
+                              <i class="fas fa-check"></i>
+                            </div>
+                            <div class="pricing-item-label">Core features</div>
+                          </div>
+                          <div class="pricing-item">
+                            <div class="pricing-item-icon">
+                              <i class="fas fa-check"></i>
+                            </div>
+                            <div class="pricing-item-label">1GB storage</div>
+                          </div>
+                          <div class="pricing-item">
+                            <div class="pricing-item-icon">
+                              <i class="fas fa-check"></i>
+                            </div>
+                            <div class="pricing-item-label">
+                              2 Custom domain
                             </div>
                           </div>
-                          <div class="pricing-cta">
-                            <a href="#" onClick="return false;"
-                              >Subscribe <i class="fas fa-arrow-right"></i
-                            ></a>
+                          <div class="pricing-item">
+                            <div class="pricing-item-icon bg-danger text-white">
+                              <i class="fas fa-times"></i>
+                            </div>
+                            <div class="pricing-item-label">Live Support</div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-12 col-md-4 col-lg-4">
-                        <div class="pricing pricing-highlight">
-                          <div class="pricing-title">Small Team</div>
-                          <div class="pricing-padding">
-                            <div class="pricing-price">
-                              <div>$60</div>
-                              <div>per month</div>
+                      <div class="pricing-cta">
+                        <a (click)="subscribe()"
+                          >Subscribe <i class="fas fa-arrow-right"></i
+                        ></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4 col-lg-4">
+                    <div class="pricing pricing-highlight">
+                      <div class="pricing-title">Small Team</div>
+                      <div class="pricing-padding">
+                        <div class="pricing-price">
+                          <div>₹60</div>
+                          <div>per month</div>
+                        </div>
+                        <div class="pricing-details">
+                          <div class="pricing-item">
+                            <div class="pricing-item-icon">
+                              <i class="fas fa-check"></i>
                             </div>
-                            <div class="pricing-details">
-                              <div class="pricing-item">
-                                <div class="pricing-item-icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="pricing-item-label">
-                                  5 user agent
-                                </div>
-                              </div>
-                              <div class="pricing-item">
-                                <div class="pricing-item-icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="pricing-item-label">
-                                  Core features
-                                </div>
-                              </div>
-                              <div class="pricing-item">
-                                <div class="pricing-item-icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="pricing-item-label">
-                                  10GB storage
-                                </div>
-                              </div>
-                              <div class="pricing-item">
-                                <div class="pricing-item-icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="pricing-item-label">
-                                  10 Custom domain
-                                </div>
-                              </div>
-                              <div class="pricing-item">
-                                <div class="pricing-item-icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="pricing-item-label">
-                                  24/7 Support
-                                </div>
-                              </div>
+                            <div class="pricing-item-label">5 user agent</div>
+                          </div>
+                          <div class="pricing-item">
+                            <div class="pricing-item-icon">
+                              <i class="fas fa-check"></i>
+                            </div>
+                            <div class="pricing-item-label">Core features</div>
+                          </div>
+                          <div class="pricing-item">
+                            <div class="pricing-item-icon">
+                              <i class="fas fa-check"></i>
+                            </div>
+                            <div class="pricing-item-label">10GB storage</div>
+                          </div>
+                          <div class="pricing-item">
+                            <div class="pricing-item-icon">
+                              <i class="fas fa-check"></i>
+                            </div>
+                            <div class="pricing-item-label">
+                              10 Custom domain
                             </div>
                           </div>
-                          <div class="pricing-cta">
-                            <a href="#" onClick="return false;"
-                              >Subscribe <i class="fas fa-arrow-right"></i
-                            ></a>
+                          <div class="pricing-item">
+                            <div class="pricing-item-icon">
+                              <i class="fas fa-check"></i>
+                            </div>
+                            <div class="pricing-item-label">24/7 Support</div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-12 col-md-4 col-lg-4">
-                        <div class="pricing">
-                          <div class="pricing-title">Enterprise</div>
-                          <div class="pricing-padding">
-                            <div class="pricing-price">
-                              <div>$499</div>
-                              <div>per month</div>
+                      <div class="pricing-cta">
+                        <a href="#" onclick="return false;"
+                          >Subscribe <i class="fas fa-arrow-right"></i
+                        ></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4 col-lg-4">
+                    <div class="pricing">
+                      <div class="pricing-title">Enterprise</div>
+                      <div class="pricing-padding">
+                        <div class="pricing-price">
+                          <div>₹499</div>
+                          <div>per month</div>
+                        </div>
+                        <div class="pricing-details">
+                          <div class="pricing-item">
+                            <div class="pricing-item-icon">
+                              <i class="fas fa-check"></i>
                             </div>
-                            <div class="pricing-details">
-                              <div class="pricing-item">
-                                <div class="pricing-item-icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="pricing-item-label">
-                                  Unlimited user agent
-                                </div>
-                              </div>
-                              <div class="pricing-item">
-                                <div class="pricing-item-icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="pricing-item-label">
-                                  Core features
-                                </div>
-                              </div>
-                              <div class="pricing-item">
-                                <div class="pricing-item-icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="pricing-item-label">
-                                  8TB storage
-                                </div>
-                              </div>
-                              <div class="pricing-item">
-                                <div class="pricing-item-icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="pricing-item-label">
-                                  Unlimited custom domain
-                                </div>
-                              </div>
-                              <div class="pricing-item">
-                                <div class="pricing-item-icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="pricing-item-label">
-                                  Lifetime Support
-                                </div>
-                              </div>
+                            <div class="pricing-item-label">
+                              Unlimited user agent
                             </div>
                           </div>
-                          <div class="pricing-cta">
-                            <a href="#" onClick="return false;"
-                              >Subscribe <i class="fas fa-arrow-right"></i
-                            ></a>
+                          <div class="pricing-item">
+                            <div class="pricing-item-icon">
+                              <i class="fas fa-check"></i>
+                            </div>
+                            <div class="pricing-item-label">Core features</div>
+                          </div>
+                          <div class="pricing-item">
+                            <div class="pricing-item-icon">
+                              <i class="fas fa-check"></i>
+                            </div>
+                            <div class="pricing-item-label">8TB storage</div>
+                          </div>
+                          <div class="pricing-item">
+                            <div class="pricing-item-icon">
+                              <i class="fas fa-check"></i>
+                            </div>
+                            <div class="pricing-item-label">
+                              Unlimited custom domain
+                            </div>
+                          </div>
+                          <div class="pricing-item">
+                            <div class="pricing-item-icon">
+                              <i class="fas fa-check"></i>
+                            </div>
+                            <div class="pricing-item-label">
+                              Lifetime Support
+                            </div>
                           </div>
                         </div>
+                      </div>
+                      <div class="pricing-cta">
+                        <a href="#" onclick="return false;"
+                          >Subscribe <i class="fas fa-arrow-right"></i
+                        ></a>
                       </div>
                     </div>
                   </div>
                 </div>
+
                 <button (click)="submit()" class="btn btn-primary f-right">
                   Submit
                 </button>
