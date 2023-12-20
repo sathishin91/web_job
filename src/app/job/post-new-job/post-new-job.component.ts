@@ -55,7 +55,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store<AppState>
+    private store: Store
   ) {
     this.designation$ = this.store.select(selectDesignation);
     this.department$ = this.store.select(selectDepartment);
@@ -83,10 +83,70 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   anywhere = false;
   commOthers = false;
   notifyOthers = false;
+  error = '';
+  errorCandidate = '';
+  errorInterview = '';
+  errorSubmit = '';
+  desinationList: any;
+  departmentList: any;
+  categoryList: any;
+
+  initForm() {
+    this.jobDetailss = this.fb.group({
+      company_name: ['', [Validators.required]],
+      last: [''],
+      department: ['', Validators.required],
+      designation: ['', Validators.required],
+      work_location: [''],
+      jobTitle: [''],
+      wo_address: [''],
+      job_type: ['', Validators.required],
+      wh_city: [''],
+      fj_area: [''],
+      role: [''],
+      City: [''],
+      wh_place: [''],
+      specificArea: [''],
+      wo_city: [''],
+      night_shift: [''],
+      location_type: ['', Validators.required],
+      wo_address2: [''],
+      paytype: ['', Validators.required],
+
+      add_perks: [''],
+
+      nightShift: [''],
+      min_salary: [''],
+      specificCity: [''],
+      wfh_change: [''],
+
+      plot_number: [''],
+      max_salary: [''],
+      incentive: [''],
+      over_time: [''],
+      joining_fee: [''],
+      comments: [''],
+    });
+
+    this.interviewDetails = this.fb.group({
+      com_pref: ['', Validators.required],
+      com_pref_fn: [''],
+      com_pref_mob: [''],
+      noti_pref: ['', Validators.required],
+      noti_pref_fn: [''],
+      noti_pref_mob: [''],
+      interview_method: ['', Validators.required],
+    });
+
+    this.candidateDetails = this.fb.group({
+      education: ['', Validators.required],
+      experience: ['', Validators.required],
+      eng_lvl: ['', Validators.required],
+      description: [''],
+    });
+  }
 
   next() {
-    console.log('jobDetailss value', this.jobDetailss.value);
-
     const data = {
       //job details
       api_key: environment.api_key,
@@ -117,14 +177,18 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       incentive: this.jobDetailss.get('incentive')?.value,
     };
 
-    this.store.dispatch(
-      JobActions.setAddJobDetails({
-        data,
-      })
-    );
-
-    console.log('data passed to api', data);
-    this.active = 'candidateRequirements';
+    if (this.jobDetailss.invalid) {
+      this.error = 'Please fill all the required fields';
+      return;
+    } else {
+      this.store.dispatch(
+        JobActions.setAddJobDetails({
+          data,
+        })
+      );
+      console.log('data passed to api', data);
+      this.active = 'candidateRequirements';
+    }
   }
 
   onJobTitleChange(event: any) {
@@ -151,13 +215,17 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     };
 
     console.log('data for candidate requirements', data);
-
-    this.store.dispatch(
-      JobActions.setAddCandidateDetails({
-        data,
-      })
-    );
-    this.active = 'interviewerInformation';
+    if (this.candidateDetails.invalid) {
+      this.errorCandidate = 'Please fill all the required fields';
+      return;
+    } else {
+      this.store.dispatch(
+        JobActions.setAddCandidateDetails({
+          data,
+        })
+      );
+      this.active = 'interviewerInformation';
+    }
   }
   next3() {
     const data = {
@@ -174,21 +242,26 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       interview_method: this.interviewDetails.get('interview_method')?.value,
     };
     console.log('data passing to interview info form', data);
-    this.store.dispatch(
-      JobActions.setAddInterviewDetails({
-        data,
-      })
-    );
-    this.active = 'jobPreview';
-    const preview = {
-      api_key: environment.api_key,
-      job_id: 55,
-    };
-    this.store.dispatch(
-      JobActions.setPreviewDetails({
-        preview,
-      })
-    );
+    if (this.interviewDetails.invalid) {
+      this.errorInterview = 'Please fill all the required fields';
+      return;
+    } else {
+      this.store.dispatch(
+        JobActions.setAddInterviewDetails({
+          data,
+        })
+      );
+      this.active = 'jobPreview';
+      const preview = {
+        api_key: environment.api_key,
+        job_id: 55,
+      };
+      this.store.dispatch(
+        JobActions.setPreviewDetails({
+          preview,
+        })
+      );
+    }
   }
   next4() {
     this.active = 'selectPlan';
@@ -298,83 +371,16 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     }
   }
 
-  initForm() {
-    this.jobDetailss = this.fb.group({
-      company_name: [
-        '',
-        [Validators.required, Validators.pattern('[a-zA-Z]+')],
-      ],
-      last: [''],
-      department: ['', Validators.required],
-      designation: ['', Validators.required],
-      work_location: [''],
-      jobTitle: [''],
-      wo_address: [''],
-      job_type: [''],
-      wh_city: [''],
-      fj_area: [''],
-      role: [''],
-      City: [''],
-      wh_place: [''],
-      specificArea: [''],
-      wo_city: [''],
-      night_shift: [''],
-      location_type: [''],
-      wo_address2: [''],
-      paytype: [''],
-
-      add_perks: [''],
-
-      nightShift: [''],
-      min_salary: [''],
-      specificCity: [''],
-      wfh_change: [''],
-
-      plot_number: [''],
-      max_salary: [''],
-      incentive: [''],
-      over_time: [''],
-      joining_fee: [''],
-      comments: [''],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(15),
-        ],
-      ],
-      email: [
-        '',
-        [Validators.required, Validators.email, Validators.minLength(5)],
-      ],
-      address: [''],
-      city: ['', [Validators.required]],
-      state: ['', [Validators.required]],
-      country: ['', [Validators.required]],
-      termcondition: [false, [Validators.requiredTrue]],
-    });
-
-    this.interviewDetails = this.fb.group({
-      com_pref: [''],
-      com_pref_fn: [''],
-      com_pref_mob: [''],
-      noti_pref: [''],
-      noti_pref_fn: [''],
-      noti_pref_mob: [''],
-      interview_method: [''],
-    });
-
-    this.candidateDetails = this.fb.group({
-      education: [''],
-      experience: [''],
-      eng_lvl: [''],
-      description: [''],
-    });
+  ngOnDestroy() {
+    // Unsubscribe from observables to avoid memory leaks
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
-  desinationList: any;
-  departmentList: any;
-  categoryList: any;
+
+  subscribe() {
+    this.router.navigate(['/jobs']);
+  }
+
   ngOnInit() {
     this.initForm();
 
@@ -484,14 +490,5 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     } else {
       console.error('User data not found in localStorage');
     }
-  }
-  ngOnDestroy() {
-    // Unsubscribe from observables to avoid memory leaks
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  subscribe() {
-    this.router.navigate(['/jobs']);
   }
 }

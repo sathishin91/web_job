@@ -46,3 +46,8 @@ export const selectExpLevel = createSelector(
   selectJobState,
   (state: JobState) => state.experience
 );
+
+export const getJobLists = createSelector(
+  selectJobState,
+  (state: JobState) => state.list
+);

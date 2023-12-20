@@ -1,23 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../Store/Common/App.state';
 
-import * as TokenActions from '../../Store/Token/Token.Actions';
-
-import {
-  Menus,
-  Roleaccess,
-  Roles,
-  Usercred,
-  Userinfo,
-  Users,
-} from '../../Store/Model/User.Model';
-import { env } from 'echarts';
+import { Userinfo } from '../../Store/Model/User.Model';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +21,6 @@ export class AuthService {
       JSON.parse(localStorage.getItem('currentUser') || '{}')
     );
     this.currentUser = this.currentUserSubject.asObservable();
-    const token = this.store.select((state) => state.token.token);
   }
 
   public get currentUserValue(): User {
@@ -69,7 +58,7 @@ export class AuthService {
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          // console.log(JSON.stringify(user));
+          console.log(JSON.stringify(user));
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
           return user;
@@ -83,6 +72,8 @@ export class AuthService {
 
   logout() {
     // remove user from local storage to log user out
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userMobile');
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(this.currentUserValue);
     return of({ success: false });

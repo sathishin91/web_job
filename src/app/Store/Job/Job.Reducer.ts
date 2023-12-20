@@ -1,5 +1,4 @@
-// job.reducer.ts
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on, Action } from '@ngrx/store';
 import * as JobActions from '../Job/Job.Action';
 
 export interface JobState {
@@ -14,6 +13,7 @@ export interface JobState {
   addCandidateDetails: any;
   addInterviewDetails: any;
   list: any;
+  preview: any;
 }
 
 export const initialState: JobState = {
@@ -28,115 +28,190 @@ export const initialState: JobState = {
   addCandidateDetails: null,
   addInterviewDetails: null,
   list: null,
+  preview: null,
 };
 
 export const jobReducer = createReducer(
   initialState,
 
-  on(JobActions.getDesignationList, (state, { designation }) => ({
-    ...state,
-    designation,
-  })),
+  on(
+    JobActions.getDesignationList,
+    (state, { designation }): JobState => ({
+      ...state,
+      designation,
+    })
+  ),
 
-  on(JobActions.setDesignationList, (state, { designation }) => ({
-    ...state,
-    designation,
-  })),
+  on(
+    JobActions.setDesignationList,
+    (state, { designation }): JobState => ({
+      ...state,
+      designation,
+    })
+  ),
 
-  on(JobActions.setDepartmentList, (state, { department, category }) => ({
-    ...state,
-    department,
-    category,
-  })),
-  on(JobActions.getDepartmentList, (state, { api_key, id }) => ({
-    ...state,
-    department: id,
-  })),
+  on(
+    JobActions.setDepartmentList,
+    (state, { department, category }): JobState => ({
+      ...state,
+      department,
+      category,
+    })
+  ),
+  on(
+    JobActions.getDepartmentList,
+    (state, { api_key, id }): JobState => ({
+      ...state,
+      department: id,
+    })
+  ),
 
-  on(JobActions.getCityList, (state, { city }) => ({
-    ...state,
-    city,
-  })),
+  on(
+    JobActions.getCityList,
+    (state, { city }): JobState => ({
+      ...state,
+      city,
+    })
+  ),
 
-  on(JobActions.setCityList, (state, { city }) => ({
-    ...state,
-    city,
-  })),
+  on(
+    JobActions.setCityList,
+    (state, { city }): JobState => ({
+      ...state,
+      city,
+    })
+  ),
 
-  on(JobActions.getEducationList, (state, { education }) => ({
-    ...state,
-    education,
-  })),
+  on(
+    JobActions.getEducationList,
+    (state, { education }): JobState => ({
+      ...state,
+      education,
+    })
+  ),
 
-  on(JobActions.setEducationList, (state, { education }) => ({
-    ...state,
-    education,
-  })),
+  on(
+    JobActions.setEducationList,
+    (state, { education }): JobState => ({
+      ...state,
+      education,
+    })
+  ),
 
-  on(JobActions.getEnglishLevelList, (state, { englishLevel }) => ({
-    ...state,
-    englishLevel,
-  })),
+  on(
+    JobActions.getEnglishLevelList,
+    (state, { englishLevel }): JobState => ({
+      ...state,
+      englishLevel,
+    })
+  ),
 
-  on(JobActions.setEnglishLevelList, (state, { englishLevel }) => ({
-    ...state,
-    englishLevel,
-  })),
+  on(
+    JobActions.setEnglishLevelList,
+    (state, { englishLevel }): JobState => ({
+      ...state,
+      englishLevel,
+    })
+  ),
 
-  on(JobActions.getExperienceList, (state, { experience }) => ({
-    ...state,
-    experience,
-  })),
+  on(
+    JobActions.getExperienceList,
+    (state, { experience }): JobState => ({
+      ...state,
+      experience,
+    })
+  ),
 
-  on(JobActions.setExperienceList, (state, { experience }) => ({
-    ...state,
-    experience,
-  })),
+  on(
+    JobActions.setExperienceList,
+    (state, { experience }): JobState => ({
+      ...state,
+      experience,
+    })
+  ),
 
-  on(JobActions.getAddJobDetails, (state, { addJobDetails }) => ({
-    ...state,
-    addJobDetails,
-  })),
+  on(
+    JobActions.getAddJobDetails,
+    (state, { addJobDetails }): JobState => ({
+      ...state,
+      addJobDetails,
+    })
+  ),
 
-  on(JobActions.setAddJobDetails, (state, { data }) => ({
-    ...state,
-    addJobDetails: data,
-  })),
+  on(
+    JobActions.setAddJobDetails,
+    (state, { data }): JobState => ({
+      ...state,
+      addJobDetails: data,
+    })
+  ),
 
-  on(JobActions.getAddCandidateDetails, (state, { addCandidateDetails }) => ({
-    ...state,
-    addCandidateDetails,
-  })),
+  on(
+    JobActions.getAddCandidateDetails,
+    (state, { addCandidateDetails }): JobState => ({
+      ...state,
+      addCandidateDetails,
+    })
+  ),
 
-  on(JobActions.setAddCandidateDetails, (state, { data }) => ({
-    ...state,
-    addCandidateDetails: data,
-  })),
-  on(JobActions.getAddInterviewDetails, (state, { addInterviewDetails }) => ({
-    ...state,
-    addInterviewDetails,
-  })),
+  on(
+    JobActions.setAddCandidateDetails,
+    (state, { data }): JobState => ({
+      ...state,
+      addCandidateDetails: data,
+    })
+  ),
 
-  on(JobActions.setAddInterviewDetails, (state, { data }) => ({
-    ...state,
-    addInterviewDetails: data,
-  })),
-  on(JobActions.getJobsList, (state, { list }) => ({
-    ...state,
-    list,
-  })),
+  on(
+    JobActions.getAddInterviewDetails,
+    (state, { addInterviewDetails }): JobState => ({
+      ...state,
+      addInterviewDetails,
+    })
+  ),
 
-  on(JobActions.setJobsList, (state, { list }) => ({
-    ...state,
-    list: list,
-  })),
-  on(JobActions.setPreviewDetails, (state, { preview }) => ({
-    ...state,
-    preview,
-  })),
+  on(
+    JobActions.setAddInterviewDetails,
+    (state, { data }): JobState => ({
+      ...state,
+      addInterviewDetails: data,
+    })
+  ),
 
-  on(JobActions.getPreviewDetails, (state, { preview }) => ({
-    ...state,
-    preview,
-  }))
+  on(
+    JobActions.getJobsList,
+    (state, { list }): JobState => ({
+      ...state,
+      list,
+    })
+  ),
+
+  on(
+    JobActions.setJobsList,
+    (state, { list }): JobState => ({
+      ...state,
+      list: list,
+    })
+  ),
+
+  on(
+    JobActions.setPreviewDetails,
+    (state, { preview }): JobState => ({
+      ...state,
+      preview,
+    })
+  ),
+
+  on(
+    JobActions.getPreviewDetails,
+    (state, { preview }): JobState => ({
+      ...state,
+      preview,
+    })
+  )
 );
+
+// Explicitly specify the return type for the reducer function
+export function reducer(state: JobState | undefined, action: Action) {
+  return jobReducer(state, action);
+}

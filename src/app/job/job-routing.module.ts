@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'jobs', component: AllJobsComponent },
   { path: 'new-job/:id', component: PostNewJobComponent },
   { path: 'edit-job/:id', component: PostNewJobComponent },
-  { path: 'job-detail', component: JobDetailComponent },
+  { path: 'job-detail/:id', component: JobDetailComponent },
 ];
 
 @NgModule({

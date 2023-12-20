@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '../../Store/Common/App.state';
+import { Observable } from 'rxjs';
+import { getJobLists } from '../../Store/Job/Job.Selector';
+import { of } from 'rxjs';
 
 import * as TokenActions from '../../Store/Token/Token.Actions';
 
@@ -13,18 +16,19 @@ import * as JobActions from '../../Store/Job/Job.Action';
   styleUrls: ['./all-jobs.component.scss'],
 })
 export class AllJobsComponent implements OnInit {
-  userId = localStorage.getItem('currentUser');
+  jobList$: Observable<any> = of([]);
+  userId = localStorage.getItem('userId');
   id: any;
 
   constructor(private store: Store<AppState>) {}
   ngOnInit(): void {
     this.store.dispatch(TokenActions.getToken());
-    if (this.userId !== null) {
-      // Parse the JSON string into an object
-      const userData = JSON.parse(this.userId);
 
-      // Now you can access properties of userData safely
-      this.id = userData.data?.id;
+    // Select the job list from the store
+    this.jobList$ = this.store.pipe(select(getJobLists));
+    console.log('job list', this.jobList$);
+    if (this.userId !== null) {
+      this.id = this.userId;
       console.log('id', this.id);
     } else {
       console.error('User data not found in localStorage');

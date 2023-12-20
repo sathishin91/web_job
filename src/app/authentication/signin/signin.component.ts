@@ -75,6 +75,9 @@ export class SigninComponent implements OnInit {
           next: (res: any) => {
             if (res.status !== 'failed') {
               console.log('response of login api', res);
+              console.log('response of login api', res.data.id);
+              localStorage.setItem('userId', res.data.id);
+              localStorage.setItem('userMobile', res.mobile);
               console.log('response of login api', res.data.is_registered);
 
               if (res.data.is_registered === '0') {

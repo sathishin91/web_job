@@ -542,7 +542,9 @@
                         ></textarea>
                       </div>
                     </div>
-
+                    <div *ngIf="error" class="alert alert-danger mb-3 msl-3">
+                      {{ error }}
+                    </div>
                     <button (click)="next()" class="btn btn-primary f-right">
                       Next
                     </button>
@@ -642,6 +644,12 @@
                           data="<p>Hello, world!</p>"
                         ></ckeditor>
                       </div>
+                    </div>
+                    <div
+                      *ngIf="errorCandidate"
+                      class="alert alert-danger mb-3 msl-3"
+                    >
+                      {{ errorCandidate }}
                     </div>
                     <button
                       (click)="next2()"
@@ -880,6 +888,12 @@
                         </div>
                       </div>
                     </div>
+                    <div
+                      *ngIf="errorInterview"
+                      class="alert alert-danger mb-3 msl-3"
+                    >
+                      {{ errorInterview }}
+                    </div>
                     <button (click)="next3()" class="btn btn-primary f-right">
                       Next
                     </button>
@@ -1043,6 +1057,7 @@
                       </div>
                     </div>
                   </div>
+
                   <button (click)="next4()" class="btn btn-primary f-right">
                     Next
                   </button>
@@ -1211,7 +1226,9 @@
                     </div>
                   </div>
                 </div>
-
+                <div *ngIf="error" class="alert alert-danger mb-3 msl-3">
+                  {{ error }}
+                </div>
                 <button (click)="submit()" class="btn btn-primary f-right">
                   Submit
                 </button>

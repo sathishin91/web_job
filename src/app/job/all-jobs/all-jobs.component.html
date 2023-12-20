@@ -92,14 +92,20 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-6 col-md-6 col-lg-6 col-sm-12 col-12">
+    <div class="row" *ngIf="jobList$ | async as jobList">
+      <div
+        class="col-6 col-md-6 col-lg-6 col-sm-12 col-12"
+        *ngFor="let job of jobList.data"
+      >
         <div class="card">
           <div class="card-body">
             <div class="row">
-              <div class="col-md-8 job-detail-view" routerLink="job-detail">
+              <div
+                class="col-md-8 job-detail-view"
+                routerLink="job-detail/{{ job.id }}"
+              >
                 <div>
-                  <h5 class="category">Category 1</h5>
+                  <h5 class="category">{{ job.company_name }}</h5>
                 </div>
                 <div class="">
                   <p>
@@ -123,11 +129,22 @@
                   </div>
                 </div>
               </div>
+              <div class="col-md-12 planSection">
+                <div class="row">
+                  <div class="col-md-9">
+                    <p>Select plan and finish job posting</p>
+                  </div>
+
+                  <div class="col-md-3">
+                    <button class="btn btn-plan mt-2">Select Plan</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-6 col-md-6 col-lg-6 col-sm-12 col-12">
+      <!-- <div class="col-6 col-md-6 col-lg-6 col-sm-12 col-12">
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -160,7 +177,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </section>
