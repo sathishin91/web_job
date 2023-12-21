@@ -24,6 +24,7 @@ import {
   selectEnglishLevel,
   selectExpLevel,
   selectMinEducation,
+  showPreview,
 } from '../../Store/Job/Job.Selector';
 import { selectDepartment } from '../../Store/Job/Job.Selector';
 import { environment } from 'src/environments/environment';
@@ -41,15 +42,19 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   education$: Observable<object>;
   city$: Observable<object>;
   expLevel$: Observable<object>;
+  preview$: Observable<object>;
 
   private unsubscribe$ = new Subject<void>();
   userId = localStorage.getItem('currentUser');
-
+  min_salary = 0;
+  incentive = 0;
+  max_salary = 0;
   cityList: any;
   educationList: any;
   englishLevel$: any;
   englishList: any;
   expList: any;
+  previewDatas: any;
 
   constructor(
     private fb: FormBuilder,
@@ -64,6 +69,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     this.education$ = this.store.select(selectMinEducation);
     this.englishLevel$ = this.store.select(selectEnglishLevel);
     this.expLevel$ = this.store.select(selectExpLevel);
+    this.preview$ = this.store.select(showPreview);
   }
 
   active: any;
@@ -112,16 +118,15 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       location_type: ['', Validators.required],
       wo_address2: [''],
       paytype: ['', Validators.required],
-
       add_perks: [''],
-
       nightShift: [''],
-      min_salary: [''],
+
       specificCity: [''],
       wfh_change: [''],
-
       plot_number: [''],
+      min_salary: [''],
       max_salary: [''],
+
       incentive: [''],
       over_time: [''],
       joining_fee: [''],
@@ -261,6 +266,12 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
           preview,
         })
       );
+      this.preview$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((previewData) => {
+          console.log('preview details', previewData);
+          this.previewDatas = previewData;
+        });
     }
   }
   next4() {
@@ -283,11 +294,14 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       const selectedValue = salaryTypeControl.value;
       console.log('radio value', selectedValue);
       if (selectedValue === '3') {
+        this.min_salary = 0;
+        this.max_salary = 0;
         this.displayIncentive = true;
         this.displayFixedIncentive = false;
         this.displayFixed = false;
       }
       if (selectedValue === '1') {
+        this.incentive = 0;
         this.displayIncentive = false;
         this.displayFixedIncentive = false;
         this.displayFixed = true;

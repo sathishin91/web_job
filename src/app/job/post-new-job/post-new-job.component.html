@@ -52,14 +52,14 @@
                           formControlName="company_name"
                           required
                         />
-                        <!-- <small
+                        <small
                           class="form-text text-danger"
                           *ngIf="
                             !jobDetailss.get('company_name')?.valid &&
                             jobDetailss.get('company_name')?.touched
                           "
                           >Please enter a company name!</small
-                        > -->
+                        >
                       </div>
                       <div class="form-group col-md-6">
                         <label
@@ -81,6 +81,14 @@
                             {{ list.designation }}
                           </option>
                         </select>
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            !jobDetailss.get('designation')?.valid &&
+                            jobDetailss.get('designation')?.touched
+                          "
+                          >Please select a Designation !</small
+                        >
                       </div>
 
                       <div class="form-group col-md-6">
@@ -99,14 +107,14 @@
                             {{ list.department }}
                           </option>
                         </select>
-                        <!-- <small
+                        <small
                           class="form-text text-danger"
                           *ngIf="
                             !jobDetailss.get('department')?.valid &&
                             jobDetailss.get('department')?.touched
                           "
-                          >Please enter a Department !</small
-                        > -->
+                          >Please select a Department !</small
+                        >
                       </div>
                       <div class="form-group col-md-6">
                         <label>Role<span class="text-danger">*</span></label>
@@ -121,6 +129,14 @@
                             {{ list.category }}
                           </option>
                         </select>
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            !jobDetailss.get('role')?.valid &&
+                            jobDetailss.get('role')?.touched
+                          "
+                          >Please select a Role !</small
+                        >
                       </div>
                       <div class="form-group col-md-6">
                         <label
@@ -167,6 +183,14 @@
                             </label>
                           </div>
                         </div>
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            !jobDetailss.get('job_type')?.valid &&
+                            jobDetailss.get('job_type')?.touched
+                          "
+                          >Please select a job_type !</small
+                        >
                       </div>
                       <div class="form-group">
                         <div class="form-check">
@@ -439,6 +463,7 @@
                                 class="form-control"
                                 placeholder="Minimum field salary"
                                 formControlName="min_salary"
+                                [(ngModel)]="min_salary"
                                 required
                               />
                             </div>
@@ -448,6 +473,7 @@
                                 class="form-control"
                                 placeholder="Maximum field salary"
                                 formControlName="max_salary"
+                                [(ngModel)]="max_salary"
                                 required
                               />
                             </div>
@@ -462,6 +488,7 @@
                             class="form-control"
                             placeholder="Incentive"
                             formControlName="incentive"
+                            [(ngModel)]="incentive"
                             required
                           />
                         </div>
@@ -485,7 +512,9 @@
                                 <td><h6>Fixed Salary / Month</h6></td>
                                 <td></td>
                                 <td>
-                                  <h6 id="fixed_salary_disp">₹ 0 - ₹ 0</h6>
+                                  <h6 id="fixed_salary_disp">
+                                    ₹ {{ min_salary }} - ₹ {{ max_salary }}
+                                  </h6>
                                 </td>
                                 <td></td>
                               </tr>
@@ -493,7 +522,11 @@
                               <tr>
                                 <td><h6>Average Incentive / Month</h6></td>
                                 <td></td>
-                                <td><h6 id="fixed_incentive_disp">₹ 0</h6></td>
+                                <td>
+                                  <h6 id="fixed_incentive_disp">
+                                    ₹ {{ incentive }}
+                                  </h6>
+                                </td>
                                 <td></td>
                               </tr>
                               <tr></tr>
@@ -506,6 +539,15 @@
                               <tr></tr>
                             </tbody>
                           </table>
+                        </div>
+                        <div
+                          *ngIf="
+                            jobDetailss
+                              ?.get('max_salary')
+                              ?.hasError('maxSalaryInvalid')
+                          "
+                        >
+                          Maximum salary should be greater than minimum salary.
                         </div>
                       </div>
                     </div>
@@ -907,8 +949,12 @@
                 ><i class="material-icons">description</i>
               </a>
               <ng-template ngbNavContent>
-                <div id="test-l-4" class="content previewBox">
-                  <div class="row mt-3">
+                <div
+                  id="test-l-4"
+                  class="content previewBox"
+                  *ngIf="previewDatas"
+                >
+                  <div class="row mt-3" *ngFor="let data of previewDatas.data">
                     <div class="col-md-6">
                       <div class="card">
                         <div class="card-header">
@@ -927,7 +973,9 @@
                             <div class="col-sm-12">
                               <ul class="preview_list">
                                 <li>
-                                  <label>Company name<label></label></label>
+                                  <label
+                                    >{{ data.company_name }}<label></label
+                                  ></label>
                                 </li>
                                 <li><h6>Test</h6></li>
                               </ul>
