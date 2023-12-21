@@ -104,3 +104,12 @@ export const getPreviewDetails = createAction(
   '[Job] Get Preview Details',
   props<{ preview: any }>()
 );
+
+export const setJobDetailsId = createAction(
+  '[Job] Set Preview Details',
+  props<{ preview: any }>()
+);
+export const getJobDetailsId = createAction(
+  '[Job] Get Preview Details',
+  props<{ preview: any }>()
+);

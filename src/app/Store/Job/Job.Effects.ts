@@ -174,4 +174,20 @@ export class JobEffects {
       })
     );
   });
+
+  getJobId$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(JobActions.setJobDetailsId),
+      mergeMap((action) => {
+        return this.authService.getJobId(action.preview).pipe(
+          map((response: any) => {
+            // Return the action here
+            return JobActions.getJobDetailsId({
+              preview: response,
+            });
+          })
+        );
+      })
+    );
+  });
 }

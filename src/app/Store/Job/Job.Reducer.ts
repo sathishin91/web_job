@@ -208,6 +208,21 @@ export const jobReducer = createReducer(
       ...state,
       preview,
     })
+  ),
+  on(
+    JobActions.setJobDetailsId,
+    (state, { preview }): JobState => ({
+      ...state,
+      preview,
+    })
+  ),
+
+  on(
+    JobActions.getJobDetailsId,
+    (state, { preview }): JobState => ({
+      ...state,
+      preview,
+    })
   )
 );
 

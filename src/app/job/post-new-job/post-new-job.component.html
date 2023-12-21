@@ -50,6 +50,7 @@
                           class="form-control"
                           placeholder="Company name"
                           formControlName="company_name"
+                          [(ngModel)]="company_name"
                           required
                         />
                         <small
@@ -72,6 +73,7 @@
                           id="designation"
                           class="form-select form-control"
                           formControlName="designation"
+                          [(ngModel)]="designation"
                           (input)="onJobTitleChange($event)"
                         >
                           <option
@@ -365,6 +367,13 @@
                               {{ list.city_name }}
                             </option>
                           </select>
+                          <div
+                            *ngIf="
+                              jobDetailss.get('wh_city')!.hasError('required')
+                            "
+                          >
+                            City is required.
+                          </div>
                         </div>
                       </div>
                       <div *ngIf="displayFieldJob === true">
@@ -949,11 +958,7 @@
                 ><i class="material-icons">description</i>
               </a>
               <ng-template ngbNavContent>
-                <div
-                  id="test-l-4"
-                  class="content previewBox"
-                  *ngIf="previewDatas"
-                >
+                <div id="test-l-4" class="content previewBox">
                   <div class="row mt-3" *ngFor="let data of previewDatas.data">
                     <div class="col-md-6">
                       <div class="card">
@@ -973,38 +978,48 @@
                             <div class="col-sm-12">
                               <ul class="preview_list">
                                 <li>
-                                  <label
-                                    >{{ data.company_name }}<label></label
-                                  ></label>
+                                  <label><label>Company Name</label></label>
                                 </li>
-                                <li><h6>Test</h6></li>
+                                <li>
+                                  <h6>{{ data.company_name }}</h6>
+                                </li>
                               </ul>
 
                               <ul class="preview_list">
                                 <li><label>Job title</label></li>
-                                <li><h6>Category 1</h6></li>
+                                <li>
+                                  <h6>{{ data.designation }}</h6>
+                                </li>
                               </ul>
 
                               <ul class="preview_list">
                                 <li><label>Department | Role</label></li>
                                 <li>
-                                  <h6>Job Sub Category | Job Final Category</h6>
+                                  <h6>
+                                    {{ data.department }} | {{ data.role }}
+                                  </h6>
                                 </li>
                               </ul>
 
                               <ul class="preview_list">
                                 <li><label>Job type</label></li>
-                                <li><h6>Full Time | General Shift</h6></li>
+                                <li>
+                                  <h6>{{ data.job_type }} | General Shift</h6>
+                                </li>
                               </ul>
 
                               <ul class="preview_list">
                                 <li><label>Work type</label></li>
-                                <li><h6>Work From Office</h6></li>
+                                <li>
+                                  <h6>{{ data.location_type }}</h6>
+                                </li>
                               </ul>
 
                               <ul class="preview_list">
                                 <li><label>Job location</label></li>
-                                <li><h6>Abohar</h6></li>
+                                <li>
+                                  <h6>{{ data.wo_city }}</h6>
+                                </li>
                               </ul>
 
                               <ul class="preview_list">

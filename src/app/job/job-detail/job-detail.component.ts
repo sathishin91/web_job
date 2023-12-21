@@ -7,11 +7,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './job-detail.component.html',
   styleUrls: ['./job-detail.component.scss'],
 })
-export class JobDetailComponent {
+export class JobDetailComponent implements OnInit {
   active = 'jobDetail';
   page = 4;
   page2 = 1;
   currentPage = 3;
+  jobId!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,11 +25,21 @@ export class JobDetailComponent {
   }
 
   editJob() {
-    this.router.navigate(['/jobs/edit-job/4']);
+    this.router.navigate(['/jobs/edit-job'], {
+      queryParams: { job_id: this.jobId, tab_id: 4 },
+    });
   }
 
   activateJobPreviewTab() {
     console.log('inside active');
     this.active = 'jobPreview';
+  }
+
+  ngOnInit() {
+    //Access the id from the params
+    this.route.params.subscribe((params) => {
+      this.jobId = params['id'];
+      console.log('id on the params', this.jobId);
+    });
   }
 }

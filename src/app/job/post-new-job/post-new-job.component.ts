@@ -25,6 +25,7 @@ import {
   selectExpLevel,
   selectMinEducation,
   showPreview,
+  selectJobsId,
 } from '../../Store/Job/Job.Selector';
 import { selectDepartment } from '../../Store/Job/Job.Selector';
 import { environment } from 'src/environments/environment';
@@ -43,6 +44,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   city$: Observable<object>;
   expLevel$: Observable<object>;
   preview$: Observable<object>;
+  getJobID$: Observable<object>;
 
   private unsubscribe$ = new Subject<void>();
   userId = localStorage.getItem('currentUser');
@@ -55,6 +57,8 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   englishList: any;
   expList: any;
   previewDatas: any;
+  company_name: any;
+  designation: any;
 
   constructor(
     private fb: FormBuilder,
@@ -70,11 +74,12 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     this.englishLevel$ = this.store.select(selectEnglishLevel);
     this.expLevel$ = this.store.select(selectExpLevel);
     this.preview$ = this.store.select(showPreview);
+    this.getJobID$ = this.store.select(selectJobsId);
   }
 
   active: any;
   public Editor: any = ClassicEditor;
-
+  jobId!: number;
   jobDetailss!: FormGroup;
   candidateDetails!: UntypedFormGroup;
   interviewDetails!: UntypedFormGroup;
@@ -259,7 +264,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       this.active = 'jobPreview';
       const preview = {
         api_key: environment.api_key,
-        job_id: 55,
+        job_id: this.jobId,
       };
       this.store.dispatch(
         JobActions.setPreviewDetails({
@@ -276,6 +281,12 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   }
   next4() {
     this.active = 'selectPlan';
+    this.preview$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((previewData) => {
+        console.log('preview details', previewData);
+        this.previewDatas = previewData;
+      });
   }
 
   submit() {
@@ -478,18 +489,36 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
         console.log('experience list', this.expList);
       });
 
-    //Access the id from the params
-    this.route.params.subscribe((params) => {
-      const id = params['id'];
+    // Access the query parameters
+    this.route.queryParams.subscribe((queryParams) => {
+      this.jobId = queryParams['job_id'];
+      const tabId = queryParams['tab_id'];
 
-      console.log('ID from params:', id);
-      if (id == 1) {
-        console.log('id is 1');
+      console.log('ID from queryParams:', tabId, this.jobId);
+
+      if (tabId == '1') {
+        console.log('tab_id is 1');
         this.active = 'jobDetail';
       }
-      if (id == 4) {
-        console.log('id is 4');
+
+      if (tabId == '4') {
+        console.log('tab_id is 4');
         this.active = 'jobPreview';
+        const preview = {
+          api_key: environment.api_key,
+          id: Number(this.jobId),
+        };
+        this.store.dispatch(
+          JobActions.setJobDetailsId({
+            preview,
+          })
+        );
+        this.getJobID$
+          .pipe(takeUntil(this.unsubscribe$))
+          .subscribe((previewData) => {
+            console.log('preview details', previewData);
+            this.previewDatas = previewData;
+          });
       }
     });
 

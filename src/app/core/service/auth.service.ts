@@ -171,4 +171,8 @@ export class AuthService {
       preview
     );
   }
+
+  getJobId(preview: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/JobDetails/getById`, preview);
+  }
 }

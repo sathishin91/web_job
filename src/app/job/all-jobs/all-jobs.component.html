@@ -95,7 +95,7 @@
     <div class="row" *ngIf="jobList$ | async as jobList">
       <div
         class="col-6 col-md-6 col-lg-6 col-sm-12 col-12"
-        *ngFor="let job of jobList.data"
+        *ngFor="let job of jobList.completed"
       >
         <div class="card">
           <div class="card-body">
@@ -109,8 +109,98 @@
                 </div>
                 <div class="">
                   <p>
+                    {{ job.department }} | {{ job.designation }} | Full Time |
+                    Posted on: {{ job.create_date }}
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <p class="">0</p>
+                <p>Total Applicants</p>
+              </div>
+              <div class="col-md-12 renewPlanSection">
+                <div class="row">
+                  <div class="col-md-9">
+                    <p>Renew now to receive new applications</p>
+                  </div>
+
+                  <div class="col-md-3">
+                    <button class="btn btn-primary mt-2">Renew Now</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 planSection">
+                <div class="row">
+                  <div class="col-md-9">
+                    <p>Select plan and finish job posting</p>
+                  </div>
+
+                  <div class="col-md-3">
+                    <button class="btn btn-plan mt-2">Select Plan</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-6 col-md-6 col-lg-6 col-sm-12 col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-8">
+                <div>
+                  <h5 class="category">Category 11</h5>
+                </div>
+                <div class="">
+                  <p>
                     Job Sub Category | Job Final Category | Full Time | Posted
                     on: 27 Oct 2023
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <p class="">0</p>
+                <p>Total Applicants</p>
+              </div>
+              <div class="col-md-12 planSection">
+                <div class="row">
+                  <div class="col-md-9">
+                    <p>Select plan and finish job posting</p>
+                  </div>
+
+                  <div class="col-md-3">
+                    <button class="btn btn-plan mt-2">Select Plan</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <div>
+      <span class="draftsJob">Drafts</span>
+    </div>
+    <div class="row mt-3" *ngIf="jobList$ | async as jobList">
+      <div
+        class="col-6 col-md-6 col-lg-6 col-sm-12 col-12"
+        *ngFor="let job of jobList.pending"
+      >
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div
+                class="col-md-8 job-detail-view"
+                routerLink="job-detail/{{ job.id }}"
+              >
+                <div>
+                  <h5 class="category">{{ job.company_name }}</h5>
+                </div>
+                <div class="">
+                  <p>
+                    {{ job.department }} | {{ job.designation }} | Full Time |
+                    Posted on: {{ job.create_date }}
                   </p>
                 </div>
               </div>

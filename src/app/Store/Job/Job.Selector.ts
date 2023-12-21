@@ -56,3 +56,8 @@ export const showPreview = createSelector(
   selectJobState,
   (state: JobState) => state.preview
 );
+
+export const selectJobsId = createSelector(
+  selectJobState,
+  (state: JobState) => state.preview
+);
