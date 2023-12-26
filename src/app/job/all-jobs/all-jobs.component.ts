@@ -22,6 +22,7 @@ export class AllJobsComponent implements OnInit {
 
   constructor(private store: Store<AppState>) {}
   ngOnInit(): void {
+    localStorage.removeItem('jobId');
     this.store.dispatch(TokenActions.getToken());
 
     // Select the job list from the store

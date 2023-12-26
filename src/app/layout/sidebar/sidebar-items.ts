@@ -13,7 +13,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'manage-coins',
-    title: 'Manage Coins',
+    title: 'Manage Wallet',
     iconType: 'feather',
     icon: 'alert-circle',
     class: '',

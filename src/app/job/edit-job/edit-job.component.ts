@@ -32,11 +32,11 @@ import { environment } from 'src/environments/environment';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-post-new-job',
-  templateUrl: './post-new-job.component.html',
-  styleUrls: ['./post-new-job.component.scss'],
+  selector: 'app-edit-job',
+  templateUrl: './edit-job.component.html',
+  styleUrls: ['./edit-job.component.scss'],
 })
-export class PostNewJobComponent implements OnInit, OnDestroy {
+export class EditJobComponent implements OnInit, OnDestroy {
   designation$: Observable<object>;
   department$: Observable<object>;
   category$: Observable<object>;
@@ -47,8 +47,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   getJobID$: Observable<object>;
 
   private unsubscribe$ = new Subject<void>();
-  userId = localStorage.getItem('userId');
-  jobsId = localStorage.getItem('jobId');
+  userId = localStorage.getItem('currentUser');
   min_salary = 0;
   incentive = 0;
   max_salary = 0;
@@ -153,7 +152,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       education: ['', Validators.required],
       experience: ['', Validators.required],
       eng_lvl: ['', Validators.required],
-      description: ['', Validators.required],
+      description: [''],
     });
   }
 
@@ -161,7 +160,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     const data = {
       //job details
       api_key: environment.api_key,
-      user_id: this.userId,
+      user_id: 67,
       company_name: this.jobDetailss.get('company_name')?.value,
       designation: this.jobDetailss.get('designation')?.value,
       department: this.jobDetailss.get('department')?.value,
@@ -197,7 +196,6 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
           data,
         })
       );
-
       console.log('data passed to api', data);
       this.active = 'candidateRequirements';
     }
@@ -218,8 +216,8 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     console.log('candidateDetails value', this.candidateDetails.value);
     const data = {
       api_key: environment.api_key,
-      user_id: this.userId,
-      job_id: this.jobsId,
+      user_id: 67,
+      job_id: 55,
       education: this.candidateDetails.get('education')?.value,
       experience: this.candidateDetails.get('experience')?.value,
       eng_lvl: this.candidateDetails.get('eng_lvl')?.value,
@@ -242,9 +240,9 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   next3() {
     const data = {
       api_key: environment.api_key,
-      user_id: this.userId,
-      //user_id: 67,
-      job_id: this.jobsId,
+      //user_id: this.userId,
+      user_id: 67,
+      job_id: 43,
       com_pref: this.interviewDetails.get('com_pref')?.value,
       com_pref_fn: this.interviewDetails.get('com_pref_fn')?.value,
       com_pref_mob: this.interviewDetails.get('com_pref_mob')?.value,
@@ -266,7 +264,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       this.active = 'jobPreview';
       const preview = {
         api_key: environment.api_key,
-        job_id: this.jobsId,
+        job_id: this.jobId,
       };
       this.store.dispatch(
         JobActions.setPreviewDetails({
@@ -523,5 +521,17 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
           });
       }
     });
+
+    // Check if userMobile is not null before using it
+    if (this.userId !== null) {
+      // Parse the JSON string into an object
+      const userData = JSON.parse(this.userId);
+
+      // Now you can access properties of userData safely
+      this.userId = userData?.data?.id;
+      console.log('user number', this.userId);
+    } else {
+      console.error('User data not found in localStorage');
+    }
   }
 }

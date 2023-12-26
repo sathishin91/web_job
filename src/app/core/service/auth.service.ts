@@ -73,6 +73,7 @@ export class AuthService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('userId');
+    localStorage.removeItem('jobId');
     localStorage.removeItem('userMobile');
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(this.currentUserValue);
@@ -151,7 +152,7 @@ export class AuthService {
   }
 
   postCandidateDetails(data: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/JobDetails/add`, data);
+    return this.http.post(`${environment.apiUrl}/CandidateReq/add`, data);
   }
   postInterviewDetails(data: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/InterviewerInfo/add`, data);

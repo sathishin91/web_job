@@ -11,7 +11,7 @@
   <div class="section-body">
     <div class="card">
       <div class="card-header">
-        <h4>Job Details</h4>
+        <h4>Edit Job Details</h4>
       </div>
       <div class="card-body">
         <div class="d-flex">
@@ -596,11 +596,8 @@
                     <div *ngIf="error" class="alert alert-danger mb-3 msl-3">
                       {{ error }}
                     </div>
-                    <button
-                      (click)="next()"
-                      class="btn btn-primary f-right w-20"
-                    >
-                      Continue
+                    <button (click)="next()" class="btn btn-primary f-right">
+                      Next
                     </button>
                   </div>
                 </form>
@@ -690,8 +687,7 @@
                         <label class="mb-3"
                           ><strong>
                             Description / Additional requirement</strong
-                          >
-                          <span class="text-danger">*</span></label
+                          ></label
                         >
                         <ckeditor
                           formControlName="description"
@@ -708,9 +704,9 @@
                     </div>
                     <button
                       (click)="next2()"
-                      class="btn btn-primary mt-3 f-right w-20"
+                      class="btn btn-primary mt-3 f-right"
                     >
-                      Continue
+                      Next
                     </button>
                   </div>
                 </form>
@@ -949,11 +945,8 @@
                     >
                       {{ errorInterview }}
                     </div>
-                    <button
-                      (click)="next3()"
-                      class="btn btn-primary f-right w-20"
-                    >
-                      Continue
+                    <button (click)="next3()" class="btn btn-primary f-right">
+                      Next
                     </button>
                   </div>
                 </form>
@@ -1128,11 +1121,8 @@
                     </div>
                   </div>
 
-                  <button
-                    (click)="next4()"
-                    class="btn btn-primary f-right w-20"
-                  >
-                    Continue
+                  <button (click)="next4()" class="btn btn-primary f-right">
+                    Next
                   </button>
                 </div>
               </ng-template>
@@ -1302,7 +1292,7 @@
                 <div *ngIf="error" class="alert alert-danger mb-3 msl-3">
                   {{ error }}
                 </div>
-                <button (click)="submit()" class="btn btn-primary f-right w-20">
+                <button (click)="submit()" class="btn btn-primary f-right">
                   Submit
                 </button>
               </ng-template>

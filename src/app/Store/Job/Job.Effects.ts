@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { mergeMap, map } from 'rxjs/operators';
+import { mergeMap, map, tap } from 'rxjs/operators';
 import { AuthService } from '../../core/service/auth.service';
 import * as JobActions from './Job.Action';
 
@@ -106,8 +106,15 @@ export class JobEffects {
       mergeMap((action) =>
         this.authService.postJobDetails(action.data).pipe(
           map((response: any) => {
+            // Assuming that the ID is in the 'id' property of the response
+            const jobId = response.job_id;
+
+            // Store the job ID in localStorage
+            localStorage.setItem('jobId', jobId);
+
             return JobActions.getAddJobDetails({ addJobDetails: response });
           })
+          // You can add catchError here if needed
         )
       )
     );

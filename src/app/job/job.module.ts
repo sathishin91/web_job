@@ -9,9 +9,10 @@ import { JobDetailComponent } from './job-detail/job-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { EditJobComponent } from './edit-job/edit-job.component';
 
 @NgModule({
-  declarations: [AllJobsComponent, PostNewJobComponent, JobDetailComponent],
+  declarations: [AllJobsComponent, PostNewJobComponent, JobDetailComponent, EditJobComponent],
   imports: [
     CommonModule,
     JobRoutingModule,

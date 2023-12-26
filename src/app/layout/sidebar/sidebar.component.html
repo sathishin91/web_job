@@ -22,15 +22,15 @@
         class="flex-container"
       >
         <ul class="list">
-          <li class="sidebar-user-panel">
+          <!-- <li class="sidebar-user-panel">
             <div class="user-panel">
-              <div class="image">
+               <div class="image">
                 <img
                   src="assets/images/user.png"
                   class="img-circle user-img-circle"
                   alt="User Image"
                 />
-              </div>
+              </div> 
             </div>
             <div class="profile-usertitle">
               <div class="sidebar-userpic-name">Emily Smith</div>
@@ -38,7 +38,7 @@
                 {{ "MENUITEMS.USER.POST" | translate }}
               </div>
             </div>
-          </li>
+          </li> -->
           <!-- Top Most level menu -->
           <li
             *ngFor="let sidebarItem of sidebarItems"
@@ -153,7 +153,7 @@
           <li class="coinBalance">
             <i class="fas fa-coins"></i>
 
-            <span class="hide-menu pl-2">Coin Balance </span>
+            <span class="hide-menu pl-2">Wallet Balance </span>
             <strong class="coinBal">{{ coinBalances }}</strong>
           </li>
         </ul>
