@@ -500,17 +500,25 @@ export class EditJobComponent implements OnInit, OnDestroy {
         console.log('tab_id is 1');
         this.active = 'jobDetail';
       }
+      if (tabId == '2') {
+        console.log('tab_id is 1');
+        this.active = 'candidateRequirements';
+      }
+      if (tabId == '3') {
+        console.log('tab_id is 1');
+        this.active = 'candidateDetails';
+      }
 
       if (tabId == '4') {
         console.log('tab_id is 4');
         this.active = 'jobPreview';
-        const preview = {
+        const singlejob = {
           api_key: environment.api_key,
           id: Number(this.jobId),
         };
         this.store.dispatch(
           JobActions.setJobDetailsId({
-            preview,
+            singlejob,
           })
         );
         this.getJobID$

@@ -186,11 +186,11 @@ export class JobEffects {
     return this.actions$.pipe(
       ofType(JobActions.setJobDetailsId),
       mergeMap((action) => {
-        return this.authService.getJobId(action.preview).pipe(
+        return this.authService.getJobId(action.singlejob).pipe(
           map((response: any) => {
             // Return the action here
             return JobActions.getJobDetailsId({
-              preview: response,
+              singlejob: response,
             });
           })
         );

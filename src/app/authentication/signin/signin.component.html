@@ -2,7 +2,7 @@
   <div class="row no-gutters shadow-lg">
     <div class="col-md-6 d-none d-md-block">
       <img
-        src="assets/images/login.jpg"
+        src="assets/images/signin.jpg"
         class="img-fluid"
         style="min-height: 100%"
       />
@@ -28,22 +28,22 @@
                 />
               </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-xs-12">
+            <div class="col-lg-3 col-md-4 col-xs-12 d-flex align-items-center">
               <button
                 *ngIf="getOtp === true"
                 (click)="startTimer()"
-                class="btn btn-primary mt-2em fill_available"
+                class="btn btn-primary fill_available"
               >
                 Get OTP
               </button>
               <button
-                class="btn btn-primary mt-2em fill_available"
+                class="btn btn-primary fill_available"
                 *ngIf="displayTimer === true && getOtp === false"
               >
                 {{ counter }}
               </button>
               <button
-                class="btn btn-primary mt-2em fill_available"
+                class="btn btn-primary fill_available"
                 *ngIf="showResentOtp === true"
                 (click)="startTimer()"
               >
@@ -75,15 +75,6 @@
                 Sign in
               </button>
             </div>
-
-            <!-- <div class="col-12 text-center">
-              <p class="mb-0 mt-3">
-                <small class="text-dark msr-2">Don't have an account ?</small>
-                <a routerLink="/authentication/signup" class="text-dark fw-bold"
-                  >Sign Up</a
-                >
-              </p>
-            </div> -->
           </div>
         </form>
       </div>

@@ -14,6 +14,7 @@ export interface JobState {
   addInterviewDetails: any;
   list: any;
   preview: any;
+  singlejob: any;
 }
 
 export const initialState: JobState = {
@@ -29,6 +30,7 @@ export const initialState: JobState = {
   addInterviewDetails: null,
   list: null,
   preview: null,
+  singlejob: null,
 };
 
 export const jobReducer = createReducer(
@@ -211,17 +213,17 @@ export const jobReducer = createReducer(
   ),
   on(
     JobActions.setJobDetailsId,
-    (state, { preview }): JobState => ({
+    (state, { singlejob }): JobState => ({
       ...state,
-      preview,
+      singlejob,
     })
   ),
 
   on(
     JobActions.getJobDetailsId,
-    (state, { preview }): JobState => ({
+    (state, { singlejob }): JobState => ({
       ...state,
-      preview,
+      singlejob,
     })
   )
 );

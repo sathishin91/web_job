@@ -4,14 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
-  UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/Store/Common/App.state';
 
 import * as TokenActions from '../../Store/Token/Token.Actions';
 
@@ -25,7 +23,6 @@ import {
   selectExpLevel,
   selectMinEducation,
   showPreview,
-  selectJobsId,
 } from '../../Store/Job/Job.Selector';
 import { selectDepartment } from '../../Store/Job/Job.Selector';
 import { environment } from 'src/environments/environment';
@@ -44,11 +41,12 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   city$: Observable<object>;
   expLevel$: Observable<object>;
   preview$: Observable<object>;
-  getJobID$: Observable<object>;
+  //getJobID$: Observable<object>;
 
   private unsubscribe$ = new Subject<void>();
   userId = localStorage.getItem('userId');
   jobsId = localStorage.getItem('jobId');
+  user_company_name = localStorage.getItem('user_company_name');
   min_salary = 0;
   incentive = 0;
   max_salary = 0;
@@ -75,7 +73,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     this.englishLevel$ = this.store.select(selectEnglishLevel);
     this.expLevel$ = this.store.select(selectExpLevel);
     this.preview$ = this.store.select(showPreview);
-    this.getJobID$ = this.store.select(selectJobsId);
+    //this.getJobID$ = this.store.select(selectJobsId);
   }
 
   active: any;
@@ -105,7 +103,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.jobDetailss = this.fb.group({
-      company_name: ['', [Validators.required]],
+      company_name: [this.user_company_name, [Validators.required]],
       last: [''],
       department: ['', Validators.required],
       designation: ['', Validators.required],
@@ -162,7 +160,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       //job details
       api_key: environment.api_key,
       user_id: this.userId,
-      company_name: this.jobDetailss.get('company_name')?.value,
+      company_name: this.user_company_name,
       designation: this.jobDetailss.get('designation')?.value,
       department: this.jobDetailss.get('department')?.value,
       role: this.jobDetailss.get('role')?.value,
@@ -283,12 +281,12 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   }
   next4() {
     this.active = 'selectPlan';
-    this.preview$
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((previewData) => {
-        console.log('preview details', previewData);
-        this.previewDatas = previewData;
-      });
+    // this.preview$
+    //   .pipe(takeUntil(this.unsubscribe$))
+    //   .subscribe((previewData) => {
+    //     console.log('preview details', previewData);
+    //     this.previewDatas = previewData;
+    //   });
   }
 
   submit() {
@@ -409,6 +407,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log('job id', this.jobsId);
     this.initForm();
 
     this.store.dispatch(TokenActions.getToken());
@@ -506,21 +505,21 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       if (tabId == '4') {
         console.log('tab_id is 4');
         this.active = 'jobPreview';
-        const preview = {
-          api_key: environment.api_key,
-          id: Number(this.jobId),
-        };
-        this.store.dispatch(
-          JobActions.setJobDetailsId({
-            preview,
-          })
-        );
-        this.getJobID$
-          .pipe(takeUntil(this.unsubscribe$))
-          .subscribe((previewData) => {
-            console.log('preview details', previewData);
-            this.previewDatas = previewData;
-          });
+        // const singlejob = {
+        //   api_key: environment.api_key,
+        //   id: Number(this.jobId),
+        // };
+        // this.store.dispatch(
+        //   JobActions.setJobDetailsId({
+        //     singlejob,
+        //   })
+        // );
+        // this.getJobID$
+        //   .pipe(takeUntil(this.unsubscribe$))
+        //   .subscribe((previewData) => {
+        //     console.log('preview details', previewData);
+        //     this.previewDatas = previewData;
+        //   });
       }
     });
   }

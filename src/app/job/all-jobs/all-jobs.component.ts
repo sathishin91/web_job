@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../Store/Common/App.state';
 import { Observable } from 'rxjs';
 import { getJobLists } from '../../Store/Job/Job.Selector';
@@ -18,15 +18,18 @@ import * as JobActions from '../../Store/Job/Job.Action';
 export class AllJobsComponent implements OnInit {
   jobList$: Observable<any> = of([]);
   userId = localStorage.getItem('userId');
+  userVerified = localStorage.getItem('user_verified');
   id: any;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>) {
+    console.log('AllJobsComponent constructor');
+  }
   ngOnInit(): void {
     localStorage.removeItem('jobId');
     this.store.dispatch(TokenActions.getToken());
 
     // Select the job list from the store
-    this.jobList$ = this.store.pipe(select(getJobLists));
+    this.jobList$ = this.store.select(getJobLists);
     console.log('job list', this.jobList$);
     if (this.userId !== null) {
       this.id = this.userId;

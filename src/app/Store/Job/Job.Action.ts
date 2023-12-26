@@ -107,9 +107,9 @@ export const getPreviewDetails = createAction(
 
 export const setJobDetailsId = createAction(
   '[Job] Set Preview Details',
-  props<{ preview: any }>()
+  props<{ singlejob: any }>()
 );
 export const getJobDetailsId = createAction(
   '[Job] Get Preview Details',
-  props<{ preview: any }>()
+  props<{ singlejob: any }>()
 );

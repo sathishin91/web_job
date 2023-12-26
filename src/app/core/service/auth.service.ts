@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
@@ -53,17 +52,16 @@ export class AuthService {
       mobile: mobile_number,
       otp_code: otp,
     };
-    return this.http
-      .post<User>(`${environment.apiUrl}/SignIn/verify`, data)
-      .pipe(
-        map((user) => {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          console.log(JSON.stringify(user));
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-          return user;
-        })
-      );
+    return this.http.post<User>(`${environment.apiUrl}/SignIn/verify`, data);
+    // .pipe(
+    //   map((user) => {
+    //     // store user details and jwt token in local storage to keep user logged in between page refreshes
+    //     console.log(JSON.stringify(user));
+    //     localStorage.setItem('currentUser', JSON.stringify(user));
+    //     this.currentUserSubject.next(user);
+    //     return user;
+    //   })
+    // );
   }
 
   registerUser(data: any) {
@@ -72,6 +70,8 @@ export class AuthService {
 
   logout() {
     // remove user from local storage to log user out
+    localStorage.removeItem('user_company_name');
+    localStorage.removeItem('user_verified');
     localStorage.removeItem('userId');
     localStorage.removeItem('jobId');
     localStorage.removeItem('userMobile');

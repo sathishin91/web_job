@@ -48,19 +48,10 @@
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Company name"
                           formControlName="company_name"
-                          [(ngModel)]="company_name"
-                          required
+                          readonly=""
+                          value="{{ user_company_name }}"
                         />
-                        <small
-                          class="form-text text-danger"
-                          *ngIf="
-                            !jobDetailss.get('company_name')?.valid &&
-                            jobDetailss.get('company_name')?.touched
-                          "
-                          >Please enter a company name!</small
-                        >
                       </div>
                       <div class="form-group col-md-6">
                         <label
@@ -539,12 +530,12 @@
                                 <td></td>
                               </tr>
                               <tr></tr>
-                              <tr>
+                              <!-- <tr>
                                 <td><h6>Earning Potential / Month</h6></td>
                                 <td></td>
                                 <td><h6 id="salary_total">₹ 0 - ₹ 0</h6></td>
                                 <td></td>
-                              </tr>
+                              </tr> -->
                               <tr></tr>
                             </tbody>
                           </table>
@@ -1000,10 +991,19 @@
                               </ul>
 
                               <ul class="preview_list">
-                                <li><label>Department | Role</label></li>
+                                <li><label>Department </label></li>
                                 <li>
                                   <h6>
-                                    {{ data.department }} | {{ data.role }}
+                                    {{ data.department }}
+                                  </h6>
+                                </li>
+                              </ul>
+
+                              <ul class="preview_list">
+                                <li><label> Role</label></li>
+                                <li>
+                                  <h6>
+                                    {{ data.category }}
                                   </h6>
                                 </li>
                               </ul>
@@ -1034,7 +1034,10 @@
                                   <label>Monthly Salary | Pay Type</label>
                                 </li>
                                 <li>
-                                  <h6>Min. Salary: 200 - Max. Salary: 300</h6>
+                                  <h6>
+                                    Min. Salary: {{ data.min_salary }} - Max.
+                                    Salary: {{ data.max_salary }}
+                                  </h6>
                                 </li>
                               </ul>
 
@@ -1070,17 +1073,23 @@
                             <div class="col-sm-12">
                               <ul class="preview_list">
                                 <li><label>Minimum Education</label></li>
-                                <li><h6>10th or Below 10th</h6></li>
+                                <li>
+                                  <h6>{{ data.education }}</h6>
+                                </li>
                               </ul>
 
                               <ul class="preview_list">
                                 <li><label>Experience Required</label></li>
-                                <li><h6>6 months</h6></li>
+                                <li>
+                                  <h6>{{ data.experience }}</h6>
+                                </li>
                               </ul>
 
                               <ul class="preview_list">
                                 <li><label>English</label></li>
-                                <li><h6>No English</h6></li>
+                                <li>
+                                  <h6>{{ data.eng_lvl }}</h6>
+                                </li>
                               </ul>
                             </div>
                           </div>
@@ -1107,19 +1116,37 @@
                                 <li>
                                   <label>Communication Preferences</label>
                                 </li>
-                                <li><h6>vivekq - 852741852</h6></li>
+                                <li *ngIf="data.com_pref === '2'">
+                                  <h6>
+                                    {{ data.com_pref_fn }} -
+                                    {{ data.com_pref_mob }}
+                                  </h6>
+                                </li>
+                                <li *ngIf="data.com_pref === '1'">
+                                  <h6>{{ data.company_name }}</h6>
+                                </li>
                               </ul>
 
                               <ul class="preview_list">
                                 <li>
                                   <label>Notification Preferences</label>
                                 </li>
-                                <li><h6>Viveka - 8098778216</h6></li>
+                                <li *ngIf="data.noti_pref === '2'">
+                                  <h6>
+                                    {{ data.noti_pref_fn }} -
+                                    {{ data.noti_pref_mob }}
+                                  </h6>
+                                </li>
+                                <li *ngIf="data.noti_pref === '1'">
+                                  <h6>{{ data.company_name }}</h6>
+                                </li>
                               </ul>
 
                               <ul class="preview_list">
                                 <li><label>Type of Interview</label></li>
-                                <li><h6>In-person interview</h6></li>
+                                <li>
+                                  <h6>{{ data.interview_method }}</h6>
+                                </li>
                               </ul>
                             </div>
                           </div>

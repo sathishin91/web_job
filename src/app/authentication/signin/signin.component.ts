@@ -42,21 +42,6 @@ export class SigninComponent implements OnInit {
       mobile_number: ['', Validators.required],
       otp: ['', Validators.required],
     });
-
-    // this.store.dispatch(TokenActions.getToken());
-
-    // this.authService.getToken().subscribe({
-    //   next: (res: any) => {
-    //     // Specify the type of 'res' as ApiResponse
-    //     console.log('response on token', res);
-
-    //     this.tokens = res.token;
-    //     console.log('resposne token', this.tokens);
-    //   },
-    //   error: (err) => {
-    //     console.log('error', err);
-    //   },
-    // });
   }
   get f() {
     return this.loginForm.controls;
@@ -78,14 +63,13 @@ export class SigninComponent implements OnInit {
               console.log('response of login api', res.data.id);
               localStorage.setItem('userId', res.data.id);
               localStorage.setItem('userMobile', res.mobile);
+              localStorage.setItem('user_company_name', res.data.company_name);
+              localStorage.setItem('user_verified', res.data.is_verify);
               console.log('response of login api', res.data.is_registered);
 
               if (res.data.is_registered === '0') {
-                console.log('on if');
-
                 this.router.navigate(['/authentication/signup']);
               } else {
-                console.log('on else');
                 this.router.navigate(['/jobs']);
               }
             } else {
