@@ -167,6 +167,7 @@ export class JobEffects {
   });
 
   getPreviewList$ = createEffect(() => {
+    console.log('inside the preview');
     return this.actions$.pipe(
       ofType(JobActions.setPreviewDetails),
       mergeMap((action) => {
@@ -195,6 +196,53 @@ export class JobEffects {
           })
         );
       })
+    );
+  });
+
+  editJobDetaile$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(JobActions.setEditJobDetails),
+      mergeMap((action) => {
+        return this.authService.editJobDetails(action.data).pipe(
+          map((response: any) => {
+            // Return the action here
+            return JobActions.getEditJobDetails({
+              editJobDetails: response,
+            });
+          })
+        );
+      })
+    );
+  });
+
+  editCandidateDetaile$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(JobActions.setEditCandidateDetails),
+      mergeMap((action) => {
+        return this.authService.editJobDetails(action.data).pipe(
+          map((response: any) => {
+            // Return the action here
+            return JobActions.getEditCandidateDetails({
+              editCandidateDetails: response,
+            });
+          })
+        );
+      })
+    );
+  });
+
+  setEditInterviewDetails$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(JobActions.setEditInterviewDetails),
+      mergeMap((action) =>
+        this.authService.editInterviewDetails(action.data).pipe(
+          map((response: any) =>
+            JobActions.getEditInterviewDetails({
+              editInterviewDetails: response,
+            })
+          )
+        )
+      )
     );
   });
 }

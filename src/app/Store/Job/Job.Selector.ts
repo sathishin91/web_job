@@ -59,5 +59,5 @@ export const showPreview = createSelector(
 
 export const selectJobsId = createSelector(
   selectJobState,
-  (state: JobState) => state.preview
+  (state: JobState) => state.singlejob
 );

@@ -9,6 +9,7 @@ import { of } from 'rxjs';
 import * as TokenActions from '../../Store/Token/Token.Actions';
 
 import * as JobActions from '../../Store/Job/Job.Action';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-jobs',
@@ -21,7 +22,12 @@ export class AllJobsComponent implements OnInit {
   userVerified = localStorage.getItem('user_verified');
   id: any;
 
-  constructor(private store: Store<AppState>) {
+  constructor(
+    private store: Store<AppState>,
+    private route: ActivatedRoute,
+
+    private router: Router
+  ) {
     console.log('AllJobsComponent constructor');
   }
   ngOnInit(): void {
@@ -51,5 +57,11 @@ export class AllJobsComponent implements OnInit {
         list,
       })
     );
+  }
+
+  editjob(job: any) {
+    this.router.navigate(['/jobs/edit-job'], {
+      queryParams: { job_id: job.id, tab_id: Number(job.is_completed) + 1 },
+    });
   }
 }

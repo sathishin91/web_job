@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'jobs', component: AllJobsComponent },
   { path: 'new-job/:id', component: PostNewJobComponent },
   { path: 'jobs/edit-job/:id', component: EditJobComponent },
+  { path: 'edit-job', component: EditJobComponent },
   { path: 'job-detail/:id', component: JobDetailComponent },
 ];
 

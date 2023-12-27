@@ -4,14 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
-  UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/Store/Common/App.state';
 
 import * as TokenActions from '../../Store/Token/Token.Actions';
 
@@ -47,7 +45,7 @@ export class EditJobComponent implements OnInit, OnDestroy {
   getJobID$: Observable<object>;
 
   private unsubscribe$ = new Subject<void>();
-  userId = localStorage.getItem('currentUser');
+  userId = localStorage.getItem('userId');
   min_salary = 0;
   incentive = 0;
   max_salary = 0;
@@ -59,6 +57,7 @@ export class EditJobComponent implements OnInit, OnDestroy {
   previewDatas: any;
   company_name: any;
   designation: any;
+  singleJobs: any;
 
   constructor(
     private fb: FormBuilder,
@@ -262,31 +261,26 @@ export class EditJobComponent implements OnInit, OnDestroy {
         })
       );
       this.active = 'jobPreview';
-      const preview = {
-        api_key: environment.api_key,
-        job_id: this.jobId,
-      };
-      this.store.dispatch(
-        JobActions.setPreviewDetails({
-          preview,
-        })
-      );
-      this.preview$
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((previewData) => {
-          console.log('preview details', previewData);
-          this.previewDatas = previewData;
-        });
+      // const preview = {
+      //   api_key: environment.api_key,
+      //   job_id: this.jobId,
+      // };
+      // this.store.dispatch(
+      //   JobActions.setPreviewDetails({
+      //     preview,
+      //   })
+      // );
+      // this.preview$
+      //   .pipe(takeUntil(this.unsubscribe$))
+      //   .subscribe((previewData) => {
+      //     console.log('preview details', previewData);
+      //     this.previewDatas = previewData;
+      //   });
     }
   }
   next4() {
     this.active = 'selectPlan';
-    this.preview$
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((previewData) => {
-        console.log('preview details', previewData);
-        this.previewDatas = previewData;
-      });
+    //this.active = 'jobPreview';
   }
 
   submit() {
@@ -495,23 +489,8 @@ export class EditJobComponent implements OnInit, OnDestroy {
       const tabId = queryParams['tab_id'];
 
       console.log('ID from queryParams:', tabId, this.jobId);
-
-      if (tabId == '1') {
-        console.log('tab_id is 1');
-        this.active = 'jobDetail';
-      }
-      if (tabId == '2') {
-        console.log('tab_id is 1');
-        this.active = 'candidateRequirements';
-      }
-      if (tabId == '3') {
-        console.log('tab_id is 1');
-        this.active = 'candidateDetails';
-      }
-
-      if (tabId == '4') {
-        console.log('tab_id is 4');
-        this.active = 'jobPreview';
+      if (this.jobId) {
+        console.log('call the particulat job id');
         const singlejob = {
           api_key: environment.api_key,
           id: Number(this.jobId),
@@ -523,6 +502,41 @@ export class EditJobComponent implements OnInit, OnDestroy {
         );
         this.getJobID$
           .pipe(takeUntil(this.unsubscribe$))
+          .subscribe((singleJob) => {
+            console.log('singleJob details', singleJob);
+            this.singleJobs = singleJob;
+          });
+      }
+
+      if (tabId == 1) {
+        console.log('tab_id is 1');
+        this.active = 'jobDetail';
+      }
+      if (tabId == 2) {
+        console.log('tab_id is 1');
+        this.active = 'candidateRequirements';
+      }
+      if (tabId == 3) {
+        console.log('tab_id is 1');
+        this.active = 'candidateDetails';
+      }
+
+      if (tabId == 4) {
+        console.log('tab_id is 4');
+        this.active = 'jobPreview';
+        const preview = {
+          api_key: environment.api_key,
+          job_id: this.jobId,
+        };
+
+        console.log('preview details before api', preview);
+        this.store.dispatch(
+          JobActions.setPreviewDetails({
+            preview,
+          })
+        );
+        this.preview$
+          .pipe(takeUntil(this.unsubscribe$))
           .subscribe((previewData) => {
             console.log('preview details', previewData);
             this.previewDatas = previewData;
@@ -530,13 +544,8 @@ export class EditJobComponent implements OnInit, OnDestroy {
       }
     });
 
-    // Check if userMobile is not null before using it
+    // Check if userId is not null before using it
     if (this.userId !== null) {
-      // Parse the JSON string into an object
-      const userData = JSON.parse(this.userId);
-
-      // Now you can access properties of userData safely
-      this.userId = userData?.data?.id;
       console.log('user number', this.userId);
     } else {
       console.error('User data not found in localStorage');

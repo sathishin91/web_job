@@ -12,7 +12,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [],
   },
   {
-    path: 'manage-coins',
+    path: 'manage-wallet',
     title: 'Manage Wallet',
     iconType: 'feather',
     icon: 'alert-circle',

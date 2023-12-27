@@ -176,4 +176,22 @@ export class AuthService {
   getJobId(preview: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/JobDetails/getById`, preview);
   }
+
+  editJobDetails(editJobDetails: any): Observable<any> {
+    return this.http.put(
+      `${environment.apiUrl}/JobDetails/edit`,
+      editJobDetails
+    );
+  }
+
+  editCandidateDetails(editCandidateDetails: any): Observable<any> {
+    return this.http.put(
+      `${environment.apiUrl}/CandidateReq/edit`,
+      editCandidateDetails
+    );
+  }
+
+  editInterviewDetails(data: any): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/InterviewerInfo/edit`, data);
+  }
 }

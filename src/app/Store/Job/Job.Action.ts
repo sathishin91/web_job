@@ -113,3 +113,30 @@ export const getJobDetailsId = createAction(
   '[Job] Get Preview Details',
   props<{ singlejob: any }>()
 );
+
+export const setEditJobDetails = createAction(
+  '[Job] Set Edit Job Details',
+  props<{ data: any }>()
+);
+export const getEditJobDetails = createAction(
+  '[Job] Get Edit Job Details',
+  props<{ editJobDetails: any }>()
+);
+
+export const setEditCandidateDetails = createAction(
+  '[Job] Set Edit Candidate Details',
+  props<{ data: any }>()
+);
+export const getEditCandidateDetails = createAction(
+  '[Job] Get Edit Candidate Details',
+  props<{ editCandidateDetails: any }>()
+);
+
+export const setEditInterviewDetails = createAction(
+  '[Job] Set Edit Interview Details',
+  props<{ data: any }>()
+);
+export const getEditInterviewDetails = createAction(
+  '[Job] Get Edit Interview Details',
+  props<{ editInterviewDetails: any }>()
+);

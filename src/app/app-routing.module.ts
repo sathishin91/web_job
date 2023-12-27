@@ -25,7 +25,7 @@ const routes: Routes = [
         loadChildren: () => import('./job/job.module').then((m) => m.JobModule),
       },
       {
-        path: 'manage-coins',
+        path: 'manage-wallet',
         loadChildren: () =>
           import('./manage-coins/manage-coins.module').then(
             (m) => m.ManageCoinsModule
