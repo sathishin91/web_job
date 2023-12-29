@@ -96,14 +96,14 @@ export const getJobsList = createAction(
   props<{ list: any }>()
 );
 
-export const setPreviewDetails = createAction(
-  '[Job] Set Preview Details',
-  props<{ preview: any }>()
-);
-export const getPreviewDetails = createAction(
-  '[Job] Get Preview Details',
-  props<{ preview: any }>()
-);
+// export const setPreviewDetails = createAction(
+//   '[Job] Set Preview Details',
+//   props<{ preview: any }>()
+// );
+// export const getPreviewDetails = createAction(
+//   '[Job] Get Preview Details',
+//   props<{ preview: any }>()
+// );
 
 export const setJobDetailsId = createAction(
   '[Job] Set Preview Details',
@@ -139,4 +139,19 @@ export const setEditInterviewDetails = createAction(
 export const getEditInterviewDetails = createAction(
   '[Job] Get Edit Interview Details',
   props<{ editInterviewDetails: any }>()
+);
+
+export const setAddJobDetailsSuccess = createAction(
+  '[Job] Set Add Job Details Success',
+  props<{ response: any }>()
+);
+
+export const setAddJobDetailsFailure = createAction(
+  '[Job] Set Add Job Details Failure',
+  props<{ error: any }>()
+);
+
+export const postJobDetailsError = createAction(
+  '[Job] Post Job Details Error',
+  props<{ error: any }>()
 );

@@ -41,3 +41,13 @@
     color: rgb(23, 43, 77);
   }
 }
+
+.jobsSection img {
+  max-width: 100%;
+  height: auto;
+}
+
+.jobsSection:not(.scrollable) {
+  max-height: 80vh;
+  overflow-y: hidden;
+}

@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mergeMap, map, tap } from 'rxjs/operators';
 import { AuthService } from '../../core/service/auth.service';
 import * as JobActions from './Job.Action';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class JobEffects {
@@ -166,22 +167,22 @@ export class JobEffects {
     );
   });
 
-  getPreviewList$ = createEffect(() => {
-    console.log('inside the preview');
-    return this.actions$.pipe(
-      ofType(JobActions.setPreviewDetails),
-      mergeMap((action) => {
-        return this.authService.getJobpreview(action.preview).pipe(
-          map((response: any) => {
-            // Return the action here
-            return JobActions.getPreviewDetails({
-              preview: response,
-            });
-          })
-        );
-      })
-    );
-  });
+  // getPreviewList$ = createEffect(() => {
+  //   console.log('inside the preview');
+  //   return this.actions$.pipe(
+  //     ofType(JobActions.setPreviewDetails),
+  //     mergeMap((action) => {
+  //       return this.authService.getTheJobpreview(action.preview).pipe(
+  //         map((response: any) => {
+  //           // Return the action here
+  //           return JobActions.getPreviewDetails({
+  //             preview: response,
+  //           });
+  //         })
+  //       );
+  //     })
+  //   );
+  // });
 
   getJobId$ = createEffect(() => {
     return this.actions$.pipe(
@@ -219,7 +220,7 @@ export class JobEffects {
     return this.actions$.pipe(
       ofType(JobActions.setEditCandidateDetails),
       mergeMap((action) => {
-        return this.authService.editJobDetails(action.data).pipe(
+        return this.authService.editCandidateDetails(action.data).pipe(
           map((response: any) => {
             // Return the action here
             return JobActions.getEditCandidateDetails({

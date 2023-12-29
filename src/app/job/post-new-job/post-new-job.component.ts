@@ -7,12 +7,9 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-
 import * as TokenActions from '../../Store/Token/Token.Actions';
-
 import * as JobActions from '../../Store/Job/Job.Action';
 import { Observable, Subject } from 'rxjs';
 import {
@@ -27,6 +24,7 @@ import {
 import { selectDepartment } from '../../Store/Job/Job.Selector';
 import { environment } from 'src/environments/environment';
 import { takeUntil } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-post-new-job',
@@ -109,28 +107,25 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       designation: ['', Validators.required],
       work_location: [''],
       jobTitle: [''],
-      wo_address: [''],
+      wh_address: [''],
       job_type: ['', Validators.required],
       wh_city: [''],
       fj_area: [''],
       role: [''],
       City: [''],
-      wh_place: [''],
+      wo_place: [''],
       specificArea: [''],
       wo_city: [''],
       night_shift: [''],
       location_type: ['', Validators.required],
-      wo_address2: [''],
+      wh_address2: [''],
       paytype: ['', Validators.required],
       add_perks: [''],
       nightShift: [''],
-
       specificCity: [''],
-      wfh_change: [''],
       plot_number: [''],
       min_salary: [''],
       max_salary: [''],
-
       incentive: [''],
       over_time: [''],
       joining_fee: [''],
@@ -173,9 +168,9 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       //job location
       location_type: this.jobDetailss.get('location_type')?.value,
       wo_city: this.jobDetailss.get('wo_city')?.value,
-      wo_address: this.jobDetailss.get('wo_address')?.value,
-      wo_address2: this.jobDetailss.get('wo_address2')?.value,
-      wh_place: this.jobDetailss.get('wh_place')?.value,
+      wh_address: this.jobDetailss.get('wh_address')?.value,
+      wh_address2: this.jobDetailss.get('wh_address2')?.value,
+      wo_place: this.jobDetailss.get('wo_place')?.value,
       wh_city: this.jobDetailss.get('wh_city')?.value,
       fj_area: this.jobDetailss.get('fj_area')?.value,
 
@@ -185,19 +180,13 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
       max_salary: this.jobDetailss.get('max_salary')?.value,
       incentive: this.jobDetailss.get('incentive')?.value,
     };
-
+    console.log('data passing before the api', data);
     if (this.jobDetailss.invalid) {
       this.error = 'Please fill all the required fields';
       return;
     } else {
-      this.store.dispatch(
-        JobActions.setAddJobDetails({
-          data,
-        })
-      );
-
-      console.log('data passed to api', data);
       this.active = 'candidateRequirements';
+      this.store.dispatch(JobActions.setAddJobDetails({ data }));
     }
   }
 
@@ -262,21 +251,21 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
         })
       );
       this.active = 'jobPreview';
-      const preview = {
-        api_key: environment.api_key,
-        job_id: this.jobsId,
-      };
-      this.store.dispatch(
-        JobActions.setPreviewDetails({
-          preview,
-        })
-      );
-      this.preview$
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((previewData) => {
-          console.log('preview details', previewData);
-          this.previewDatas = previewData;
-        });
+      // const preview = {
+      //   api_key: environment.api_key,
+      //   job_id: this.jobsId,
+      // };
+      // this.store.dispatch(
+      //   JobActions.setPreviewDetails({
+      //     preview,
+      //   })
+      // );
+      // this.preview$
+      //   .pipe(takeUntil(this.unsubscribe$))
+      //   .subscribe((previewData) => {
+      //     console.log('preview details', previewData);
+      //     this.previewDatas = previewData;
+      //   });
     }
   }
   next4() {
@@ -382,7 +371,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   }
 
   WFHChange() {
-    const workFromHomeControl = this.jobDetailss.get('wfh_change');
+    const workFromHomeControl = this.jobDetailss.get('wo_place');
 
     if (workFromHomeControl) {
       const selectedValue = workFromHomeControl.value;

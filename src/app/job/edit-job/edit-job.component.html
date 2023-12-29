@@ -51,16 +51,9 @@
                           placeholder="Company name"
                           formControlName="company_name"
                           [(ngModel)]="company_name"
-                          required
+                          readonly=""
+                          value="{{ user_company_name }}"
                         />
-                        <small
-                          class="form-text text-danger"
-                          *ngIf="
-                            !jobDetailss.get('company_name')?.valid &&
-                            jobDetailss.get('company_name')?.touched
-                          "
-                          >Please enter a company name!</small
-                        >
                       </div>
                       <div class="form-group col-md-6">
                         <label
@@ -149,40 +142,37 @@
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="job_type"
                               formControlName="job_type"
                               id="rb1"
                               value="1"
                             />
-                            <label class="form-check-label" for="rb1">
-                              Full Time
-                            </label>
+                            <label class="form-check-label" for="rb1"
+                              >Full Time</label
+                            >
                           </div>
                           <div class="form-check">
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="job_type"
                               formControlName="job_type"
                               id="rb2"
                               value="2"
                             />
-                            <label class="form-check-label" for="rb2">
-                              Part Time
-                            </label>
+                            <label class="form-check-label" for="rb2"
+                              >Part Time</label
+                            >
                           </div>
                           <div class="form-check">
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="job_type"
                               formControlName="job_type"
                               id="rb3"
                               value="3"
                             />
-                            <label class="form-check-label" for="rb3">
-                              Both (Full Time & Part Time)
-                            </label>
+                            <label class="form-check-label" for="rb3"
+                              >Both (Full Time & Part Time)</label
+                            >
                           </div>
                         </div>
                         <small
@@ -191,9 +181,11 @@
                             !jobDetailss.get('job_type')?.valid &&
                             jobDetailss.get('job_type')?.touched
                           "
-                          >Please select a job_type !</small
                         >
+                          Please select a job_type !
+                        </small>
                       </div>
+
                       <div class="form-group">
                         <div class="form-check">
                           <input
@@ -259,6 +251,7 @@
                               name="location_type"
                               id="rb6"
                               value="3"
+                              [(ngModel)]="location_type"
                               (change)="onRadioChange()"
                             />
                             <label class="form-check-label" for="rb6">
@@ -277,6 +270,7 @@
                           <select
                             class="form-select form-control"
                             formControlName="wo_city"
+                            [(ngModel)]="wo_city"
                           >
                             <option
                               *ngFor="let list of cityList"
@@ -294,7 +288,7 @@
                           <input
                             type="text"
                             class="form-control"
-                            formControlName="wo_address"
+                            formControlName="wh_address"
                             required
                           />
                         </div>
@@ -306,7 +300,7 @@
                           <input
                             type="text"
                             class="form-control"
-                            formControlName="wo_address2"
+                            formControlName="wh_address2"
                             required
                           />
                         </div>
@@ -322,8 +316,8 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="wfh_change"
-                                formControlName="wfh_change"
+                                name="wo_place"
+                                formControlName="wo_place"
                                 value="1"
                                 (change)="WFHChange()"
                                 id="rb10"
@@ -336,8 +330,8 @@
                               <input
                                 class="form-check-input"
                                 type="radio"
-                                name="wfh_change"
-                                formControlName="wfh_change"
+                                name="wo_place"
+                                formControlName="wo_place"
                                 value="2"
                                 (change)="WFHChange()"
                                 id="rb11"
@@ -359,6 +353,7 @@
                           <select
                             class="form-select form-control"
                             formControlName="wh_city"
+                            [(ngModel)]="wh_city"
                           >
                             <option
                               *ngFor="let list of cityList"
@@ -386,6 +381,7 @@
                           <select
                             class="form-select form-control"
                             formControlName="fj_area"
+                            [(ngModel)]="fj_area"
                           >
                             <option
                               *ngFor="let list of cityList"
@@ -539,12 +535,12 @@
                                 <td></td>
                               </tr>
                               <tr></tr>
-                              <tr>
+                              <!-- <tr>
                                 <td><h6>Earning Potential / Month</h6></td>
                                 <td></td>
                                 <td><h6 id="salary_total">₹ 0 - ₹ 0</h6></td>
                                 <td></td>
-                              </tr>
+                              </tr> -->
                               <tr></tr>
                             </tbody>
                           </table>
@@ -596,8 +592,11 @@
                     <div *ngIf="error" class="alert alert-danger mb-3 msl-3">
                       {{ error }}
                     </div>
-                    <button (click)="next()" class="btn btn-primary f-right">
-                      Next
+                    <button
+                      (click)="next()"
+                      class="btn btn-primary f-right w-20"
+                    >
+                      Continue
                     </button>
                   </div>
                 </form>
@@ -704,9 +703,9 @@
                     </div>
                     <button
                       (click)="next2()"
-                      class="btn btn-primary mt-3 f-right"
+                      class="btn btn-primary mt-3 f-right w-20"
                     >
-                      Next
+                      Continue
                     </button>
                   </div>
                 </form>
@@ -945,8 +944,11 @@
                     >
                       {{ errorInterview }}
                     </div>
-                    <button (click)="next3()" class="btn btn-primary f-right">
-                      Next
+                    <button
+                      (click)="next3()"
+                      class="btn btn-primary f-right w-20"
+                    >
+                      Continue
                     </button>
                   </div>
                 </form>
@@ -1121,8 +1123,11 @@
                     </div>
                   </div>
 
-                  <button (click)="next4()" class="btn btn-primary f-right">
-                    Next
+                  <button
+                    (click)="next4()"
+                    class="btn btn-primary f-right w-20"
+                  >
+                    Continue
                   </button>
                 </div>
               </ng-template>

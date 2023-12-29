@@ -14,12 +14,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: '/landing', pathMatch: 'full' },
-
-      {
-        path: 'dashboard',
-        loadChildren: () =>
-          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
-      },
       {
         path: 'jobs',
         loadChildren: () => import('./job/job.module').then((m) => m.JobModule),
@@ -36,27 +30,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./reports/reports.module').then((m) => m.ReportsModule),
       },
-      {
-        path: 'advance-table',
-        loadChildren: () =>
-          import('./advance-table/advance-table.module').then(
-            (m) => m.AdvanceTableModule
-          ),
-      },
-      {
-        path: 'extra-pages',
-        loadChildren: () =>
-          import('./extra-pages/extra-pages.module').then(
-            (m) => m.ExtraPagesModule
-          ),
-      },
-      {
-        path: 'multilevel',
-        loadChildren: () =>
-          import('./multilevel/multilevel.module').then(
-            (m) => m.MultilevelModule
-          ),
-      },
+
       {
         path: 'profile',
         component: ProfileComponent,

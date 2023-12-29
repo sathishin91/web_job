@@ -22,8 +22,8 @@ export class SignupComponent implements OnInit {
   registerForm!: UntypedFormGroup;
   submitted = false;
   error = '';
-  mobileNumber!: number;
-  userMobile = localStorage.getItem('currentUser');
+  mobileNumber: any;
+  userMobile = localStorage.getItem('userMobile');
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -36,8 +36,7 @@ export class SignupComponent implements OnInit {
     this.store.dispatch(TokenActions.getToken());
     // Check if userMobile is not null before using it
     if (this.userMobile !== null) {
-      const userData = JSON.parse(this.userMobile);
-      this.mobileNumber = userData.mobile;
+      this.mobileNumber = this.userMobile;
       console.log('mobile number', this.mobileNumber);
     } else {
       console.error('User data not found in localStorage');

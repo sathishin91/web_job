@@ -722,3 +722,23 @@ $border-opacity: 1;
   --tw-bg-opacity: 1;
   background-color: rgb(193 199 208 / var(--tw-bg-opacity));
 }
+
+.salaryPreviewBox {
+  margin: 2.5em 1em;
+  background: #d9e9f4;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #b3bcc1;
+}
+
+.salaryPreviewBox h6 {
+  color: #495057;
+  font-size: 14px;
+}
+.salaryPreviewBox h5,
+.salaryPreviewBox h6 {
+  font-weight: unset;
+}
+.w-20 {
+  width: 20%;
+}

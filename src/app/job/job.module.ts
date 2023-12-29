@@ -10,9 +10,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { EditJobComponent } from './edit-job/edit-job.component';
-
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
-  declarations: [AllJobsComponent, PostNewJobComponent, JobDetailComponent, EditJobComponent],
+  declarations: [
+    AllJobsComponent,
+    PostNewJobComponent,
+    JobDetailComponent,
+    EditJobComponent,
+  ],
   imports: [
     CommonModule,
     JobRoutingModule,
@@ -22,6 +27,7 @@ import { EditJobComponent } from './edit-job/edit-job.component';
     FormsModule,
     NgScrollbarModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot(),
   ],
 })
 export class JobModule {}

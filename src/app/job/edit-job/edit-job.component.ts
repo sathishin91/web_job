@@ -7,12 +7,9 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-
 import * as TokenActions from '../../Store/Token/Token.Actions';
-
 import * as JobActions from '../../Store/Job/Job.Action';
 import { Observable, Subject } from 'rxjs';
 import {
@@ -41,14 +38,15 @@ export class EditJobComponent implements OnInit, OnDestroy {
   education$: Observable<object>;
   city$: Observable<object>;
   expLevel$: Observable<object>;
-  preview$: Observable<object>;
+  // preview$: Observable<object>;
   getJobID$: Observable<object>;
 
   private unsubscribe$ = new Subject<void>();
   userId = localStorage.getItem('userId');
-  min_salary = 0;
-  incentive = 0;
-  max_salary = 0;
+  user_company_name = localStorage.getItem('user_company_name');
+  min_salary!: number;
+  incentive!: number;
+  max_salary!: number;
   cityList: any;
   educationList: any;
   englishLevel$: any;
@@ -58,6 +56,8 @@ export class EditJobComponent implements OnInit, OnDestroy {
   company_name: any;
   designation: any;
   singleJobs: any;
+  wh_city: any;
+  fj_area: any;
 
   constructor(
     private fb: FormBuilder,
@@ -72,7 +72,7 @@ export class EditJobComponent implements OnInit, OnDestroy {
     this.education$ = this.store.select(selectMinEducation);
     this.englishLevel$ = this.store.select(selectEnglishLevel);
     this.expLevel$ = this.store.select(selectExpLevel);
-    this.preview$ = this.store.select(showPreview);
+    // this.preview$ = this.store.select(showPreview);
     this.getJobID$ = this.store.select(selectJobsId);
   }
 
@@ -100,37 +100,34 @@ export class EditJobComponent implements OnInit, OnDestroy {
   desinationList: any;
   departmentList: any;
   categoryList: any;
+  wo_city: any;
+  location_type: any;
 
   initForm() {
     this.jobDetailss = this.fb.group({
-      company_name: ['', [Validators.required]],
-      last: [''],
+      company_name: [this.user_company_name, [Validators.required]],
       department: ['', Validators.required],
       designation: ['', Validators.required],
       work_location: [''],
       jobTitle: [''],
-      wo_address: [''],
+      wh_address: [''],
       job_type: ['', Validators.required],
       wh_city: [''],
       fj_area: [''],
       role: [''],
       City: [''],
-      wh_place: [''],
+      wo_place: [''],
       specificArea: [''],
       wo_city: [''],
       night_shift: [''],
       location_type: ['', Validators.required],
-      wo_address2: [''],
+      wh_address2: [''],
       paytype: ['', Validators.required],
       add_perks: [''],
       nightShift: [''],
-
       specificCity: [''],
-      wfh_change: [''],
-      plot_number: [''],
       min_salary: [''],
       max_salary: [''],
-
       incentive: [''],
       over_time: [''],
       joining_fee: [''],
@@ -159,8 +156,9 @@ export class EditJobComponent implements OnInit, OnDestroy {
     const data = {
       //job details
       api_key: environment.api_key,
-      user_id: 67,
-      company_name: this.jobDetailss.get('company_name')?.value,
+      job_id: this.jobId,
+      user_id: this.userId,
+      company_name: this.user_company_name,
       designation: this.jobDetailss.get('designation')?.value,
       department: this.jobDetailss.get('department')?.value,
       role: this.jobDetailss.get('role')?.value,
@@ -173,9 +171,9 @@ export class EditJobComponent implements OnInit, OnDestroy {
       //job location
       location_type: this.jobDetailss.get('location_type')?.value,
       wo_city: this.jobDetailss.get('wo_city')?.value,
-      wo_address: this.jobDetailss.get('wo_address')?.value,
-      wo_address2: this.jobDetailss.get('wo_address2')?.value,
-      wh_place: this.jobDetailss.get('wh_place')?.value,
+      wh_address: this.jobDetailss.get('wh_address')?.value,
+      wh_address2: this.jobDetailss.get('wh_address2')?.value,
+      wo_place: this.jobDetailss.get('wo_place')?.value,
       wh_city: this.jobDetailss.get('wh_city')?.value,
       fj_area: this.jobDetailss.get('fj_area')?.value,
 
@@ -186,12 +184,14 @@ export class EditJobComponent implements OnInit, OnDestroy {
       incentive: this.jobDetailss.get('incentive')?.value,
     };
 
+    console.log('datas passing in job edit api', data);
+
     if (this.jobDetailss.invalid) {
       this.error = 'Please fill all the required fields';
       return;
     } else {
       this.store.dispatch(
-        JobActions.setAddJobDetails({
+        JobActions.setEditJobDetails({
           data,
         })
       );
@@ -215,8 +215,8 @@ export class EditJobComponent implements OnInit, OnDestroy {
     console.log('candidateDetails value', this.candidateDetails.value);
     const data = {
       api_key: environment.api_key,
-      user_id: 67,
-      job_id: 55,
+      user_id: this.userId,
+      job_id: this.jobId,
       education: this.candidateDetails.get('education')?.value,
       experience: this.candidateDetails.get('experience')?.value,
       eng_lvl: this.candidateDetails.get('eng_lvl')?.value,
@@ -229,7 +229,7 @@ export class EditJobComponent implements OnInit, OnDestroy {
       return;
     } else {
       this.store.dispatch(
-        JobActions.setAddCandidateDetails({
+        JobActions.setEditCandidateDetails({
           data,
         })
       );
@@ -239,16 +239,16 @@ export class EditJobComponent implements OnInit, OnDestroy {
   next3() {
     const data = {
       api_key: environment.api_key,
-      //user_id: this.userId,
-      user_id: 67,
-      job_id: 43,
-      com_pref: this.interviewDetails.get('com_pref')?.value,
-      com_pref_fn: this.interviewDetails.get('com_pref_fn')?.value,
-      com_pref_mob: this.interviewDetails.get('com_pref_mob')?.value,
-      noti_pref: this.interviewDetails.get('noti_pref')?.value,
-      noti_pref_fn: this.interviewDetails.get('noti_pref_fn')?.value,
-      noti_pref_mob: this.interviewDetails.get('noti_pref_mob')?.value,
-      interview_method: this.interviewDetails.get('interview_method')?.value,
+      user_id: this.userId,
+      job_id: this.jobId,
+      com_pref: this.interviewDetails.get('com_pref')?.value || null,
+      com_pref_fn: this.interviewDetails.get('com_pref_fn')?.value || null,
+      com_pref_mob: this.interviewDetails.get('com_pref_mob')?.value || null,
+      noti_pref: this.interviewDetails.get('noti_pref')?.value || null,
+      noti_pref_fn: this.interviewDetails.get('noti_pref_fn')?.value || null,
+      noti_pref_mob: this.interviewDetails.get('noti_pref_mob')?.value || null,
+      interview_method:
+        this.interviewDetails.get('interview_method')?.value || null,
     };
     console.log('data passing to interview info form', data);
     if (this.interviewDetails.invalid) {
@@ -256,31 +256,17 @@ export class EditJobComponent implements OnInit, OnDestroy {
       return;
     } else {
       this.store.dispatch(
-        JobActions.setAddInterviewDetails({
+        JobActions.setEditInterviewDetails({
           data,
         })
       );
+
       this.active = 'jobPreview';
-      // const preview = {
-      //   api_key: environment.api_key,
-      //   job_id: this.jobId,
-      // };
-      // this.store.dispatch(
-      //   JobActions.setPreviewDetails({
-      //     preview,
-      //   })
-      // );
-      // this.preview$
-      //   .pipe(takeUntil(this.unsubscribe$))
-      //   .subscribe((previewData) => {
-      //     console.log('preview details', previewData);
-      //     this.previewDatas = previewData;
-      //   });
     }
   }
+
   next4() {
     this.active = 'selectPlan';
-    //this.active = 'jobPreview';
   }
 
   submit() {
@@ -288,9 +274,6 @@ export class EditJobComponent implements OnInit, OnDestroy {
     this.router.navigate(['/jobs']);
   }
 
-  onSubmit() {
-    console.log('Form Value', this.jobDetailss.value);
-  }
   onSalaryChange() {
     this.salaryPreview = true;
     const salaryTypeControl = this.jobDetailss.get('paytype');
@@ -376,7 +359,7 @@ export class EditJobComponent implements OnInit, OnDestroy {
   }
 
   WFHChange() {
-    const workFromHomeControl = this.jobDetailss.get('wfh_change');
+    const workFromHomeControl = this.jobDetailss.get('wo_place');
 
     if (workFromHomeControl) {
       const selectedValue = workFromHomeControl.value;
@@ -503,9 +486,110 @@ export class EditJobComponent implements OnInit, OnDestroy {
         this.getJobID$
           .pipe(takeUntil(this.unsubscribe$))
           .subscribe((singleJob) => {
-            console.log('singleJob details', singleJob);
+            console.log('single Job details', singleJob);
             this.singleJobs = singleJob;
+
+            if (this.singleJobs) {
+              this.jobDetailss.patchValue({
+                company_name: this.user_company_name,
+                designation: this.singleJobs.designation,
+                department: this.singleJobs.department,
+                role: this.singleJobs.role,
+                job_type: this.singleJobs.job_type?.toString(),
+                paytype: this.singleJobs.paytype?.toString(),
+                night_shift: this.singleJobs.night_shift,
+                add_perks: this.singleJobs.add_perks,
+                joining_fee: this.singleJobs.joining_fee,
+                comments: this.singleJobs.comments,
+                location_type: this.singleJobs.location_type?.toString(),
+                wo_city: this.singleJobs.wo_city,
+                wh_address: this.singleJobs.wh_address,
+                wo_place: this.singleJobs.wo_place?.toString(),
+                wh_city: this.singleJobs.wh_city,
+                fj_area: this.singleJobs.fj_area,
+                min_salary: this.singleJobs.min_salary,
+                max_salary: this.singleJobs.max_salary,
+                incentive: this.singleJobs.incentive,
+              });
+              this.candidateDetails.patchValue({
+                education: this.singleJobs.education,
+                experience: this.singleJobs.experience,
+                eng_lvl: this.singleJobs.eng_lvl,
+                description: this.singleJobs.description,
+              });
+              this.interviewDetails.patchValue({
+                com_pref: this.singleJobs.com_pref?.toString(),
+                com_pref_fn: this.singleJobs.com_pref_fn,
+                com_pref_mob: this.singleJobs.com_pref_mob,
+                noti_pref: this.singleJobs.noti_pref?.toString(),
+                noti_pref_fn: this.singleJobs.noti_pref_fn,
+                noti_pref_mob: this.singleJobs.noti_pref_mob,
+                interview_method: this.singleJobs.interview_method?.toString(),
+              });
+
+              if (this.singleJobs.location_type == 1) {
+                console.log('location_type 1 ');
+                this.displayHomeLocation = true;
+                this.displayOfficeLocation = false;
+                this.displayFieldJob = false;
+              }
+
+              if (this.singleJobs.location_type === 3) {
+                console.log('location_type 3 ');
+                this.specificCity = false;
+                this.displayFieldJob = true;
+                this.displayOfficeLocation = false;
+                this.displayHomeLocation = false;
+              }
+
+              if (this.singleJobs.location_type == 2) {
+                console.log('location_type 2 ');
+                this.specificCity = false;
+                this.displayOfficeLocation = true;
+                this.displayFieldJob = false;
+                this.displayHomeLocation = false;
+              }
+
+              if (this.singleJobs.wo_place == 1) {
+                console.log('wo_place ', this.singleJobs.wo_place);
+                this.specificCity = true;
+                this.anywhere = false;
+              } else {
+                this.specificCity = false;
+                this.anywhere = true;
+              }
+
+              if (this.singleJobs.paytype == 3) {
+                this.salaryPreview = true;
+                this.min_salary = this.singleJobs.min_salary;
+                this.max_salary = this.singleJobs.max_salary;
+                this.displayIncentive = true;
+                this.displayFixedIncentive = false;
+                this.displayFixed = false;
+              }
+              if (this.singleJobs.paytype == 1) {
+                console.log(
+                  'salary',
+                  this.singleJobs.min_salary,
+                  this.singleJobs.max_salary,
+                  this.singleJobs.incentive
+                );
+                this.salaryPreview = true;
+                this.incentive = this.singleJobs.incentive;
+                this.displayIncentive = false;
+                this.displayFixedIncentive = false;
+                this.displayFixed = true;
+              }
+              if (this.singleJobs.paytype == 2) {
+                this.salaryPreview = true;
+                this.displayIncentive = false;
+                this.displayFixedIncentive = true;
+                this.displayFixed = false;
+              }
+            }
           });
+
+        console.log('single job', this.singleJobs);
       }
 
       if (tabId == 1) {
@@ -518,29 +602,12 @@ export class EditJobComponent implements OnInit, OnDestroy {
       }
       if (tabId == 3) {
         console.log('tab_id is 1');
-        this.active = 'candidateDetails';
+        this.active = 'interviewerInformation';
       }
 
       if (tabId == 4) {
         console.log('tab_id is 4');
         this.active = 'jobPreview';
-        const preview = {
-          api_key: environment.api_key,
-          job_id: this.jobId,
-        };
-
-        console.log('preview details before api', preview);
-        this.store.dispatch(
-          JobActions.setPreviewDetails({
-            preview,
-          })
-        );
-        this.preview$
-          .pipe(takeUntil(this.unsubscribe$))
-          .subscribe((previewData) => {
-            console.log('preview details', previewData);
-            this.previewDatas = previewData;
-          });
       }
     });
 
