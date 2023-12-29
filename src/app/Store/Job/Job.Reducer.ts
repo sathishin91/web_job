@@ -202,21 +202,21 @@ export const jobReducer = createReducer(
     })
   ),
 
-  // on(
-  //   JobActions.setPreviewDetails,
-  //   (state, { preview }): JobState => ({
-  //     ...state,
-  //     preview,
-  //   })
-  // ),
+  on(
+    JobActions.setPreviewDetails,
+    (state, { preview }): JobState => ({
+      ...state,
+      preview,
+    })
+  ),
 
-  // on(
-  //   JobActions.getPreviewDetails,
-  //   (state, { preview }): JobState => ({
-  //     ...state,
-  //     preview,
-  //   })
-  // ),
+  on(
+    JobActions.getPreviewDetails,
+    (state, { preview }): JobState => ({
+      ...state,
+      preview,
+    })
+  ),
   on(
     JobActions.setJobDetailsId,
     (state, { singlejob }): JobState => ({

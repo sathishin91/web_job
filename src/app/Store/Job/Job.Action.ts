@@ -96,21 +96,21 @@ export const getJobsList = createAction(
   props<{ list: any }>()
 );
 
-// export const setPreviewDetails = createAction(
-//   '[Job] Set Preview Details',
-//   props<{ preview: any }>()
-// );
-// export const getPreviewDetails = createAction(
-//   '[Job] Get Preview Details',
-//   props<{ preview: any }>()
-// );
+export const setPreviewDetails = createAction(
+  '[Job] Set Preview Details',
+  props<{ preview: any }>()
+);
+export const getPreviewDetails = createAction(
+  '[Job] Get Preview Details',
+  props<{ preview: any }>()
+);
 
 export const setJobDetailsId = createAction(
-  '[Job] Set Preview Details',
+  '[Job] Set Job Id Details',
   props<{ singlejob: any }>()
 );
 export const getJobDetailsId = createAction(
-  '[Job] Get Preview Details',
+  '[Job] Get Job Id Details',
   props<{ singlejob: any }>()
 );
 

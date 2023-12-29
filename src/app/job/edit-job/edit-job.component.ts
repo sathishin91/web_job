@@ -38,7 +38,7 @@ export class EditJobComponent implements OnInit, OnDestroy {
   education$: Observable<object>;
   city$: Observable<object>;
   expLevel$: Observable<object>;
-  // preview$: Observable<object>;
+  preview$: Observable<object>;
   getJobID$: Observable<object>;
 
   private unsubscribe$ = new Subject<void>();
@@ -72,7 +72,7 @@ export class EditJobComponent implements OnInit, OnDestroy {
     this.education$ = this.store.select(selectMinEducation);
     this.englishLevel$ = this.store.select(selectEnglishLevel);
     this.expLevel$ = this.store.select(selectExpLevel);
-    // this.preview$ = this.store.select(showPreview);
+    this.preview$ = this.store.select(showPreview);
     this.getJobID$ = this.store.select(selectJobsId);
   }
 
@@ -465,6 +465,10 @@ export class EditJobComponent implements OnInit, OnDestroy {
         this.expList = experience;
         console.log('experience list', this.expList);
       });
+    this.preview$.pipe(takeUntil(this.unsubscribe$)).subscribe((data) => {
+      console.log('preview details', data);
+      this.previewDatas = data;
+    });
 
     // Access the query parameters
     this.route.queryParams.subscribe((queryParams) => {
@@ -608,6 +612,15 @@ export class EditJobComponent implements OnInit, OnDestroy {
       if (tabId == 4) {
         console.log('tab_id is 4');
         this.active = 'jobPreview';
+        const preview = {
+          api_key: environment.api_key,
+          job_id: this.jobId,
+        };
+        this.store.dispatch(
+          JobActions.setPreviewDetails({
+            preview,
+          })
+        );
       }
     });
 
@@ -617,5 +630,23 @@ export class EditJobComponent implements OnInit, OnDestroy {
     } else {
       console.error('User data not found in localStorage');
     }
+  }
+
+  editJobDetails(dataId: string) {
+    this.router.navigate(['jobs/edit-job'], {
+      queryParams: { job_id: dataId, tab_id: '1' },
+    });
+  }
+
+  editCandidateDetails(dataId: string) {
+    this.router.navigate(['jobs/edit-job'], {
+      queryParams: { job_id: dataId, tab_id: '2' },
+    });
+  }
+
+  editInterviewDetails(dataId: string) {
+    this.router.navigate(['jobs/edit-job'], {
+      queryParams: { job_id: dataId, tab_id: '3' },
+    });
   }
 }

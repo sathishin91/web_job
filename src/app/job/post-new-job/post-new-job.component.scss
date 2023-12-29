@@ -32,25 +32,6 @@ ul.nav-pills.nav.flex-column {
     font-size: 14px;
   }
 }
-.preview_list {
-  margin: 0px;
-  padding: 0px;
-  float: left;
-  width: 100%;
-  display: block;
-  margin-bottom: 15px;
-  list-style-type: none;
-}
-.preview_list li:first-child {
-  width: 170px;
-}
-.preview_list li {
-  float: left;
-}
-.preview_list li label {
-  color: #756c6c;
-  font-weight: normal;
-}
 
 @media only screen and (max-width: 778px) {
   div#test-l-5 .card-body {

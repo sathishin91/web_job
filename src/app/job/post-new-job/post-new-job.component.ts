@@ -39,7 +39,6 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   city$: Observable<object>;
   expLevel$: Observable<object>;
   preview$: Observable<object>;
-  //getJobID$: Observable<object>;
 
   private unsubscribe$ = new Subject<void>();
   userId = localStorage.getItem('userId');
@@ -71,7 +70,6 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     this.englishLevel$ = this.store.select(selectEnglishLevel);
     this.expLevel$ = this.store.select(selectExpLevel);
     this.preview$ = this.store.select(showPreview);
-    //this.getJobID$ = this.store.select(selectJobsId);
   }
 
   active: any;
@@ -202,7 +200,11 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     );
   }
   next2() {
-    console.log('candidateDetails value', this.candidateDetails.value);
+    console.log(
+      'candidateDetails value',
+      this.candidateDetails.value,
+      this.jobsId
+    );
     const data = {
       api_key: environment.api_key,
       user_id: this.userId,
@@ -251,31 +253,19 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
         })
       );
       this.active = 'jobPreview';
-      // const preview = {
-      //   api_key: environment.api_key,
-      //   job_id: this.jobsId,
-      // };
-      // this.store.dispatch(
-      //   JobActions.setPreviewDetails({
-      //     preview,
-      //   })
-      // );
-      // this.preview$
-      //   .pipe(takeUntil(this.unsubscribe$))
-      //   .subscribe((previewData) => {
-      //     console.log('preview details', previewData);
-      //     this.previewDatas = previewData;
-      //   });
+      const preview = {
+        api_key: environment.api_key,
+        job_id: this.jobsId,
+      };
+      this.store.dispatch(
+        JobActions.setPreviewDetails({
+          preview,
+        })
+      );
     }
   }
   next4() {
     this.active = 'selectPlan';
-    // this.preview$
-    //   .pipe(takeUntil(this.unsubscribe$))
-    //   .subscribe((previewData) => {
-    //     console.log('preview details', previewData);
-    //     this.previewDatas = previewData;
-    //   });
   }
 
   submit() {
@@ -479,37 +469,9 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
         console.log('experience list', this.expList);
       });
 
-    // Access the query parameters
-    this.route.queryParams.subscribe((queryParams) => {
-      this.jobId = queryParams['job_id'];
-      const tabId = queryParams['tab_id'];
-
-      console.log('ID from queryParams:', tabId, this.jobId);
-
-      if (tabId == '1') {
-        console.log('tab_id is 1');
-        this.active = 'jobDetail';
-      }
-
-      if (tabId == '4') {
-        console.log('tab_id is 4');
-        this.active = 'jobPreview';
-        // const singlejob = {
-        //   api_key: environment.api_key,
-        //   id: Number(this.jobId),
-        // };
-        // this.store.dispatch(
-        //   JobActions.setJobDetailsId({
-        //     singlejob,
-        //   })
-        // );
-        // this.getJobID$
-        //   .pipe(takeUntil(this.unsubscribe$))
-        //   .subscribe((previewData) => {
-        //     console.log('preview details', previewData);
-        //     this.previewDatas = previewData;
-        //   });
-      }
+    this.preview$.pipe(takeUntil(this.unsubscribe$)).subscribe((data) => {
+      console.log('preview details', data);
+      this.previewDatas = data;
     });
   }
 }

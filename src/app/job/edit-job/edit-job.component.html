@@ -961,18 +961,18 @@
               </a>
               <ng-template ngbNavContent>
                 <div id="test-l-4" class="content previewBox">
-                  <div class="row mt-3" *ngFor="let data of previewDatas.data">
+                  <div class="row mt-3" *ngFor="let data of previewDatas?.data">
                     <div class="col-md-6">
                       <div class="card">
                         <div class="card-header">
                           <h4 class="d-inline">Job Details</h4>
                           <div class="card-header-action">
-                            <a
-                              href="#"
-                              onclick="return false;"
+                            <button
+                              (click)="editJobDetails(data.id)"
                               class="btn btn-primary"
-                              >Edit</a
                             >
+                              Edit
+                            </button>
                           </div>
                         </div>
                         <div class="card-body">
@@ -995,10 +995,19 @@
                               </ul>
 
                               <ul class="preview_list">
-                                <li><label>Department | Role</label></li>
+                                <li><label>Department </label></li>
                                 <li>
                                   <h6>
-                                    {{ data.department }} | {{ data.role }}
+                                    {{ data.department }}
+                                  </h6>
+                                </li>
+                              </ul>
+
+                              <ul class="preview_list">
+                                <li><label> Role</label></li>
+                                <li>
+                                  <h6>
+                                    {{ data.category }}
                                   </h6>
                                 </li>
                               </ul>
@@ -1029,7 +1038,10 @@
                                   <label>Monthly Salary | Pay Type</label>
                                 </li>
                                 <li>
-                                  <h6>Min. Salary: 200 - Max. Salary: 300</h6>
+                                  <h6>
+                                    Min. Salary: {{ data.min_salary }} - Max.
+                                    Salary: {{ data.max_salary }}
+                                  </h6>
                                 </li>
                               </ul>
 
@@ -1053,8 +1065,7 @@
                           <h4 class="d-inline">Candidate Requirements</h4>
                           <div class="card-header-action">
                             <a
-                              href="#"
-                              onclick="return false;"
+                              (click)="editCandidateDetails(data.id)"
                               class="btn btn-primary"
                               >Edit</a
                             >
@@ -1065,17 +1076,23 @@
                             <div class="col-sm-12">
                               <ul class="preview_list">
                                 <li><label>Minimum Education</label></li>
-                                <li><h6>10th or Below 10th</h6></li>
+                                <li>
+                                  <h6>{{ data.education }}</h6>
+                                </li>
                               </ul>
 
                               <ul class="preview_list">
                                 <li><label>Experience Required</label></li>
-                                <li><h6>6 months</h6></li>
+                                <li>
+                                  <h6>{{ data.experience }}</h6>
+                                </li>
                               </ul>
 
                               <ul class="preview_list">
                                 <li><label>English</label></li>
-                                <li><h6>No English</h6></li>
+                                <li>
+                                  <h6>{{ data.eng_lvl }}</h6>
+                                </li>
                               </ul>
                             </div>
                           </div>
@@ -1088,8 +1105,7 @@
                           <h4 class="d-inline">Interview Information</h4>
                           <div class="card-header-action">
                             <a
-                              href="#"
-                              onclick="return false;"
+                              (click)="editInterviewDetails(data.id)"
                               class="btn btn-primary"
                               >Edit</a
                             >
@@ -1102,19 +1118,37 @@
                                 <li>
                                   <label>Communication Preferences</label>
                                 </li>
-                                <li><h6>vivekq - 852741852</h6></li>
+                                <li *ngIf="data.com_pref === '2'">
+                                  <h6>
+                                    {{ data.com_pref_fn }} -
+                                    {{ data.com_pref_mob }}
+                                  </h6>
+                                </li>
+                                <li *ngIf="data.com_pref === '1'">
+                                  <h6>{{ data.company_name }}</h6>
+                                </li>
                               </ul>
 
                               <ul class="preview_list">
                                 <li>
                                   <label>Notification Preferences</label>
                                 </li>
-                                <li><h6>Viveka - 8098778216</h6></li>
+                                <li *ngIf="data.noti_pref === '2'">
+                                  <h6>
+                                    {{ data.noti_pref_fn }} -
+                                    {{ data.noti_pref_mob }}
+                                  </h6>
+                                </li>
+                                <li *ngIf="data.noti_pref === '1'">
+                                  <h6>{{ data.company_name }}</h6>
+                                </li>
                               </ul>
 
                               <ul class="preview_list">
                                 <li><label>Type of Interview</label></li>
-                                <li><h6>In-person interview</h6></li>
+                                <li>
+                                  <h6>{{ data.interview_method }}</h6>
+                                </li>
                               </ul>
                             </div>
                           </div>

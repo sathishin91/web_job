@@ -167,22 +167,22 @@ export class JobEffects {
     );
   });
 
-  // getPreviewList$ = createEffect(() => {
-  //   console.log('inside the preview');
-  //   return this.actions$.pipe(
-  //     ofType(JobActions.setPreviewDetails),
-  //     mergeMap((action) => {
-  //       return this.authService.getTheJobpreview(action.preview).pipe(
-  //         map((response: any) => {
-  //           // Return the action here
-  //           return JobActions.getPreviewDetails({
-  //             preview: response,
-  //           });
-  //         })
-  //       );
-  //     })
-  //   );
-  // });
+  getPreviewList$ = createEffect(() => {
+    console.log('inside the preview');
+    return this.actions$.pipe(
+      ofType(JobActions.setPreviewDetails),
+      mergeMap((action) => {
+        return this.authService.getTheJobpreview(action.preview).pipe(
+          map((response: any) => {
+            // Return the action here
+            return JobActions.getPreviewDetails({
+              preview: response,
+            });
+          })
+        );
+      })
+    );
+  });
 
   getJobId$ = createEffect(() => {
     return this.actions$.pipe(

@@ -151,8 +151,10 @@
           </div>
         </div>
       </div>
-      <div>
-        <span class="draftsJob">Drafts</span>
+      <div *ngIf="jobList$ | async as jobList">
+        <span *ngIf="jobList.pending?.length > 0" class="draftsJob"
+          >Drafts</span
+        >
       </div>
       <div class="row mt-3" *ngIf="jobList$ | async as jobList">
         <div

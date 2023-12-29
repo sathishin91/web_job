@@ -166,12 +166,12 @@ export class AuthService {
     );
   }
 
-  // getTheJobpreview(preview: any): Observable<any> {
-  //   return this.http.post(
-  //     `${environment.apiUrl}/JobDetails/getJobPreviewById`,
-  //     preview
-  //   );
-  // }
+  getTheJobpreview(preview: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/JobDetails/getJobPreviewById`,
+      preview
+    );
+  }
 
   getJobId(preview: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/JobDetails/getById`, preview);
