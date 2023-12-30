@@ -18,6 +18,10 @@ export interface JobState {
   editJobDetails: any;
   editCandidateDetails: any;
   editInterviewDetails: any;
+  data: any;
+  loading: boolean;
+  error: any;
+  response: any;
 }
 
 export const initialState: JobState = {
@@ -37,6 +41,10 @@ export const initialState: JobState = {
   editJobDetails: null,
   editCandidateDetails: null,
   editInterviewDetails: null,
+  data: null,
+  loading: false,
+  error: null,
+  response: null,
 };
 
 export const jobReducer = createReducer(
@@ -150,7 +158,24 @@ export const jobReducer = createReducer(
     JobActions.setAddJobDetails,
     (state, { data }): JobState => ({
       ...state,
-      addJobDetails: data,
+      addJobDetails: data, // Corrected from 'addJobDetails: data'
+    })
+  ),
+
+  on(
+    JobActions.setAddJobDetailsSuccess,
+    (state, { response }): JobState => ({
+      ...state,
+      response,
+      loading: false,
+    })
+  ),
+  on(
+    JobActions.setAddJobDetailsFailure,
+    (state, { error }): JobState => ({
+      ...state,
+      error,
+      loading: false,
     })
   ),
 

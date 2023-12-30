@@ -4,10 +4,15 @@ import { mergeMap, map, tap } from 'rxjs/operators';
 import { AuthService } from '../../core/service/auth.service';
 import * as JobActions from './Job.Action';
 import { catchError } from 'rxjs/operators';
-
+import { of } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 @Injectable()
 export class JobEffects {
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private toastr: ToastrService
+  ) {}
 
   getDesignationLists$ = createEffect(() => {
     console.log('Entered inside the token effects');
@@ -101,25 +106,56 @@ export class JobEffects {
       )
     );
   });
+  // setAddJobDetails$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(JobActions.setAddJobDetails),
+  //     mergeMap((action) =>
+  //       this.authService.postJobDetails(action.data).pipe(
+  //         map((response: any) => {
+  //           // Assuming that the ID is in the 'id' property of the response
+  //           const jobId = response.job_id;
+
+  //           // Store the job ID in localStorage
+  //           localStorage.setItem('jobId', jobId);
+
+  //           return JobActions.getAddJobDetails({ addJobDetails: response });
+  //         })
+  //         // You can add catchError here if needed
+  //       )
+  //     )
+  //   );
+  // });
   setAddJobDetails$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(JobActions.setAddJobDetails),
       mergeMap((action) =>
         this.authService.postJobDetails(action.data).pipe(
-          map((response: any) => {
-            // Assuming that the ID is in the 'id' property of the response
-            const jobId = response.job_id;
+          mergeMap((data: any) => {
+            const jobId = data.job_id;
 
             // Store the job ID in localStorage
             localStorage.setItem('jobId', jobId);
 
-            return JobActions.getAddJobDetails({ addJobDetails: response });
-          })
-          // You can add catchError here if needed
+            return of(JobActions.setAddJobDetailsSuccess({ response: data }));
+          }),
+          catchError((error) =>
+            of(JobActions.setAddJobDetailsFailure({ error }))
+          )
         )
-      )
+      ),
+      // Tap into the effect to show Toastr messages
+      tap((action) => {
+        if (JobActions.setAddJobDetailsSuccess.type === action.type) {
+          console.log('Api success');
+          this.toastr.success('API call successful', 'Success');
+        } else if (JobActions.setAddJobDetailsFailure.type === action.type) {
+          console.log('Api fail');
+          this.toastr.error('API call failed', 'Error');
+        }
+      })
     );
   });
+
   setAddCandidateDetails$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(JobActions.setAddCandidateDetails),

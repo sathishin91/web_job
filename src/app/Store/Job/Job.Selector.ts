@@ -61,3 +61,8 @@ export const selectJobsId = createSelector(
   selectJobState,
   (state: JobState) => state.singlejob
 );
+
+export const selectAddJobDetails = createSelector(
+  selectJobState,
+  (state: JobState) => state.response
+);

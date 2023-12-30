@@ -13,6 +13,7 @@ import * as TokenActions from '../../Store/Token/Token.Actions';
 import * as JobActions from '../../Store/Job/Job.Action';
 import { Observable, Subject } from 'rxjs';
 import {
+  selectAddJobDetails,
   selectCategory,
   selectCity,
   selectDesignation,
@@ -24,7 +25,8 @@ import {
 import { selectDepartment } from '../../Store/Job/Job.Selector';
 import { environment } from 'src/environments/environment';
 import { takeUntil } from 'rxjs/operators';
-import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-post-new-job',
@@ -39,6 +41,7 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
   city$: Observable<object>;
   expLevel$: Observable<object>;
   preview$: Observable<object>;
+  addJobDetails$: Observable<object>;
 
   private unsubscribe$ = new Subject<void>();
   userId = localStorage.getItem('userId');
@@ -60,7 +63,8 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store
+    private store: Store,
+    private toastr: ToastrService
   ) {
     this.designation$ = this.store.select(selectDesignation);
     this.department$ = this.store.select(selectDepartment);
@@ -70,6 +74,15 @@ export class PostNewJobComponent implements OnInit, OnDestroy {
     this.englishLevel$ = this.store.select(selectEnglishLevel);
     this.expLevel$ = this.store.select(selectExpLevel);
     this.preview$ = this.store.select(showPreview);
+    this.addJobDetails$ = this.store.select(selectAddJobDetails);
+
+    // this.subscription = this.addJobDetails$.subscribe((state: any) => {
+    //   if (state?.data) {
+    //     this.toastr.success('API call successful', 'Success');
+    //   } else if (state?.error) {
+    //     this.toastr.error('API call failed', 'Error');
+    //   }
+    // });
   }
 
   active: any;

@@ -40,7 +40,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { TokenEffects } from './Store/Token/Token.Effects';
-
+import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptor } from './core/interceptor/token.interceptor';
 import { tokenReducer } from './Store/Token/Token.Reducer';
 import { jobReducer } from './Store/Job/Job.Reducer';
@@ -70,6 +70,7 @@ export function createTranslateLoader(http: HttpClient) {
     ReactiveFormsModule,
     NgScrollbarModule,
     LoadingBarRouterModule,
+    ToastrModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
