@@ -262,6 +262,15 @@ export class EditJobComponent implements OnInit, OnDestroy {
       );
 
       this.active = 'jobPreview';
+      const preview = {
+        api_key: environment.api_key,
+        job_id: this.jobId,
+      };
+      this.store.dispatch(
+        JobActions.setPreviewDetails({
+          preview,
+        })
+      );
     }
   }
 

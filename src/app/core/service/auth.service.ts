@@ -194,4 +194,11 @@ export class AuthService {
   editInterviewDetails(data: any): Observable<any> {
     return this.http.put(`${environment.apiUrl}/InterviewerInfo/edit`, data);
   }
+
+  getProfileDetails(data: any) {
+    return this.http.post(
+      `${environment.apiUrl}/JobDetails/getJobProfile`,
+      data
+    );
+  }
 }

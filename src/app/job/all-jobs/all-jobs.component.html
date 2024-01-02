@@ -25,7 +25,7 @@
   </div>
 
   <div class="section-body all_jobs">
-    <div class="row">
+    <div class="row" *ngIf="userVerified === '1'">
       <div class="col-lg-3 col-md-6 col-sm-6 col-12">
         <div class="card card-statistic-1">
           <div class="card-icon l-bg-purple">
@@ -93,11 +93,7 @@
         </div>
       </div>
     </div>
-    <div
-      [ngClass]="{ scrollable: userVerified === '1' }"
-      class="jobsSection"
-      *ngIf="userVerified === '1'"
-    >
+    <div class="jobsSection" *ngIf="userVerified === '1'">
       <div class="row" *ngIf="jobList$ | async as jobList">
         <div
           class="col-6 col-md-6 col-lg-6 col-sm-12 col-12"
@@ -211,7 +207,10 @@
       class="jobsSection"
       *ngIf="userVerified === '0' || userVerified === '2'"
     >
-      <img src="../../../assets/images/user_verify.jpg" class="img-fluid" />
+      <img
+        src="../../../assets/images/user_verify.jpg"
+        class="not-scrollableImg"
+      />
     </div>
   </div>
 </section>

@@ -135,22 +135,28 @@ export class JobEffects {
 
             // Store the job ID in localStorage
             localStorage.setItem('jobId', jobId);
-
-            return of(JobActions.setAddJobDetailsSuccess({ response: data }));
-          }),
-          catchError((error) =>
-            of(JobActions.setAddJobDetailsFailure({ error }))
-          )
+            if (data.code === 400) {
+              console.log('inside fail');
+              return of(JobActions.setAddJobDetailsFailure({ error: data }));
+            } else {
+              console.log('inside success');
+              return of(JobActions.setAddJobDetailsSuccess({ response: data }));
+            }
+          })
         )
       ),
       // Tap into the effect to show Toastr messages
-      tap((action) => {
-        if (JobActions.setAddJobDetailsSuccess.type === action.type) {
-          console.log('Api success');
-          this.toastr.success('API call successful', 'Success');
-        } else if (JobActions.setAddJobDetailsFailure.type === action.type) {
-          console.log('Api fail');
-          this.toastr.error('API call failed', 'Error');
+      tap((action: any) => {
+        // Corrected condition to check for failure
+        if (action.type === JobActions.setAddJobDetailsSuccess.type) {
+          console.log('inside success');
+          const successMessage =
+            action.response.message || 'API call successful';
+          this.toastr.success(successMessage, 'Success');
+        } else if (action.type === JobActions.setAddJobDetailsFailure.type) {
+          console.log('inside fail');
+          const errorMessage = action.error.message || 'API call failed';
+          this.toastr.error(errorMessage, 'Error');
         }
       })
     );

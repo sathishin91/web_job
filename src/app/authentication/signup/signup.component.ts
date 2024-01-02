@@ -80,7 +80,6 @@ export class SignupComponent implements OnInit {
       };
       this.authService.registerUser(data).subscribe({
         next: (res: any) => {
-          //const apiResponse = res as MyApiResponse;
           if (res) {
             console.log('response of register api', res);
             if (res.status == 'success') {
