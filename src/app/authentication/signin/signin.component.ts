@@ -85,22 +85,26 @@ export class SigninComponent implements OnInit {
   }
 
   startTimer() {
-    this.showResentOtp = false;
-    this.getOtp = false;
-    this.displayTimer = true;
-    this.counter = 2;
-    window.clearInterval(this.timer);
-    this.timer = setInterval(() => {
-      this.counter--;
-      if (this.counter === 0) {
-        window.clearInterval(this.timer);
+    if (this.f['mobile_number'].value != '') {
+      this.showResentOtp = false;
+      this.getOtp = false;
+      this.displayTimer = true;
+      this.counter = 2;
+      window.clearInterval(this.timer);
+      this.timer = setInterval(() => {
+        this.counter--;
+        if (this.counter === 0) {
+          window.clearInterval(this.timer);
 
-        /*After counter value is 0 means 10000 is completed */
-        this.startFilling();
-        this.showResentOtp = true;
-        this.displayTimer = false;
-      }
-    }, 1000);
+          /*After counter value is 0 means 10000 is completed */
+          this.startFilling();
+          this.showResentOtp = true;
+          this.displayTimer = false;
+        }
+      }, 1000);
+    } else {
+      this.error = 'Please enter the mobile number';
+    }
   }
 
   startFilling() {

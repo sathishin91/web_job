@@ -45,7 +45,6 @@ import { TokenInterceptor } from './core/interceptor/token.interceptor';
 import { tokenReducer } from './Store/Token/Token.Reducer';
 import { jobReducer } from './Store/Job/Job.Reducer';
 import { JobEffects } from './Store/Job/Job.Effects';
-
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
@@ -98,6 +97,7 @@ export function createTranslateLoader(http: HttpClient) {
       useClass: TokenInterceptor,
       multi: true,
     },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     // { provide: LocationStrategy, useClass: HashLocationStrategy },
     // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

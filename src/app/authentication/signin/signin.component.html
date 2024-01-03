@@ -20,12 +20,39 @@
               <div class="form-group position-relative">
                 <label>Mobile Number <span class="text-danger">*</span></label>
                 <i-feather name="user" class="login-icons"></i-feather>
-                <input
-                  type="number"
-                  class="form-control psl-5"
-                  formControlName="mobile_number"
-                  placeholder="Mobile number"
-                />
+                <div class="input-container">
+                  <input
+                    type="text"
+                    class="form-control psl-5"
+                    formControlName="mobile_number"
+                    placeholder="Mobile number"
+                    pattern="[0-9]{10}"
+                  />
+                  <small
+                    *ngIf="f['mobile_number'].hasError('pattern')"
+                    class="text-danger"
+                  >
+                    Please enter a valid 10-digit numeric value.
+                  </small>
+                  <small
+                    *ngIf="(submitted && loginForm.controls['mobile_number'].errors?.['required'])"
+                    class="text-danger"
+                  >
+                    Mobile Number is required.
+                  </small>
+                  <small
+                    *ngIf="submitted && loginForm.controls['mobile_number'].errors?.['minlength']"
+                    class="text-danger"
+                  >
+                    Mobile number must be at least 10 digits.
+                  </small>
+                  <small
+                    *ngIf="submitted && loginForm.controls['mobile_number'].errors?.['maxlength']"
+                    class="text-danger"
+                  >
+                    Mobile number cannot exceed 10 digits.
+                  </small>
+                </div>
               </div>
             </div>
             <div class="col-lg-3 col-md-4 col-xs-12 d-flex align-items-center">
@@ -56,11 +83,33 @@
                 <label>OTP<span class="text-danger">*</span></label>
                 <i-feather name="key" class="login-icons"></i-feather>
                 <input
-                  type="number"
+                  type="text"
                   class="form-control psl-5"
                   formControlName="otp"
                   placeholder="Enter OTP"
+                  pattern="[0-9]{4}"
                 />
+                <small *ngIf="f['otp'].hasError('pattern')" class="text-danger">
+                  Please enter a valid 4-digit numeric value.
+                </small>
+                <small
+                  *ngIf="submitted && loginForm.controls['otp'].errors?.['required']"
+                  class="text-danger"
+                >
+                  otp is required.
+                </small>
+                <small
+                  *ngIf="submitted && loginForm.controls['otp'].errors?.['minlength']"
+                  class="text-danger"
+                >
+                  OTP must be at least 4 digits.
+                </small>
+                <small
+                  *ngIf="submitted && loginForm.controls['otp'].errors?.['maxlength']"
+                  class="text-danger"
+                >
+                  OTP cannot exceed 4 digits.
+                </small>
               </div>
             </div>
 
