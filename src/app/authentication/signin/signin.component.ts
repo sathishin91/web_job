@@ -58,7 +58,7 @@ export class SigninComponent implements OnInit {
         .login(this.f['mobile_number'].value, this.f['otp'].value)
         .subscribe({
           next: (res: any) => {
-            if (res.status !== 'failed') {
+            if (res.code === 200) {
               console.log('response of login api', res);
               console.log('response of login api', res.data.id);
               localStorage.setItem('userId', res.data.id);

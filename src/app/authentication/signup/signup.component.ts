@@ -39,6 +39,7 @@ export class SignupComponent implements OnInit {
       this.mobileNumber = this.userMobile;
       console.log('mobile number', this.mobileNumber);
     } else {
+      this.mobileNumber = '';
       console.error('User data not found in localStorage');
     }
 
@@ -82,13 +83,13 @@ export class SignupComponent implements OnInit {
         next: (res: any) => {
           if (res) {
             console.log('response of register api', res);
-            if (res.status == 'success') {
+            if (res.code === 200) {
               this.router.navigate(['/jobs']);
             } else {
               this.error = res.message;
             }
           } else {
-            this.error = 'Invalid Register';
+            this.error = res.message;
           }
         },
         error: (error) => {
@@ -100,18 +101,24 @@ export class SignupComponent implements OnInit {
   }
 
   customWithFunction() {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Confirm',
-    }).then((result) => {
-      if (result.value) {
-        this.onSubmit();
-      }
-    });
+    this.submitted = true;
+    if (this.registerForm.invalid) {
+      this.error = 'Invalid data !';
+      return;
+    } else {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirm',
+      }).then((result) => {
+        if (result.value) {
+          this.onSubmit();
+        }
+      });
+    }
   }
 }

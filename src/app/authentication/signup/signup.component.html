@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" style="overflow-x: clip">
   <div class="row no-gutters shadow-lg registers">
     <div class="col-md-6 d-none d-md-block">
       <img
@@ -25,7 +25,14 @@
                   class="form-control psl-5"
                   formControlName="company_name"
                   placeholder="Enter Company name"
+                  required
                 />
+                <small
+                  *ngIf="(submitted && registerForm.controls['company_name'].errors?.['required'])"
+                  class="text-danger"
+                >
+                  company name is required.
+                </small>
               </div>
             </div>
             <div class="col-md-12">
@@ -38,7 +45,20 @@
                   formControlName="email"
                   placeholder="Email"
                   required
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                 />
+                <small
+                  *ngIf="f['email'].hasError('pattern')"
+                  class="text-danger"
+                >
+                  Please enter a valid email address.
+                </small>
+                <small
+                  *ngIf="(submitted && registerForm.controls['email'].errors?.['required'])"
+                  class="text-danger"
+                >
+                  Email is required.
+                </small>
               </div>
             </div>
             <div class="col-md-12">
@@ -72,6 +92,12 @@
                       </label>
                     </div>
                   </div>
+                  <small
+                    *ngIf="submitted && registerForm.controls['is_company'].errors?.['required']"
+                    class="text-danger"
+                  >
+                    Please select an option (Company or Consultancy).
+                  </small>
                 </div>
               </div>
             </div>
@@ -94,11 +120,24 @@
                 >
                 <i-feather name="user" class="login-icons"></i-feather>
                 <input
-                  type="number"
+                  type="text"
                   class="form-control psl-5"
                   formControlName="no_employees"
                   placeholder="Number of employees"
+                  pattern="[0-9]*"
                 />
+                <small
+                  *ngIf="f['no_employees'].hasError('pattern')"
+                  class="text-danger"
+                >
+                  Please enter only numbers
+                </small>
+                <small
+                  *ngIf="(submitted && registerForm.controls['no_employees'].errors?.['required'])"
+                  class="text-danger"
+                >
+                  Number of employees is required.
+                </small>
               </div>
             </div>
 
@@ -119,6 +158,12 @@
                     >
                   </label>
                 </div>
+                <small
+                  *ngIf="(submitted && registerForm.controls['is_accept'].errors?.['required'])"
+                  class="text-danger"
+                >
+                  Please agree our Terms and Condition
+                </small>
               </div>
             </div>
 
